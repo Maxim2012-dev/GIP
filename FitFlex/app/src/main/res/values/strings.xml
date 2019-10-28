@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FitFlex</string>
+    <string name="button">Button</string>
+    <string name="wachtwoord">Wachtwoord</string>
+    <string name="gebruikersnaam">Gebruikersnaam</string>
+    <string name="todo">TODO</string>
+    <string name="login">Login</string>
+    <string name="registreer">Registreer</string>
+    <string name="hello_world">Hello World</string>
 </resources>
