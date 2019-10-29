@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         registerLink = findViewById(R.id.registerLink);
-        SpannableString registreer = new SpannableString("Nog geen account? Registreer");
-        registreer.setSpan(new UnderlineSpan(), 18, 28, 0);
+        SpannableString registreer = new SpannableString("Registreer");
+        registreer.setSpan(new UnderlineSpan(), 0, registreer.length(), 0);
         registerLink.setText(registreer);
         registerLink.setOnClickListener(new View.OnClickListener() {
             @Override
