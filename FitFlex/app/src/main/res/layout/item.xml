@@ -34,7 +34,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:text="@string/nieuwe_workout"
-                android:textColor="black"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp">
             </TextView>
 
