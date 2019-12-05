@@ -21,5 +21,6 @@
     <string name="wachtwoordRInput">Voer wachtwoord in</string>
     <string name="registreerBtn">Button</string>
     <string name="nieuwe_workout">Nieuwe workout</string>
-    <string name="tik_op_dit_vak_om_te_kiezen"><![CDATA[--> Tik op dit vak om te kiezen]]></string>
+    <string name="bekijk_account">Bekijk account</string>
+    <string name="bekijk_voortgang">Bekijk voortgang</string>
 </resources>
