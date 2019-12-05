@@ -1,180 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Home">
+    android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="30dp"
-        app:cardCornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:clipToPadding="false"
+        android:foregroundGravity="center"
+        android:overScrollMode="never"></androidx.viewpager.widget.ViewPager>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background"
-            android:orientation="vertical">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/round"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="@string/nieuwe_workout"
+        android:textColor="fff">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/nieuwe_workout"
-                android:textColor="#ffff"
-                android:textSize="25sp"
-                android:textStyle="bold">
+    </Button>
 
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="0dp"
-                android:text="@string/tik_op_dit_vak_om_te_kiezen"
-                android:textColor="#ffff"
-                android:textSize="12sp"
-                android:textStyle="bold">
-
-            </TextView>
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/workouticon">
-
-            </ImageView>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginRight="30dp"
-        app:cardCornerRadius="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/nieuwe_workout"
-                android:textColor="#ffff"
-                android:textSize="25sp"
-                android:textStyle="bold">
-
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="0dp"
-                android:text="@string/tik_op_dit_vak_om_te_kiezen"
-                android:textColor="#ffff"
-                android:textSize="12sp"
-                android:textStyle="bold">
-
-            </TextView>
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/workouticon">
-
-            </ImageView>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="500dp"
-        android:layout_marginRight="30dp"
-        app:cardCornerRadius="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:text="@string/nieuwe_workout"
-                android:textColor="#ffff"
-                android:textSize="25sp"
-                android:textStyle="bold">
-
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="0dp"
-                android:text="@string/tik_op_dit_vak_om_te_kiezen"
-                android:textColor="#ffff"
-                android:textSize="12sp"
-                android:textStyle="bold">
-
-            </TextView>
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/todo"
-                android:src="@drawable/workouticon">
-
-            </ImageView>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
