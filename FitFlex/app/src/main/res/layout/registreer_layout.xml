@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/signUp"
+        android:text="@string/registreer"
         android:textColor="@color/white_greyish"
         android:textSize="25sp"
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/fullName"
+        android:id="@+id/naam"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -39,7 +39,7 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/userEmailId"
+        android:id="@+id/email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -62,7 +62,7 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/mobileNumber"
+        android:id="@+id/telefoonnummer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -85,7 +85,7 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/location"
+        android:id="@+id/locatie"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -108,7 +108,7 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/wachtwoord"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -131,7 +131,7 @@
         android:background="@color/white_greyish" />
 
     <EditText
-        android:id="@+id/confirmPassword"
+        android:id="@+id/bevestigWachtwoord"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -149,7 +149,7 @@
         android:autofillHints="" />
 
     <CheckBox
-        android:id="@+id/terms_conditions"
+        android:id="@+id/voorwaarden"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
@@ -158,26 +158,26 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/signUpBtn"
+        android:id="@+id/registerknop"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/loginbutton_selector"
         android:padding="3dp"
-        android:text="@string/signUp"
+        android:text="@string/registreer"
         android:textColor="@color/background_color"
         android:textSize="17sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/already_user"
+        android:id="@+id/alGebruiker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:padding="10dp"
-        android:text="@string/already_user"
+        android:text="@string/reeds_lid"
         android:textColor="@color/white_greyish"
         android:textSize="15sp" />
 

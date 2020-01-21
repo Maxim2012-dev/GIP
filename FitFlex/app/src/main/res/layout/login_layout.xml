@@ -22,7 +22,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/login_emailid"
+            android:id="@+id/login_email"
             android:singleLine="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             android:background="@color/white_greyish" />
 
         <EditText
-            android:id="@+id/login_password"
+            android:id="@+id/login_wachtwoord"
             android:singleLine="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
             android:paddingTop="8dp" >
 
             <CheckBox
-                android:id="@+id/show_hide_password"
+                android:id="@+id/toon_verberg_wachtwoord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -78,7 +78,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/forgot_password"
+                android:id="@+id/vergetenWachtwoord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -90,7 +90,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/loginBtn"
+            android:id="@+id/loginknop"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
@@ -103,7 +103,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/createAccount"
+        android:id="@+id/maakAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_layout"

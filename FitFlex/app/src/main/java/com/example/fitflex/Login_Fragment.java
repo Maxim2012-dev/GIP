@@ -25,20 +25,20 @@ import androidx.fragment.app.FragmentManager;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.example.fitflex.Utils.ForgotPassword_Fragment;
-import static com.example.fitflex.Utils.SignUp_Fragment;
+import static com.example.fitflex.Utils.WachtwoordVergeten_Fragment;
+import static com.example.fitflex.Utils.Registreer_Fragment;
 
 public class Login_Fragment extends Fragment implements View.OnClickListener {
 
     private static View view;
 
-    private static EditText emailid, password;
-    private static Button loginButton;
-    private static TextView forgotPassword, signUp;
-    private static CheckBox show_hide_password;
-    private static LinearLayout loginLayout;
-    private static Animation shakeAnimation;
-    private static FragmentManager fragmentManager;
+    private EditText email, wachtwoord;
+    private Button loginknop;
+    private TextView vergetenWachtwoord, maakAccount;
+    private CheckBox toon_verberg_wachtwoord;
+    private LinearLayout loginLayout;
+    private Animation shakeAnimation;
+    private FragmentManager fragmentManager;
 
     public Login_Fragment() {
 
@@ -56,14 +56,13 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
     private void initViews() {
         fragmentManager = getActivity().getSupportFragmentManager();
 
-        emailid = (EditText) view.findViewById(R.id.login_emailid);
-        password = (EditText) view.findViewById(R.id.login_password);
-        loginButton = (Button) view.findViewById(R.id.loginBtn);
-        forgotPassword = (TextView) view.findViewById(R.id.forgot_password);
-        signUp = (TextView) view.findViewById(R.id.createAccount);
-        show_hide_password = (CheckBox) view
-                .findViewById(R.id.show_hide_password);
-        loginLayout = (LinearLayout) view.findViewById(R.id.login_layout);
+        email =  view.findViewById(R.id.login_email);
+        wachtwoord = view.findViewById(R.id.login_wachtwoord);
+        loginknop = view.findViewById(R.id.loginknop);
+        vergetenWachtwoord = view.findViewById(R.id.vergetenWachtwoord);
+        maakAccount = view.findViewById(R.id.maakAccount);
+        toon_verberg_wachtwoord = view.findViewById(R.id.toon_verberg_wachtwoord);
+        loginLayout = view.findViewById(R.id.login_layout);
 
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
@@ -73,19 +72,19 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
             ColorStateList csl = ColorStateList.createFromXml(getResources(),
                     xrp);
 
-            forgotPassword.setTextColor(csl);
-            show_hide_password.setTextColor(csl);
-            signUp.setTextColor(csl);
+            vergetenWachtwoord.setTextColor(csl);
+            toon_verberg_wachtwoord.setTextColor(csl);
+            maakAccount.setTextColor(csl);
         } catch (Exception e) {
         }
     }
 
     private void setListeners() {
-        loginButton.setOnClickListener(this);
-        forgotPassword.setOnClickListener(this);
-        signUp.setOnClickListener(this);
+        loginknop.setOnClickListener(this);
+        vergetenWachtwoord.setOnClickListener(this);
+        maakAccount.setOnClickListener(this);
 
-        show_hide_password
+        toon_verberg_wachtwoord
                 .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
                     @Override
@@ -94,17 +93,17 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
 
                         if (isChecked) {
 
-                            show_hide_password.setText(R.string.verberg_pwd);
+                            toon_verberg_wachtwoord.setText(R.string.verberg_pwd);
 
-                            password.setInputType(InputType.TYPE_CLASS_TEXT);
-                            password.setTransformationMethod(HideReturnsTransformationMethod
+                            wachtwoord.setInputType(InputType.TYPE_CLASS_TEXT);
+                            wachtwoord.setTransformationMethod(HideReturnsTransformationMethod
                                     .getInstance());
                         } else {
-                            show_hide_password.setText(R.string.toon_pwd);
+                            toon_verberg_wachtwoord.setText(R.string.toon_pwd);
 
-                            password.setInputType(InputType.TYPE_CLASS_TEXT
+                            wachtwoord.setInputType(InputType.TYPE_CLASS_TEXT
                                     | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                            password.setTransformationMethod(PasswordTransformationMethod
+                            wachtwoord.setTransformationMethod(PasswordTransformationMethod
                                     .getInstance());
 
                         }
@@ -116,26 +115,26 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.loginBtn:
+            case R.id.loginknop:
                 checkValidation();
                 break;
 
-            case R.id.forgot_password:
+            case R.id.vergetenWachtwoord:
 
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer,
-                                new ForgotPassword_Fragment(),
-                                ForgotPassword_Fragment).commit();
+                                new WachtwoordVergeten_Fragment(),
+                                WachtwoordVergeten_Fragment).commit();
                 break;
-            case R.id.createAccount:
+            case R.id.maakAccount:
 
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer, new SignUp_Fragment(),
-                                SignUp_Fragment).commit();
+                        .replace(R.id.frameContainer, new Registreer_Fragment(),
+                                Registreer_Fragment).commit();
                 break;
         }
 
@@ -143,8 +142,8 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
 
     private void checkValidation() {
 
-        String getEmailId = emailid.getText().toString();
-        String getPassword = password.getText().toString();
+        String getEmailId = email.getText().toString();
+        String getPassword = wachtwoord.getText().toString();
 
         Pattern p = Pattern.compile(Utils.regEx);
 
