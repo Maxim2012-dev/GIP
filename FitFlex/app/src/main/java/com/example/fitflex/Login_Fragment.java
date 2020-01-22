@@ -1,7 +1,6 @@
 package com.example.fitflex;
 
-import android.content.res.ColorStateList;
-import android.content.res.XmlResourceParser;
+
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
@@ -24,9 +23,6 @@ import androidx.fragment.app.FragmentManager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.example.fitflex.Utils.WachtwoordVergeten_Fragment;
-import static com.example.fitflex.Utils.Registreer_Fragment;
 
 public class Login_Fragment extends Fragment implements View.OnClickListener {
 
@@ -67,7 +63,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
 
-        XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
+        /*XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
         try {
             ColorStateList csl = ColorStateList.createFromXml(getResources(),
                     xrp);
@@ -76,7 +72,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
             toon_verberg_wachtwoord.setTextColor(csl);
             maakAccount.setTextColor(csl);
         } catch (Exception e) {
-        }
+        }*/
     }
 
     private void setListeners() {
@@ -125,16 +121,14 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
                         .replace(R.id.frameContainer,
-                                new WachtwoordVergeten_Fragment(),
-                                WachtwoordVergeten_Fragment).commit();
+                                new WachtwoordVergeten_Fragment()).commit();
                 break;
             case R.id.maakAccount:
 
                 fragmentManager
                         .beginTransaction()
                         .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer, new Registreer_Fragment(),
-                                Registreer_Fragment).commit();
+                        .replace(R.id.frameContainer, new Registreer_Fragment()).commit();
                 break;
         }
 

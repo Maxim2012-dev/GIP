@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -124,5 +125,6 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
                     .show();
 
     }
+
 
 }
