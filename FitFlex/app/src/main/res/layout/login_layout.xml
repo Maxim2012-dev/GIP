@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp">
@@ -23,21 +24,22 @@
 
         <EditText
             android:id="@+id/login_email"
-            android:singleLine="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:autofillHints=""
             android:background="@android:color/transparent"
             android:drawableStart="@drawable/email"
             android:drawablePadding="8dp"
+            android:enabled="true"
             android:gravity="center_vertical"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:padding="10dp"
+            android:singleLine="true"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="16sp"
-            android:autofillHints="" />
+            android:textSize="16sp" />
 
         <View
             android:layout_width="fill_parent"
@@ -46,20 +48,21 @@
 
         <EditText
             android:id="@+id/login_wachtwoord"
-            android:singleLine="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:background="@android:color/transparent"
             android:drawableStart="@drawable/password"
             android:drawablePadding="8dp"
+            android:enabled="true"
             android:gravity="center_vertical"
             android:hint="@string/wachtwoord"
             android:inputType="textPassword"
             android:padding="10dp"
+            android:singleLine="true"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="16sp"
-            android:autofillHints="" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -73,9 +76,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/toon_pwd"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:clickable="true"
+                android:textSize="14sp"
+                android:text="@string/verberg_pwd"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/vergetenWachtwoord"
@@ -85,8 +89,9 @@
                 android:gravity="end"
                 android:padding="5dp"
                 android:text="@string/vergeet"
-                android:textColor="@color/white"
+                android:textColor="@color/text_selector"
                 android:textSize="14sp" />
+
         </LinearLayout>
 
         <Button
@@ -94,7 +99,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:background="@drawable/loginbutton_selector"
+            android:background="@color/loginbutton_selector"
             android:padding="3dp"
             android:text="@string/login"
             android:textColor="#009688"
@@ -112,7 +117,7 @@
         android:gravity="center"
         android:padding="5dp"
         android:text="@string/nieuweGebruiker"
-        android:textColor="@color/white"
+        android:textColor="@color/text_selector"
         android:textSize="15sp" />
 
 </RelativeLayout>

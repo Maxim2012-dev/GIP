@@ -162,7 +162,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/loginbutton_selector"
+        android:background="@color/loginbutton_selector"
         android:padding="3dp"
         android:text="@string/registreer"
         android:textColor="@color/background_color"
@@ -178,7 +178,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="@string/reeds_lid"
-        android:textColor="@color/white_greyish"
+        android:textColor="@color/text_selector"
         android:textSize="15sp" />
 
 </LinearLayout>
