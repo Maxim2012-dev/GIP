@@ -40,12 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
     // Replace Login Fragment with animation
     protected void replaceLoginFragment() {
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
-                .replace(R.id.frameContainer, new Login_Fragment(),
-                        Utils.Login_Fragment).commit();
+        try {
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                    .replace(R.id.frameContainer, new Login_Fragment(),
+                            Utils.Login_Fragment).commit();
+        } catch (Exception ex) {
+            ex.toString();
+        }
     }
 
     @Override
