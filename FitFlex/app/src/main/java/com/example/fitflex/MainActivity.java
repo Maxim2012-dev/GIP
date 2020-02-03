@@ -9,7 +9,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FragmentManager fragmentManager;
+    protected FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
