@@ -2,30 +2,30 @@ package com.example.fitflex;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FragmentManager fragmentManager;
+    private FragmentTransaction ft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragmentManager = getSupportFragmentManager();
 
         // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.frameContainer, new Login_Fragment(),
-                            Utils.Login_Fragment).commit();
+
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameContainer, new Login_Fragment(), Utils.Login_Fragment);
+            ft.commit();
+
         }
 
-        // On close icon click finish activity
+        //Onclick sluiticoon om af te sluiten
         findViewById(R.id.close_activity).setOnClickListener(
                 new View.OnClickListener() {
 
@@ -40,21 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
     // Replace Login Fragment with animation
     protected void replaceLoginFragment() {
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
-                .replace(R.id.frameContainer, new Login_Fragment(),
-                        Utils.Login_Fragment).commit();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.left_enter, R.anim.right_out);
+        ft.replace(R.id.frameContainer, new Login_Fragment(), Utils.Login_Fragment);
+        ft.commit();
+
     }
 
     @Override
     public void onBackPressed() {
 
         // Find the tag of signup and forgot password fragment
-        Fragment Registreer_Fragment = fragmentManager
+        Fragment Registreer_Fragment = getSupportFragmentManager()
                 .findFragmentByTag(Utils.Registreer_Fragment);
-        Fragment WachtwoordVergeten_Fragment = fragmentManager
+        Fragment WachtwoordVergeten_Fragment = getSupportFragmentManager()
                 .findFragmentByTag(Utils.WachtwoordVergeten_Fragment);
 
         // Check if both are null or not

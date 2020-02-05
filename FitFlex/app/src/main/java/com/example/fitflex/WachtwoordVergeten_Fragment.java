@@ -1,7 +1,5 @@
 package com.example.fitflex;
 
-import android.content.res.ColorStateList;
-import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +15,10 @@ import java.util.regex.Pattern;
 
 public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClickListener {
 
-    private static View view;
+    private View view;
 
-    private static EditText emailId;
-    private static TextView submit, back;
+    private EditText emailId;
+    private TextView submit, back;
 
     public WachtwoordVergeten_Fragment() {
 
@@ -39,9 +37,9 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
     // Initialize the views
     private void initViews() {
 
-        emailId = (EditText) view.findViewById(R.id.registered_emailid);
-        submit = (TextView) view.findViewById(R.id.forgot_button);
-        back = (TextView) view.findViewById(R.id.backToLoginBtn);
+        emailId = view.findViewById(R.id.registered_emailid);
+        submit = view.findViewById(R.id.forgot_button);
+        back = view.findViewById(R.id.backToLoginBtn);
 
     }
 
