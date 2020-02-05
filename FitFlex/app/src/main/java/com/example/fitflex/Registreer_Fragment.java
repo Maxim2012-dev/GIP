@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,6 +24,7 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
     private TextView alGebruiker;
     private Button registerknop;
     private CheckBox voorwaarden;
+    private FragmentManager fragmentManager;
 
     public Registreer_Fragment() {
 
@@ -32,6 +34,7 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.registreer_layout, container, false);
+        fragmentManager = getActivity().getSupportFragmentManager();
         initViews();
         setListeners();
         return view;
@@ -70,7 +73,10 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
             case R.id.alGebruiker:
 
                 // Replace login fragment
-                new MainActivity().replaceLoginFragment();
+                fragmentManager.beginTransaction()
+                                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                                .replace(R.id.frameContainer, new Login_Fragment())
+                                .commit();
                 break;
         }
 

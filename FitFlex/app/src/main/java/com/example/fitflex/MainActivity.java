@@ -2,14 +2,14 @@ package com.example.fitflex;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FragmentTransaction ft;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +19,7 @@ public class MainActivity extends AppCompatActivity {
         // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
 
-            ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.frameContainer, new Login_Fragment());
-            ft.commit();
+            replaceLoginFragment();
 
         }
 
@@ -41,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
     // Replace Login Fragment with animation
     protected void replaceLoginFragment() {
 
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.left_enter, R.anim.right_out);
-        ft.replace(R.id.frameContainer, new Login_Fragment(), Utils.Login_Fragment);
-        ft.commit();
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                .replace(R.id.frameContainer, new Login_Fragment())
+                .commit();
 
     }
 

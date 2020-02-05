@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,6 +20,7 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
 
     private EditText emailId;
     private TextView submit, back;
+    private FragmentManager fragmentManager;
 
     public WachtwoordVergeten_Fragment() {
 
@@ -29,6 +31,7 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.wachtwoord_vergeten, container,
                 false);
+        fragmentManager = getActivity().getSupportFragmentManager();
         initViews();
         setListeners();
         return view;
@@ -55,7 +58,10 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
             case R.id.backToLoginBtn:
 
                 // Replace Login Fragment on Back Presses
-                new MainActivity().replaceLoginFragment();
+                fragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                        .replace(R.id.frameContainer, new Login_Fragment())
+                        .commit();
                 break;
 
             case R.id.forgot_button:
