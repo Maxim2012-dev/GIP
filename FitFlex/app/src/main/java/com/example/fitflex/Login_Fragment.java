@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 public class Login_Fragment extends Fragment implements View.OnClickListener {
 
-    private static View view;
+    private View view;
 
     private EditText email, wachtwoord;
     private Button loginknop;
@@ -47,6 +47,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
         initViews();
         setListeners();
         return view;
+
     }
 
     private void initViews() {
@@ -63,16 +64,6 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
                 R.anim.shake);
 
-        /*XmlResourceParser xrp = getResources().getXml(R.drawable.text_selector);
-        try {
-            ColorStateList csl = ColorStateList.createFromXml(getResources(),
-                    xrp);
-
-            vergetenWachtwoord.setTextColor(csl);
-            toon_verberg_wachtwoord.setTextColor(csl);
-            maakAccount.setTextColor(csl);
-        } catch (Exception e) {
-        }*/
     }
 
     private void setListeners() {

@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
 
             ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frameContainer, new Login_Fragment(), Utils.Login_Fragment);
+            ft.add(R.id.frameContainer, new Login_Fragment());
             ft.commit();
 
         }
