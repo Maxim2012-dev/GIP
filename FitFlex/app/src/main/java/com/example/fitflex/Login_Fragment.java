@@ -1,6 +1,7 @@
 package com.example.fitflex;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
@@ -136,9 +137,12 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
 
         if (getEmailId.equals("") || getEmailId.length() == 0
                 || getPassword.equals("") || getPassword.length() == 0) {
-            loginLayout.startAnimation(shakeAnimation);
+
+            Intent i = new Intent(getActivity(), HomeActivity.class);
+            startActivity(i);
+            /*loginLayout.startAnimation(shakeAnimation);
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Vul beide velden in!");
+                    "Vul beide velden in!");*/
 
         }
         else if (!m.find())
