@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
@@ -34,6 +35,7 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
     private CheckBox voorwaarden;
     private ProgressBar progressBar;
     private FragmentManager fragmentManager;
+    private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
 
     public Registreer_Fragment() {
@@ -65,6 +67,7 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference("Gebruiker");
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -158,7 +161,7 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
                                         getWachtwoord
                                 );
 
-                                FirebaseDatabase.getInstance().getReference("Gebruikers")
+                                FirebaseDatabase.getInstance().getReference("Gebruiker")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .setValue(gebruiker).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
