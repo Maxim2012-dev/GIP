@@ -19,8 +19,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,7 +38,9 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
     private CheckBox voorwaarden;
     private ProgressBar progressBar;
     private FragmentManager fragmentManager;
-    private DatabaseReference databaseReference;
+
+    private long maxGebruikersNr;
+    DatabaseReference reff;
     private FirebaseAuth mAuth;
 
     public Registreer_Fragment() {
@@ -67,7 +72,20 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         progressBar = view.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Gebruiker");
+        reff = FirebaseDatabase.getInstance().getReference("Gebruiker");
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+                    maxGebruikersNr = dataSnapshot.getChildrenCount();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -82,25 +100,25 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.registerknop:
-
+                Gebruiker gebruiker = new Gebruiker();
                 // Call checkValidation method
-                checkValidation();
+                checkValidation(gebruiker);
                 break;
 
             case R.id.alGebruiker:
 
                 // Replace login fragment
                 fragmentManager.beginTransaction()
-                                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
-                                .replace(R.id.frameContainer, new Login_Fragment())
-                                .commit();
+                        .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                        .replace(R.id.frameContainer, new Login_Fragment())
+                        .commit();
                 break;
         }
 
     }
 
     // Check Validation Method
-    private void checkValidation() {
+    private void checkValidation(Gebruiker gebruiker) {
 
         // Get all edittext texts
         final String getNaam = naam.getText().toString();
@@ -131,69 +149,38 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
             new CustomToast().Show_Toast(getActivity(), view,
                     "Het e-mailadres is ongeldig.");*/
 
-            // Check if both password should be equal
+
         else if (!getBevestigWachtwoord.equals(getWachtwoord))
             new CustomToast().Show_Toast(getActivity(), view,
                     "Beide wachtwoorden moeten gelijk zijn.");
 
-            // Make sure user should check Terms and Conditions checkbox
+
         else if (!voorwaarden.isChecked())
             new CustomToast().Show_Toast(getActivity(), view,
                     "Accepteer de algemene voorwaarden.");
 
-            // Else do signup or do your stuff
-        else
+
+        else {
+
+            gebruiker.setNaam(getNaam);
+            gebruiker.setEmailID(getEmailId);
+            gebruiker.setLocatie(getLocatie);
+            gebruiker.setWachtwoord(getWachtwoord);
+            gebruiker.setTelefoonnummer(getTelefoonnummer);
+
+            reff.child(String.valueOf(maxGebruikersNr + 1)).setValue(gebruiker);
 
             progressBar.setVisibility(View.VISIBLE);
-            mAuth.createUserWithEmailAndPassword(getEmailId, getWachtwoord)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            progressBar.setVisibility(View.GONE);
-                            if (task.isSuccessful()) {
-
-                                Gebruiker gebruiker = new Gebruiker(
-                                        getNaam,
-                                        getEmailId,
-                                        getTelefoonnummer,
-                                        getLocatie,
-                                        getWachtwoord
-                                );
-
-                                FirebaseDatabase.getInstance().getReference("Gebruiker")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(gebruiker).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                        if (task.isSuccessful()) {
-
-                                            Toast.makeText(getContext(), R.string.succesvolGeregistreerd, Toast.LENGTH_LONG).show();
-                                            fragmentManager.beginTransaction()
-                                                    .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
-                                                    .replace(R.id.frameContainer, new Login_Fragment())
-                                                    .commit();
-
-                                        } else {
-
-                                            Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-
-                                        }
-
-                                    }
-                                });
-
-                            } else {
-
-                                Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
-                            }
-
-                        }
-                    });
-
+            mAuth.createUserWithEmailAndPassword(getEmailId, getWachtwoord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getContext(), "Succesvol aangemaakt", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
-
-
 }
+
+

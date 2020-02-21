@@ -4,13 +4,46 @@ public class Gebruiker {
 
     public String naam, emailID, telefoonnummer, locatie, wachtwoord;
 
-    public Gebruiker(String naam, String emailID, String telefoonnummer, String locatie, String wachtwoord) {
+    public Gebruiker() {
+    }
 
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
         this.naam = naam;
-        this.emailID = emailID;
-        this.telefoonnummer = telefoonnummer;
-        this.locatie = locatie;
-        this.wachtwoord = wachtwoord;
+    }
 
+    public String getEmailID() {
+        return emailID;
+    }
+
+    public void setEmailID(String emailID) {
+        this.emailID = emailID;
+    }
+
+    public String getTelefoonnummer() {
+        return telefoonnummer;
+    }
+
+    public void setTelefoonnummer(String telefoonnummer) {
+        this.telefoonnummer = telefoonnummer;
+    }
+
+    public String getLocatie() {
+        return locatie;
+    }
+
+    public void setLocatie(String locatie) {
+        this.locatie = locatie;
+    }
+
+    public String getWachtwoord() {
+        return wachtwoord;
+    }
+
+    public void setWachtwoord(String wachtwoord) {
+        this.wachtwoord = wachtwoord;
     }
 }
