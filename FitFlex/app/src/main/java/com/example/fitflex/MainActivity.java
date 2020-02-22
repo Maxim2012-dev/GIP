@@ -16,14 +16,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // If savedinstnacestate is null then replace login fragment
         if (savedInstanceState == null) {
 
             replaceLoginFragment();
 
         }
 
-        //Onclick sluiticoon om af te sluiten
         findViewById(R.id.close_activity).setOnClickListener(
                 new View.OnClickListener() {
 
@@ -36,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // Replace Login Fragment with animation
     protected void replaceLoginFragment() {
 
         fragmentManager = getSupportFragmentManager();
@@ -50,15 +47,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        // Find the tag of signup and forgot password fragment
         Fragment Registreer_Fragment = getSupportFragmentManager()
                 .findFragmentByTag(Utils.Registreer_Fragment);
         Fragment WachtwoordVergeten_Fragment = getSupportFragmentManager()
                 .findFragmentByTag(Utils.WachtwoordVergeten_Fragment);
-
-        // Check if both are null or not
-        // If both are not null then replace login fragment else do backpressed
-        // task
 
         if (Registreer_Fragment != null)
             replaceLoginFragment();
