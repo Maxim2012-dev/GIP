@@ -1,6 +1,7 @@
 package com.example.fitflex;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,6 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
         return view;
     }
 
-    // Initialize the views
     private void initViews() {
 
         emailId = view.findViewById(R.id.registered_emailid);
@@ -46,7 +46,6 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
 
     }
 
-    // Set Listeners over buttons
     private void setListeners() {
         back.setOnClickListener(this);
         submit.setOnClickListener(this);
@@ -57,7 +56,6 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
         switch (v.getId()) {
             case R.id.backToLoginBtn:
 
-                // Replace Login Fragment on Back Presses
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
                         .replace(R.id.frameContainer, new Login_Fragment())
@@ -66,7 +64,6 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
 
             case R.id.forgot_button:
 
-                // Call Submit button task
                 submitButtonTask();
                 break;
 
@@ -77,27 +74,23 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
     private void submitButtonTask() {
         String getEmailId = emailId.getText().toString();
 
-        // Pattern for email id validation
-        Pattern p = Pattern.compile(Utils.regEx);
-
-        // Match the pattern
-        Matcher m = p.matcher(getEmailId);
-
-        // First check if email id is not null else show error toast
-        if (getEmailId.equals("") || getEmailId.length() == 0)
+        if (getEmailId.equals("") || getEmailId.length() == 0) {
 
             new CustomToast().Show_Toast(getActivity(), view,
                     "Gelieve uw e-mailadres in te voeren.");
 
-            // Check if email id is valid or not
-        else if (!m.find())
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(getEmailId).matches()) {
+
             new CustomToast().Show_Toast(getActivity(), view,
                     "Dit e-mailadres is ongeldig.");
 
-            // Else submit email id and fetch passwod or do your stuff
-        else
+        } else {
+
             Toast.makeText(getActivity(), "Get Forgot Password.",
                     Toast.LENGTH_SHORT).show();
+
+        }
+
     }
 
 }

@@ -1,6 +1,8 @@
 package com.example.fitflex;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +27,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Registreer_Fragment extends Fragment implements View.OnClickListener {
@@ -36,7 +37,7 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
     private TextView alGebruiker;
     private Button registerknop;
     private CheckBox voorwaarden;
-    private ProgressBar progressBar;
+    private ProgressBar progressBarR;
     private FragmentManager fragmentManager;
 
     private long maxGebruikersNr;
@@ -57,7 +58,6 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         return view;
     }
 
-    // Initialize all views
     private void initViews() {
 
         naam = view.findViewById(R.id.naam);
@@ -69,14 +69,15 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         registerknop = view.findViewById(R.id.registerknop);
         alGebruiker = view.findViewById(R.id.alGebruiker);
         voorwaarden = view.findViewById(R.id.voorwaarden);
-        progressBar = view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.GONE);
+        progressBarR = view.findViewById(R.id.progressBarR);
+
+        progressBarR.setVisibility(View.GONE);
 
         reff = FirebaseDatabase.getInstance().getReference("Gebruiker");
         reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     maxGebruikersNr = dataSnapshot.getChildrenCount();
                 }
             }
@@ -90,10 +91,11 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
 
     }
 
-    // Set Listeners
     private void setListeners() {
+
         registerknop.setOnClickListener(this);
         alGebruiker.setOnClickListener(this);
+
     }
 
     @Override
@@ -101,13 +103,11 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         switch (v.getId()) {
             case R.id.registerknop:
                 Gebruiker gebruiker = new Gebruiker();
-                // Call checkValidation method
                 checkValidation(gebruiker);
                 break;
 
             case R.id.alGebruiker:
 
-                // Replace login fragment
                 fragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
                         .replace(R.id.frameContainer, new Login_Fragment())
@@ -117,10 +117,8 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
 
     }
 
-    // Check Validation Method
     private void checkValidation(Gebruiker gebruiker) {
 
-        // Get all edittext texts
         final String getNaam = naam.getText().toString();
         final String getEmailId = email.getText().toString();
         final String getTelefoonnummer = telefoonnummer.getText().toString();
@@ -128,39 +126,45 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         final String getWachtwoord = wachtwoord.getText().toString();
         String getBevestigWachtwoord = bevestigWachtwoord.getText().toString();
 
-        // Pattern match for email id
-        Pattern p = Pattern.compile(Utils.regEx);
-        Matcher m = p.matcher(getEmailId);
-
-        // Check if all strings are null or not
         if (getNaam.equals("") || getNaam.length() == 0
                 || getEmailId.equals("") || getEmailId.length() == 0
                 || getTelefoonnummer.equals("") || getTelefoonnummer.length() == 0
                 || getLocatie.equals("") || getLocatie.length() == 0
                 || getWachtwoord.equals("") || getWachtwoord.length() == 0
                 || getBevestigWachtwoord.equals("")
-                || getBevestigWachtwoord.length() == 0)
+                || getBevestigWachtwoord.length() == 0) {
+
 
             new CustomToast().Show_Toast(getActivity(), view,
                     "Vul alle velden in.");
 
-            // Check if email id valid or not
-        /*else if (!m.find())
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(getEmailId).matches()) {
+
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Het e-mailadres is ongeldig.");*/
+                    "Het e-mailadres is ongeldig.");
 
 
-        else if (!getBevestigWachtwoord.equals(getWachtwoord))
+        } else if (!Utils.WACHTWOORD_PATROON.matcher(getWachtwoord).matches()) {
+
+            new CustomToast().Show_Toast(getActivity(), view,
+                    "Het wachtwoord moet minstens 6 karakters bevatten met:\n" +
+                                    "- min. 1 cijfer\n" +
+                                    "- min. 1 kleine letter\n" +
+                                    "- min. 1 hoofdletter");
+
+        } else if (!getBevestigWachtwoord.equals(getWachtwoord)) {
+
             new CustomToast().Show_Toast(getActivity(), view,
                     "Beide wachtwoorden moeten gelijk zijn.");
 
 
-        else if (!voorwaarden.isChecked())
+        } else if (!voorwaarden.isChecked()) {
+
             new CustomToast().Show_Toast(getActivity(), view,
                     "Accepteer de algemene voorwaarden.");
 
 
-        else {
+        } else {
 
             gebruiker.setNaam(getNaam);
             gebruiker.setEmailID(getEmailId);
@@ -170,12 +174,19 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
 
             reff.child(String.valueOf(maxGebruikersNr + 1)).setValue(gebruiker);
 
-            progressBar.setVisibility(View.VISIBLE);
+            progressBarR.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(getEmailId, getWachtwoord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getContext(), "Succesvol aangemaakt", Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getContext(), "Succesvol geregistreerd", Toast.LENGTH_SHORT).show();
+
+                        fragmentManager.beginTransaction()
+                                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
+                                .replace(R.id.frameContainer, new Login_Fragment())
+                                .commit();
+
                     }
                 }
             });
