@@ -1,6 +1,5 @@
 package com.example.fitflex;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.LayoutInflater;
@@ -26,8 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.regex.Pattern;
 
 public class Registreer_Fragment extends Fragment implements View.OnClickListener {
 
@@ -124,8 +121,9 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         final String getTelefoonnummer = telefoonnummer.getText().toString();
         final String getLocatie = locatie.getText().toString();
         final String getWachtwoord = wachtwoord.getText().toString();
-        String getBevestigWachtwoord = bevestigWachtwoord.getText().toString();
+        final String getBevestigWachtwoord = bevestigWachtwoord.getText().toString();
 
+        //Alles ingevuld?
         if (getNaam.equals("") || getNaam.length() == 0
                 || getEmailId.equals("") || getEmailId.length() == 0
                 || getTelefoonnummer.equals("") || getTelefoonnummer.length() == 0
@@ -134,36 +132,48 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
                 || getBevestigWachtwoord.equals("")
                 || getBevestigWachtwoord.length() == 0) {
 
-
             new CustomToast().Show_Toast(getActivity(), view,
                     "Vul alle velden in.");
 
+        //Email
         } else if (!Patterns.EMAIL_ADDRESS.matcher(getEmailId).matches()) {
 
             new CustomToast().Show_Toast(getActivity(), view,
                     "Het e-mailadres is ongeldig.");
 
 
+        //Telefoonnummer
+        } else if (getTelefoonnummer.length() > 10) {
+
+            new CustomToast().Show_Toast(getActivity(), view,
+                    "Het telefoonnummer is ongeldig.");
+
+
+        //Wachtwoord
         } else if (!Utils.WACHTWOORD_PATROON.matcher(getWachtwoord).matches()) {
 
             new CustomToast().Show_Toast(getActivity(), view,
                     "Het wachtwoord moet minstens 6 karakters bevatten met:\n" +
-                                    "- min. 1 cijfer\n" +
-                                    "- min. 1 kleine letter\n" +
-                                    "- min. 1 hoofdletter");
+                            "- min. 1 cijfer\n" +
+                            "- min. 1 kleine letter\n" +
+                            "- min. 1 hoofdletter");
 
+
+        //Bevestig wachtwoord
         } else if (!getBevestigWachtwoord.equals(getWachtwoord)) {
 
             new CustomToast().Show_Toast(getActivity(), view,
                     "Beide wachtwoorden moeten gelijk zijn.");
 
 
+        //Voorwaarden
         } else if (!voorwaarden.isChecked()) {
 
             new CustomToast().Show_Toast(getActivity(), view,
                     "Accepteer de algemene voorwaarden.");
 
 
+        //Registreer
         } else {
 
             gebruiker.setNaam(getNaam);
@@ -178,6 +188,7 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
             mAuth.createUserWithEmailAndPassword(getEmailId, getWachtwoord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+
                     if (task.isSuccessful()) {
 
                         Toast.makeText(getContext(), "Succesvol geregistreerd", Toast.LENGTH_SHORT).show();
@@ -186,6 +197,10 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
                                 .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
                                 .replace(R.id.frameContainer, new Login_Fragment())
                                 .commit();
+
+                    } else {
+
+                        Toast.makeText(getContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 }

@@ -28,9 +28,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Login_Fragment extends Fragment implements View.OnClickListener {
 
     private View view;
@@ -153,6 +150,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
             loginLayout.startAnimation(shakeAnimation);
             new CustomToast().Show_Toast(getActivity(), view,
                     "Vul beide velden in!");
+            progressBarL.setVisibility(View.GONE);
 
         } else {
 
@@ -170,6 +168,8 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
                         startActivity(intent);
 
                     } else {
+
+                        progressBarL.setVisibility(View.GONE);
 
                         Toast.makeText(getContext(), "Wachtwoord incorrect.", Toast.LENGTH_SHORT).show();
 

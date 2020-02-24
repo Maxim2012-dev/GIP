@@ -76,9 +76,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:textSize="14sp"
-                android:text="@string/verberg_pwd"
-                android:textColor="@color/white"/>
+                android:text="@string/toon_pwd"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/vergetenWachtwoord"
