@@ -176,6 +176,8 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         //Registreer
         } else {
 
+            progressBarR.setVisibility(View.VISIBLE);
+
             gebruiker.setNaam(getNaam);
             gebruiker.setEmailID(getEmailId);
             gebruiker.setLocatie(getLocatie);
@@ -184,13 +186,13 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
 
             reff.child(String.valueOf(maxGebruikersNr + 1)).setValue(gebruiker);
 
-            progressBarR.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(getEmailId, getWachtwoord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
 
+                        progressBarR.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Succesvol geregistreerd", Toast.LENGTH_SHORT).show();
 
                         fragmentManager.beginTransaction()
