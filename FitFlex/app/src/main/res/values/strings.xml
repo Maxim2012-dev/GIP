@@ -23,4 +23,14 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="todo">TODO</string>
+    <string name="gerrit_wijns">Gerrit Wijns</string>
+    <string name="pemail">Email</string>
+    <string name="telefoonnummer">Telefoonnummer</string>
+    <string name="e_mailadres">E-mailadres</string>
+    <string name="wachtwoord">Wachtwoord</string>
+    <string name="todo">TODO</string>
+    <string name="todo">TODO</string>
+    <string name="todo">TODO</string>
+    <string name="telefoon" />
 </resources>
