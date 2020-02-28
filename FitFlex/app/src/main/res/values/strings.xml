@@ -9,9 +9,7 @@
     <string name="vergeet">Wachtwoord vergeten?</string>
     <string name="sluitknop">Sluitknop voor Activity</string>
     <string name="nieuweGebruiker">Nog geen lid? Registreer hier.</string>
-    <string name="naam">Naam</string>
     <string name="telnr">Telefoonnummer</string>
-    <string name="locatie">Locatie</string>
     <string name="bevestig_pwd">Bevestig wachtwoord</string>
     <string name="voorwaarden">Door te klikken op Registreer ga je akkoord met de algemene voorwaarden.</string>
     <string name="registreer">REGISTREER</string>
@@ -26,11 +24,8 @@
     <string name="todo">TODO</string>
     <string name="gerrit_wijns">Gerrit Wijns</string>
     <string name="pemail">Email</string>
-    <string name="telefoonnummer">Telefoonnummer</string>
     <string name="e_mailadres">E-mailadres</string>
-    <string name="wachtwoord">Wachtwoord</string>
-    <string name="todo">TODO</string>
-    <string name="todo">TODO</string>
-    <string name="todo">TODO</string>
-    <string name="telefoon" />
+    <string name="telefoon">Telefoonnummer</string>
+    <string name="locatie">Locatie</string>
+    <string name="naam">Naam</string>
 </resources>
