@@ -183,6 +183,7 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
             gebruiker.setLocatie(getLocatie);
             gebruiker.setWachtwoord(getWachtwoord);
             gebruiker.setTelefoonnummer(getTelefoonnummer);
+            gebruiker.setImageURL("default");
 
             reff.child(String.valueOf(maxGebruikersNr + 1)).setValue(gebruiker);
 
