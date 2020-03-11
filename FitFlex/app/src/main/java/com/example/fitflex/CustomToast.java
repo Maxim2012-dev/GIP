@@ -22,7 +22,7 @@ public class CustomToast {
             text.setText(error);
 
             Toast toast = new Toast(context);
-            toast.setGravity(Gravity.TOP | Gravity.FILL_HORIZONTAL, 0, 0);
+            toast.setGravity(Gravity.TOP | Gravity.FILL_HORIZONTAL, 0, 200);
 
             toast.setDuration(Toast.LENGTH_LONG);
             toast.setView(layout);
