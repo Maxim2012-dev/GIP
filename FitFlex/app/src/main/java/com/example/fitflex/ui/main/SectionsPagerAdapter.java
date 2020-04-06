@@ -3,20 +3,14 @@ package com.example.fitflex.ui.main;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.fitflex.Frag1;
-import com.example.fitflex.Frag2;
-import com.example.fitflex.Frag3;
-import com.example.fitflex.R;
+import com.example.fitflex.Overzicht;
+import com.example.fitflex.MijnWorkouts;
+import com.example.fitflex.MaakWorkoutTab;
 
-/**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
- */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private final Context mContext;
@@ -32,13 +26,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                fragment = new Frag1();
+                fragment = new Overzicht();
                 break;
             case 1:
-                fragment = new Frag2();
+                fragment = new MijnWorkouts();
                 break;
             case 2:
-                fragment = new Frag3();
+                fragment = new MaakWorkoutTab();
         }
         return fragment;
     }
@@ -48,11 +42,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Frag1";
+                return "Overzicht";
             case 1:
-                return "Frag2";
+                return "Workouts";
             case 2:
-                return "Frag3";
+                return "Nieuw";
         }
         return null;
     }

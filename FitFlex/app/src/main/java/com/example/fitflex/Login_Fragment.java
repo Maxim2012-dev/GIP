@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -32,10 +33,9 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
 
     private View view;
 
-    private EditText email, wachtwoord;
+    private TextInputEditText email, wachtwoord;
     private Button loginknop;
     private TextView vergetenWachtwoord, maakAccount;
-    private CheckBox toon_verberg_wachtwoord;
     private ProgressBar progressBarL;
     private LinearLayout loginLayout;
     private Animation shakeAnimation;
@@ -65,7 +65,6 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
         loginknop = view.findViewById(R.id.loginknop);
         vergetenWachtwoord = view.findViewById(R.id.vergetenWachtwoord);
         maakAccount = view.findViewById(R.id.maakAccount);
-        toon_verberg_wachtwoord = view.findViewById(R.id.toon_verberg_wachtwoord);
         progressBarL = view.findViewById(R.id.progressBarL);
         loginLayout = view.findViewById(R.id.login_layout);
 
@@ -79,36 +78,11 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
     }
 
     private void setListeners() {
+
         loginknop.setOnClickListener(this);
         vergetenWachtwoord.setOnClickListener(this);
         maakAccount.setOnClickListener(this);
 
-        toon_verberg_wachtwoord
-                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                    @Override
-                    public void onCheckedChanged(CompoundButton button,
-                                                 boolean isChecked) {
-
-                        if (isChecked) {
-
-                            toon_verberg_wachtwoord.setText(R.string.verberg_pwd);
-
-                            wachtwoord.setInputType(InputType.TYPE_CLASS_TEXT);
-                            wachtwoord.setTransformationMethod(HideReturnsTransformationMethod
-                                    .getInstance());
-                        } else {
-                            toon_verberg_wachtwoord.setText(R.string.toon_pwd);
-
-                            wachtwoord.setInputType(InputType.TYPE_CLASS_TEXT
-                                    | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                            wachtwoord.setTransformationMethod(PasswordTransformationMethod
-                                    .getInstance());
-
-                        }
-
-                    }
-                });
     }
 
     @Override

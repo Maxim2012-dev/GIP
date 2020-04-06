@@ -1,6 +1,8 @@
 package com.example.fitflex;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,6 +32,14 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
+        tabs.getTabAt(0).setIcon(R.drawable.ic_graphic_eq_black);
+        tabs.getTabAt(1).setIcon(R.drawable.ic_toc_black);
+        tabs.getTabAt(2).setIcon(R.drawable.ic_add_box);
+
+        tabs.getTabAt(0).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        tabs.getTabAt(1).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        tabs.getTabAt(2).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/login_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:padding="25dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    android:padding="15dp">
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_gravity="center"
             android:src="@drawable/logo"
             android:contentDescription="@string/logo">
@@ -19,53 +20,50 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="10dp"
             android:text="@string/login"
+            android:paddingBottom="10dp"
             android:textColor="@color/white_greyish"
             android:textSize="25sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/login_email"
-            android:layout_width="fill_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:autofillHints=""
-            android:background="@android:color/transparent"
-            android:drawableStart="@drawable/email"
-            android:drawablePadding="8dp"
-            android:enabled="true"
-            android:gravity="center_vertical"
             android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="16sp" />
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1px"
-            android:background="@color/white_greyish" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/email"
+                    android:drawablePadding="8dp"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/white_greyish"
+                    android:textColorHint="@color/white_greyish"
+                    android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/login_wachtwoord"
-            android:layout_width="fill_parent"
+        </com.google.android.material.textfield.TextInputLayout>
+        
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:background="@android:color/transparent"
-            android:drawableStart="@drawable/password"
-            android:drawablePadding="8dp"
-            android:enabled="true"
-            android:gravity="center_vertical"
             android:hint="@string/wachtwoord"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="16sp" />
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_wachtwoord"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/password"
+                    android:drawablePadding="8dp"
+                    android:inputType="textPassword"
+                    android:textColor="@color/white_greyish"
+                    android:textColorHint="@color/white_greyish"
+                    android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -74,22 +72,12 @@
             android:paddingTop="8dp"
             android:paddingBottom="5dp">
 
-            <CheckBox
-                android:id="@+id/toon_verberg_wachtwoord"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:text="@string/toon_pwd"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-
             <TextView
                 android:id="@+id/vergetenWachtwoord"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="end"
+                android:gravity="center"
                 android:padding="5dp"
                 android:text="@string/vergeet"
                 android:textColor="@color/text_selector"
