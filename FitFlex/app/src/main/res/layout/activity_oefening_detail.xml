@@ -39,6 +39,20 @@
         android:id="@+id/oefening_detail_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:text="@string/toevoegen"
+            android:background="@color/loginbutton_selector"
+            android:textColor="#009688"
+            android:textSize="15sp"
+            android:textStyle="bold" >
+
+        </Button>
+
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

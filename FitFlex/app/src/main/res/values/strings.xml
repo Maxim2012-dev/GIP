@@ -37,4 +37,5 @@
     <string name="voeg_toe">Voeg Toe</string>
     <string name="title_oefening_list">Oefeningen</string>
     <string name="title_oefening_detail">Oefening Detail</string>
+    <string name="toevoegen">Toevoegen</string>
 </resources>

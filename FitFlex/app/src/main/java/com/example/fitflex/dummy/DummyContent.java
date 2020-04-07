@@ -1,7 +1,5 @@
 package com.example.fitflex.dummy;
 
-import android.os.Handler;
-
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -41,8 +39,6 @@ public class DummyContent {
 
     static {
 
-        addItem(new DummyItem("test", "Item ", "test", "test"));
-
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -50,9 +46,8 @@ public class DummyContent {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     String moeilijkheid = ds.child("Moeilijkheid").getValue(String.class);
-                    System.out.println(moeilijkheid);
                     String naam = ds.child("Naam").getValue(String.class);
-                    addItem(new DummyItem(String.valueOf(counter), naam, moeilijkheid, makeDetails(counter)));
+                    addItem(new DummyItem(String.valueOf(counter), naam, moeilijkheid, makeDetails(naam)));
                     counter++;
 
                 }
@@ -72,11 +67,11 @@ public class DummyContent {
         ITEM_MAP.put(item.id, item);
     }
 
-    private static String makeDetails(int position) {
+    private static String makeDetails(String naam) {
         StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
+        builder.append("Details over de ").append(naam);
 
-        builder.append("\nMore details information here.");
+        builder.append("\nMeer informatie hier...");
 
         return builder.toString();
     }
