@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="30dp"
     tools:context=".StelWorkoutSamen">
 
     <TextView
@@ -11,9 +12,63 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=""
-        android:layout_margin="30dp"
+        android:layout_margin="10dp"
         android:textSize="35sp">
 
     </TextView>
+    
+    <ListView
+        android:id="@+id/workoutOefeningen"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:layout_below="@id/naam">
+        
+    </ListView>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/geen_oefeningen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/workoutOefeningen"
+        android:text=""
+        android:layout_margin="15dp"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <RelativeLayout
+        android:layout_width="450dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/geen_oefeningen"
+        android:layout_centerInParent="true">
+
+        <Button
+            android:id="@+id/toevoegen"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:background="@color/loginbutton_selector"
+            android:text="@string/voeg_toe"
+            android:textColor="#009688"
+            android:textSize="15sp"
+            android:textStyle="bold" >
+
+        </Button>
+
+        <Button
+            android:id="@+id/volgende"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@color/loginbutton_selector"
+            android:padding="3dp"
+            android:text="@string/volgende"
+            android:textColor="#009688"
+            android:textSize="15sp"
+            android:textStyle="bold" >
+
+        </Button>
+
+    </RelativeLayout>
+
+</RelativeLayout>

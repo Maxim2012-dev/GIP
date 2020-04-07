@@ -33,4 +33,8 @@
     <string name="title_activity_stel_workout_op">StelWorkoutOpActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="start">Start</string>
+    <string name="voeg_toe">Voeg Toe</string>
+    <string name="title_oefening_list">Oefeningen</string>
+    <string name="title_oefening_detail">Oefening Detail</string>
 </resources>
