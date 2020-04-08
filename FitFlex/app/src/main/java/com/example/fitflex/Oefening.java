@@ -3,8 +3,12 @@ package com.example.fitflex;
 public class Oefening {
 
     public String naam, moeilijkheid;
+    public int aantalReps;
 
-    public Oefening() {
+    public Oefening(String naam, String moeilijkheid) {
+
+        this.naam = naam;
+        this.moeilijkheid = moeilijkheid;
 
     }
 
@@ -22,5 +26,13 @@ public class Oefening {
 
     public void setMoeilijkheid(String moeilijkheid) {
         this.moeilijkheid = moeilijkheid;
+    }
+
+    public int getAantalReps() {
+        return aantalReps;
+    }
+
+    public void setAantalReps(int aantalReps) {
+        this.aantalReps = aantalReps;
     }
 }

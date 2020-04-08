@@ -7,7 +7,7 @@
     <color name="button_selectorcolor">#9E9E9E</color>
     <color name="colorPrimary">#01635A</color>
     <color name="colorPrimaryDark">#00423B</color>
-    <color name="colorAccent">#EEEEEE</color>
+    <color name="colorAccent">#000000</color>
     <color name="gradient_start">#009588</color>
     <color name="gradient_end">#00423B</color>
 

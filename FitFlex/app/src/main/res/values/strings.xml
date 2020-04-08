@@ -31,11 +31,12 @@
     <string name="kies_een_naam_voor_je_workout">Kies een naam voor je workout:</string>
     <string name="volgende">Volgende</string>
     <string name="title_activity_stel_workout_op">StelWorkoutOpActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
     <string name="start">Start</string>
     <string name="voeg_toe">Voeg Toe</string>
     <string name="title_oefening_list">Oefeningen</string>
     <string name="title_oefening_detail">Oefening Detail</string>
     <string name="toevoegen">Toevoegen</string>
+    <string name="aantal_reps">Aantal Reps</string>
+    <string name="voer_het_aantal_repetities_in_en_druk_op_toevoegen">Voer het aantal repetities in en druk op toevoegen</string>
+    <string name="verwijder">Verwijder</string>
 </resources>

@@ -2,6 +2,7 @@ package com.example.fitflex;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -111,6 +112,20 @@ public class OefeningListActivity extends AppCompatActivity {
             holder.mIdView.setText(mValues.get(position).id);
             holder.mContentView.setText(mValues.get(position).naam);
             holder.mLevelView.setText(mValues.get(position).moeilijkheid);
+
+            if (mValues.get(position).moeilijkheid.equals("Makkelijk")) {
+
+                holder.mLevelView.setTextColor(Color.parseColor("#009e2a"));
+
+            } else if (mValues.get(position).moeilijkheid.equals("Gemiddeld")) {
+
+                holder.mLevelView.setTextColor(Color.parseColor("#bfc900"));
+
+            } else {
+
+                holder.mLevelView.setTextColor(Color.parseColor("#b50000"));
+
+            }
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);

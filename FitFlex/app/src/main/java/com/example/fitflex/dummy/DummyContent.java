@@ -22,7 +22,6 @@ import java.util.Map;
 public class DummyContent {
 
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
-    ;
     private static DatabaseReference reference = database.getReference("Oefening");
 
     /**

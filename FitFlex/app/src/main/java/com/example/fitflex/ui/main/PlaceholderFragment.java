@@ -43,7 +43,7 @@ public class PlaceholderFragment extends Fragment {
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.overzicht_layout, container, false);
+        View root = inflater.inflate(R.layout.maak_workout_tab, container, false);
         return root;
     }
 }
