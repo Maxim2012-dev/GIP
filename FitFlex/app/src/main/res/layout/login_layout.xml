@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/wachtwoord"
             app:passwordToggleEnabled="true"
+            android:layout_marginTop="10dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -90,7 +91,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
-            android:background="@color/loginbutton_selector"
+            android:background="@drawable/loginbutton_selector"
             android:padding="3dp"
             android:text="@string/login"
             android:textColor="#009688"

@@ -3,13 +3,13 @@ package com.example.fitflex;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<Oefening> oefeningen = new ArrayList<>();
+    ArrayList<Oefening> oefeningen;
     CustomAdapter customAdapter;
 
     private TextView naam;
@@ -33,6 +33,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
         listView = findViewById(R.id.workoutOefeningen);
         verwijder = findViewById(R.id.verwijder);
 
-        oefeningen.add(new Oefening("Push Up", "Makkelijk"));
+        oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
 
         Intent i = getIntent();
         String naamWorkout = i.getStringExtra("naamWorkout");

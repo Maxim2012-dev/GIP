@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/naamWorkout"
-        android:background="@color/loginbutton_selector"
+        android:background="@drawable/loginbutton_selector"
         android:text="@string/volgende"
         android:layout_margin="20dp"
         android:textColor="#009688"

@@ -1,6 +1,7 @@
 package com.example.fitflex;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -11,8 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fitflex.dummy.DummyContent;
+
+import java.util.ArrayList;
 
 /**
  * A fragment representing a single Oefening detail screen.
@@ -21,6 +25,7 @@ import com.example.fitflex.dummy.DummyContent;
  * on handsets.
  */
 public class OefeningDetailFragment extends Fragment {
+
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -64,9 +69,24 @@ public class OefeningDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.oefening_detail)).setText(mItem.details);
-        }
 
+            ((TextView) rootView.findViewById(R.id.oefening_detail)).setText(mItem.details);
+            rootView.findViewById(R.id.toevoegknop).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    ((MyApplication) OefeningDetailFragment.this
+                            .getActivity()
+                            .getApplication())
+                            .getOefeningen()
+                            .add(new Oefening(mItem.naam, mItem.moeilijkheid));
+
+                    startActivity(new Intent(getActivity(), StelWorkoutSamen.class));
+
+                }
+            });
+
+        }
         return rootView;
     }
 }
