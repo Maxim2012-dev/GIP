@@ -4,8 +4,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,6 +42,9 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_stel_workout_samen);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
         naam = findViewById(R.id.naam);
         geenOefeningen = findViewById(R.id.geen_oefeningen);
         toevoegen = findViewById(R.id.toevoegen);
@@ -49,19 +54,24 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
         oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
 
-        Intent i = getIntent();
-        String naamWorkout = i.getStringExtra("naamWorkout");
-        getSupportActionBar().setTitle(naamWorkout);
-
-        naam.setText(naamWorkout);
-
         setListeners();
 
         if (oefeningen.size() == 0) {
 
+            Intent i = getIntent();
+            String naamWorkout = i.getStringExtra("naamWorkout");
+            getSupportActionBar().setTitle(naamWorkout);
+            naam.setText(naamWorkout);
+
             geenOefeningen.setText("Nog geen oefeningen...");
 
+            editor.putString("naamWorkout", naamWorkout);
+            editor.apply();
+
         } else {
+
+            getSupportActionBar().setTitle(sharedPref.getString("naamWorkout", null));
+            naam.setText(sharedPref.getString("naamWorkout", null));
 
             customAdapter = new CustomAdapter(StelWorkoutSamen.this, oefeningen);
             listView.setAdapter(customAdapter);
@@ -110,6 +120,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, OefeningListActivity.class));
                 break;
             case R.id.volgende:
+
                 break;
 
         }

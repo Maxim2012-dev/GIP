@@ -14,10 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".WorkoutSettings"></activity>
         <activity
             android:name=".OefeningListActivity"
             android:label="@string/title_oefening_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OefeningDetailActivity"
             android:label="@string/title_oefening_detail"
@@ -27,8 +28,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.fitflex.OefeningListActivity" />
         </activity>
-        <activity android:name=".StelWorkoutSamen"
-            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".StelWorkoutSamen"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".ProfielActivity"
             android:parentActivityName=".HomeActivity" />
