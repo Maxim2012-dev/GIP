@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.fitflex.dummy.DummyContent;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * An activity representing a list of Oefeningen. This activity
@@ -42,6 +43,8 @@ public class OefeningListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oefening_list);
+
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

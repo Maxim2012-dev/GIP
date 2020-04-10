@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme">
 
         <TextView
             android:id="@+id/title"
@@ -42,6 +42,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_account_box"
-        app:backgroundTint="@color/colorPrimary"/>
+        app:backgroundTint="#008e76"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

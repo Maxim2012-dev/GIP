@@ -35,10 +35,11 @@
     <string name="toevoegen">Toevoegen</string>
     <string name="voer_het_aantal_repetities_in_en_druk_op_toevoegen">Voer het aantal repetities in en druk op toevoegen</string>
     <string name="verwijder">Verwijder</string>
-    <string name="increment">increment</string>
     <string name="aantal_reps">Aantal Reps</string>
     <string name="aantal_rondes">Aantal Rondes</string>
     <string name="rust_tussen_rondes">Rust na ronde</string>
     <string name="rust_tussen_oefeningen">Rust na oefening</string>
     <string name="title_oefening_detail" />
+    <string name="itemfoto">itemFoto</string>
+    <string name="icon">icon</string>
 </resources>

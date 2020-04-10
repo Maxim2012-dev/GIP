@@ -9,11 +9,12 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".WorkoutProgress" />
         <activity
             android:name=".WorkoutSettings"
             android:parentActivityName=".StelWorkoutSamen" />
@@ -21,12 +22,12 @@
             android:name=".OefeningListActivity"
             android:label="@string/title_oefening_list"
             android:parentActivityName=".StelWorkoutSamen"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".OefeningDetailActivity"
             android:label="@string/title_oefening_detail"
             android:parentActivityName=".OefeningListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.fitflex.OefeningListActivity" />
@@ -40,8 +41,10 @@
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

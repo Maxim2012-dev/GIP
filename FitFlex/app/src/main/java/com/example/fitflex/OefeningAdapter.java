@@ -1,6 +1,8 @@
 package com.example.fitflex;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +11,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends BaseAdapter {
+public class OefeningAdapter extends BaseAdapter {
 
     Context mContext;
     ArrayList<Oefening> oefeningen;
     TextView mijnWorkoutOefNaam;
-    TextView moeilijkheid;
+    TextView hoeveelheidReps;
 
-    public CustomAdapter(Context context, ArrayList<Oefening> oefeningen) {
+    public OefeningAdapter(Context context, ArrayList<Oefening> oefeningen) {
 
         mContext = context;
         this.oefeningen = oefeningen;
@@ -38,6 +40,7 @@ public class CustomAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -48,10 +51,10 @@ public class CustomAdapter extends BaseAdapter {
         Oefening tempOef = (Oefening) getItem(position);
 
         mijnWorkoutOefNaam = convertView.findViewById(R.id.mijnWorkoutOefNaam);
-        moeilijkheid = convertView.findViewById(R.id.moeilijkheid);
+        hoeveelheidReps = convertView.findViewById(R.id.hoeveelheidReps);
 
         mijnWorkoutOefNaam.setText(tempOef.getNaam());
-        moeilijkheid.setText(tempOef.getMoeilijkheid());
+        hoeveelheidReps.setText(tempOef.getAantalReps() + " reps");
 
         return convertView;
     }
