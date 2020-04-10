@@ -71,6 +71,8 @@ public class MaakWorkoutTab extends Fragment implements View.OnClickListener {
 
         } else {
 
+            ((MyApplication) MaakWorkoutTab.this.getActivity().getApplication()).getOefeningen().clear();
+
             Intent i = new Intent(getActivity(), StelWorkoutSamen.class);
             i.putExtra("naamWorkout", workoutNaam);
             startActivity(i);

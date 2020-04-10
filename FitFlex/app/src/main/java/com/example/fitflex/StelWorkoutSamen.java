@@ -22,7 +22,7 @@ import java.util.Objects;
 public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickListener {
 
     ArrayList<Oefening> oefeningen;
-    CustomAdapter customAdapter;
+    OefeningAdapter oefeningAdapter;
 
     private TextView naam;
     private TextView geenOefeningen;
@@ -37,7 +37,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onCreate(Bundle savedInstanceState) { 
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stel_workout_samen);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -66,8 +66,8 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
             getSupportActionBar().setTitle(sharedPref.getString("naamWorkout", null));
             naam.setText(sharedPref.getString("naamWorkout", null));
 
-            customAdapter = new CustomAdapter(StelWorkoutSamen.this, oefeningen);
-            listView.setAdapter(customAdapter);
+            oefeningAdapter = new OefeningAdapter(StelWorkoutSamen.this, oefeningen);
+            listView.setAdapter(oefeningAdapter);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -91,7 +91,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
                                         geenOefeningen.setText("Nog geen oefeningen");
 
                                     }
-                                    customAdapter.notifyDataSetChanged();
+                                    oefeningAdapter.notifyDataSetChanged();
 
                                 }
                             })
@@ -133,6 +133,8 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, OefeningListActivity.class));
                 break;
             case R.id.volgende:
+                Intent i = new Intent();
+                i.putExtra("workoutNaam", naam.getText().toString());
                 startActivity(new Intent(this, WorkoutSettings.class));
                 break;
 

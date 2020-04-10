@@ -1,13 +1,20 @@
 package com.example.fitflex;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class WorkoutSettings extends AppCompatActivity implements View.OnClickListener {
 
@@ -76,6 +83,8 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
         incrementTussenOef.setOnClickListener(this);
         decrementTussenOef.setOnClickListener(this);
 
+        startknop.setOnClickListener(this);
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -113,8 +122,38 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
                     tijdTussenOef.setText(counterTussenOef + "s");
                 }
                 break;
+            case R.id.startknop:
+
+                new AlertDialog.Builder(WorkoutSettings.this)
+                        .setIcon(R.drawable.ic_save)
+                        .setTitle("Workout bijhouden?")
+                        .setMessage("Wil je de gemaakte workout opslaan?")
+                        .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                saveData();
+                                Toast.makeText(getApplicationContext(), "Workout opgeslagen!", Toast.LENGTH_SHORT).show();
+
+                            }
+                        })
+                        .setNegativeButton("Nee", null)
+                        .show();
+
+                startActivity(new Intent(getApplicationContext(), WorkoutProgress.class));
+                break;
 
         }
+    }
+
+    private void saveData() {
+
+        ArrayList<Oefening> oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
+        String workoutnaam = getIntent().getExtras().getString("workoutNaam");
+
+        Workout workout = new Workout(workoutnaam, oefeningen);
+
+        ((MyApplication) this.getApplication()).getWorkoutlijst().add(workout);
 
     }
 }

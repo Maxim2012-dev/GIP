@@ -18,7 +18,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_add_circle_outline"
-            android:contentDescription="@string/increment"
+            android:contentDescription="@string/icon"
             android:layout_alignParentEnd="true">
 
         </ImageView>
@@ -58,7 +58,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_remove_circle_outline"
-            android:contentDescription="@string/increment">
+            android:contentDescription="@string/icon">
 
         </ImageView>
 
@@ -76,7 +76,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_add_circle_outline"
-            android:contentDescription="@string/increment"
+            android:contentDescription="@string/icon"
             android:layout_alignParentEnd="true">
 
         </ImageView>
@@ -116,7 +116,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_remove_circle_outline"
-            android:contentDescription="@string/increment">
+            android:contentDescription="@string/icon">
 
         </ImageView>
 
@@ -134,7 +134,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_add_circle_outline"
-            android:contentDescription="@string/increment"
+            android:contentDescription="@string/icon"
             android:layout_alignParentEnd="true">
 
         </ImageView>
@@ -174,7 +174,7 @@
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_remove_circle_outline"
-            android:contentDescription="@string/increment">
+            android:contentDescription="@string/icon">
 
         </ImageView>
 
