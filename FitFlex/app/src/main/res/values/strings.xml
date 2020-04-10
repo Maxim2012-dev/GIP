@@ -19,7 +19,6 @@
     <string name="bevestig">BEVESTIG</string>
     <string name="terug">TERUG</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="gerrit_wijns">Gerrit Wijns</string>
     <string name="pemail">Email</string>
     <string name="telefoon">Telefoonnummer</string>
     <string name="e_mailadres">E-mailadres</string>
@@ -30,13 +29,16 @@
     <string name="logo">logo</string>
     <string name="kies_een_naam_voor_je_workout">Kies een naam voor je workout:</string>
     <string name="volgende">Volgende</string>
-    <string name="title_activity_stel_workout_op">StelWorkoutOpActivity</string>
     <string name="start">Start</string>
     <string name="voeg_toe">Voeg Toe</string>
     <string name="title_oefening_list">Oefeningen</string>
-    <string name="title_oefening_detail">Oefening Detail</string>
     <string name="toevoegen">Toevoegen</string>
-    <string name="aantal_reps">Aantal Reps</string>
     <string name="voer_het_aantal_repetities_in_en_druk_op_toevoegen">Voer het aantal repetities in en druk op toevoegen</string>
     <string name="verwijder">Verwijder</string>
+    <string name="increment">increment</string>
+    <string name="aantal_reps">Aantal Reps</string>
+    <string name="aantal_rondes">Aantal Rondes</string>
+    <string name="rust_tussen_rondes">Rust na ronde</string>
+    <string name="rust_tussen_oefeningen">Rust na oefening</string>
+    <string name="title_oefening_detail" />
 </resources>

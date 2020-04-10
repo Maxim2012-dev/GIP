@@ -1,9 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WorkoutSettings">
 
-</LinearLayout>
+    <RelativeLayout
+        android:id="@+id/rondes"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp">
+
+        <ImageView
+            android:id="@+id/incrementRondes"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_add_circle_outline"
+            android:contentDescription="@string/increment"
+            android:layout_alignParentEnd="true">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="@string/aantal_rondes"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="22sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/aantalRondes"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text=""
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="30sp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/decrementRondes"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_remove_circle_outline"
+            android:contentDescription="@string/increment">
+
+        </ImageView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rustTussenRondes"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp">
+
+        <ImageView
+            android:id="@+id/incrementTussenRondes"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_add_circle_outline"
+            android:contentDescription="@string/increment"
+            android:layout_alignParentEnd="true">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="@string/rust_tussen_rondes"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tijdTussenRondes"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text=""
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="30sp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/decrementTussenRondes"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_remove_circle_outline"
+            android:contentDescription="@string/increment">
+
+        </ImageView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rustTussenOef"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="230dp">
+
+        <ImageView
+            android:id="@+id/incrementTussenOef"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_add_circle_outline"
+            android:contentDescription="@string/increment"
+            android:layout_alignParentEnd="true">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="@string/rust_tussen_oefeningen"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tijdTussenOef"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text=""
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="30sp">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/decrementTussenOef"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_remove_circle_outline"
+            android:contentDescription="@string/increment">
+
+        </ImageView>
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/rustTussenOef"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/loginbutton_selector"
+        android:text="@string/start"
+        android:textColor="#009688"
+        android:textSize="17sp"
+        android:textStyle="bold">
+
+
+    </Button>
+
+</RelativeLayout>

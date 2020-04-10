@@ -14,10 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WorkoutSettings"></activity>
+        <activity
+            android:name=".WorkoutSettings"
+            android:parentActivityName=".StelWorkoutSamen" />
         <activity
             android:name=".OefeningListActivity"
             android:label="@string/title_oefening_list"
+            android:parentActivityName=".StelWorkoutSamen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OefeningDetailActivity"

@@ -37,7 +37,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
     @SuppressLint("SetTextI18n")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stel_workout_samen);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -45,15 +45,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        naam = findViewById(R.id.naam);
-        geenOefeningen = findViewById(R.id.geen_oefeningen);
-        toevoegen = findViewById(R.id.toevoegen);
-        volgende = findViewById(R.id.volgende);
-        listView = findViewById(R.id.workoutOefeningen);
-        verwijder = findViewById(R.id.verwijder);
-
-        oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
-
+        initViews();
         setListeners();
 
         if (oefeningen.size() == 0) {
@@ -63,6 +55,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
             getSupportActionBar().setTitle(naamWorkout);
             naam.setText(naamWorkout);
 
+            volgende.setVisibility(View.GONE);
             geenOefeningen.setText("Nog geen oefeningen...");
 
             editor.putString("naamWorkout", naamWorkout);
@@ -91,6 +84,13 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
                                 public void onClick(DialogInterface dialog, int which) {
 
                                     oefeningen.remove(item);
+
+                                    if (oefeningen.size() == 0) {
+
+                                        volgende.setVisibility(View.GONE);
+                                        geenOefeningen.setText("Nog geen oefeningen");
+
+                                    }
                                     customAdapter.notifyDataSetChanged();
 
                                 }
@@ -101,6 +101,19 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
                 }
             });
         }
+
+    }
+
+    private void initViews() {
+
+        naam = findViewById(R.id.naam);
+        geenOefeningen = findViewById(R.id.geen_oefeningen);
+        toevoegen = findViewById(R.id.toevoegen);
+        volgende = findViewById(R.id.volgende);
+        listView = findViewById(R.id.workoutOefeningen);
+        verwijder = findViewById(R.id.verwijder);
+
+        oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
 
     }
 
@@ -120,7 +133,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, OefeningListActivity.class));
                 break;
             case R.id.volgende:
-
+                startActivity(new Intent(this, WorkoutSettings.class));
                 break;
 
         }
