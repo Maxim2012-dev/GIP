@@ -25,7 +25,6 @@ public class MaakWorkoutTab extends Fragment implements View.OnClickListener {
 
     public MaakWorkoutTab() {
 
-
     }
 
     @Override

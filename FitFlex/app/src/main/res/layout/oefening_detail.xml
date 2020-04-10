@@ -17,10 +17,24 @@
 
     </TextView>
 
+    <EditText
+        android:id="@+id/aantalReps"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_gravity="center"
+        android:inputType="number"
+        android:hint="@string/aantal_reps"
+        android:textAlignment="center"
+        android:autofillHints="">
+
+    </EditText>
+
     <Button
         android:id="@+id/toevoegknop"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:text="@string/toevoegen"
         android:textColor="#009688"
         android:textSize="17sp"
