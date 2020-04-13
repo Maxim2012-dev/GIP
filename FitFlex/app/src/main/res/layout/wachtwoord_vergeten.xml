@@ -11,26 +11,26 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="@string/geregistreerdeEmail"
-        android:textColor="@color/white_greyish"
+        android:textColor="@color/colorPrimary"
         android:textSize="17sp" />
 
-    <EditText
-        android:id="@+id/geregistreerde_email"
-        android:layout_width="fill_parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:singleLine="true"
-        android:background="@android:color/transparent"
-        android:drawableStart="@drawable/email"
-        android:drawablePadding="8dp"
-        android:gravity="center_vertical"
         android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:padding="10dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
-        android:textSize="16sp"
-        android:autofillHints="" />
+        android:textColorHint="@color/colorPrimary"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/geregistreerde_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_email"
+            android:drawablePadding="8dp"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <View
         android:layout_width="fill_parent"

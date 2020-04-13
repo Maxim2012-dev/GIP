@@ -10,9 +10,11 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:textSize="30sp"
+        android:text=""
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:textAlignment="center">
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary">
 
     </TextView>
 
@@ -30,9 +32,9 @@
         android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/workoutOefeningen"
-        android:text=""
         android:textSize="20sp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:textColor="@color/black">
 
     </TextView>
 
@@ -50,7 +52,6 @@
             android:layout_alignParentStart="true"
             android:background="@drawable/loginbutton_selector"
             android:text="@string/voeg_toe"
-            android:textColor="#009688"
             android:textSize="15sp"
             android:textStyle="bold">
 
@@ -64,7 +65,6 @@
             android:background="@drawable/loginbutton_selector"
             android:padding="3dp"
             android:text="@string/volgende"
-            android:textColor="#009688"
             android:textSize="15sp"
             android:textStyle="bold">
 

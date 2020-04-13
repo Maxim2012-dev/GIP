@@ -16,6 +16,8 @@ import android.view.View;
 
 import com.example.fitflex.ui.main.SectionsPagerAdapter;
 
+import java.util.Objects;
+
 public class HomeActivity extends AppCompatActivity {
 
     FloatingActionButton floatingActionButton;
@@ -24,6 +26,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        getSupportActionBar().hide();
 
         floatingActionButton = findViewById(R.id.fab);
 

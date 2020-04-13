@@ -17,7 +17,8 @@
         <activity android:name=".WorkoutProgress" />
         <activity
             android:name=".WorkoutSettings"
-            android:parentActivityName=".StelWorkoutSamen" />
+            android:parentActivityName=".StelWorkoutSamen"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".OefeningListActivity"
             android:label="@string/title_oefening_list"
@@ -34,14 +35,16 @@
         </activity>
         <activity
             android:name=".StelWorkoutSamen"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ProfielActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme">

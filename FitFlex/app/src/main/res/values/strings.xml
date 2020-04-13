@@ -42,4 +42,7 @@
     <string name="title_oefening_detail" />
     <string name="itemfoto">itemFoto</string>
     <string name="icon">icon</string>
+    <string name="overzicht">Overzicht</string>
+    <string name="mijn_workouts">Mijn Workouts</string>
+    <string name="nieuw">Nieuw</string>
 </resources>

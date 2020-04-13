@@ -42,29 +42,21 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_stel_workout_samen);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
+        SharedPreferences sharedPref = this.getSharedPreferences("workout", MODE_PRIVATE);
 
         initViews();
         setListeners();
 
-        if (oefeningen.size() == 0) {
+        String naamWorkout = sharedPref.getString("naamWorkout", "");
+        getSupportActionBar().setTitle(naamWorkout);
+        naam.setText(naamWorkout);
 
-            Intent i = getIntent();
-            String naamWorkout = i.getStringExtra("naamWorkout");
-            getSupportActionBar().setTitle(naamWorkout);
-            naam.setText(naamWorkout);
+        if (oefeningen.size() == 0) {
 
             volgende.setVisibility(View.GONE);
             geenOefeningen.setText("Nog geen oefeningen...");
 
-            editor.putString("naamWorkout", naamWorkout);
-            editor.apply();
-
         } else {
-
-            getSupportActionBar().setTitle(sharedPref.getString("naamWorkout", null));
-            naam.setText(sharedPref.getString("naamWorkout", null));
 
             oefeningAdapter = new OefeningAdapter(StelWorkoutSamen.this, oefeningen);
             listView.setAdapter(oefeningAdapter);
@@ -133,8 +125,6 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, OefeningListActivity.class));
                 break;
             case R.id.volgende:
-                Intent i = new Intent();
-                i.putExtra("workoutNaam", naam.getText().toString());
                 startActivity(new Intent(this, WorkoutSettings.class));
                 break;
 

@@ -22,25 +22,24 @@
             android:gravity="center"
             android:text="@string/login"
             android:paddingBottom="10dp"
-            android:textColor="@color/white_greyish"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
+            android:textColorHint="@color/colorPrimary"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/login_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/email"
+                    android:drawableStart="@drawable/ic_email"
                     android:drawablePadding="8dp"
                     android:inputType="textEmailAddress"
-                    android:textColor="@color/white_greyish"
-                    android:textColorHint="@color/white_greyish"
                     android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -49,19 +48,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/wachtwoord"
+            android:textColorHint="@color/colorPrimary"
             app:passwordToggleEnabled="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/login_wachtwoord"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/password"
+                    android:drawableStart="@drawable/ic_password_key"
                     android:drawablePadding="8dp"
                     android:inputType="textPassword"
-                    android:textColor="@color/white_greyish"
-                    android:textColorHint="@color/white_greyish"
                     android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +80,8 @@
                 android:padding="5dp"
                 android:text="@string/vergeet"
                 android:textColor="@color/text_selector"
-                android:textSize="14sp" />
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
@@ -94,7 +93,6 @@
             android:background="@drawable/loginbutton_selector"
             android:padding="3dp"
             android:text="@string/login"
-            android:textColor="#009688"
             android:textSize="17sp"
             android:textStyle="bold" />
 
@@ -108,7 +106,8 @@
             android:padding="5dp"
             android:text="@string/nieuweGebruiker"
             android:textColor="@color/text_selector"
-            android:textSize="15sp" />
+            android:textSize="16sp"
+            android:textStyle="bold"/>
 
         <ProgressBar
             android:id="@+id/progressBarL"

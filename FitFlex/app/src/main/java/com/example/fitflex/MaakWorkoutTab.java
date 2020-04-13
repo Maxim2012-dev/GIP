@@ -1,6 +1,8 @@
 package com.example.fitflex;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +15,13 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class MaakWorkoutTab extends Fragment implements View.OnClickListener {
 
     private Button volgende;
-    private TextInputLayout naamWorkout;
+    private TextInputEditText naamWorkout;
     private View view;
     private RelativeLayout maakWorkout;
     private Animation shakeAnimation;
@@ -36,7 +39,7 @@ public class MaakWorkoutTab extends Fragment implements View.OnClickListener {
         return view;
 
     }
-    
+
     private void initViews() {
 
         volgende = view.findViewById(R.id.volgende);
@@ -57,7 +60,7 @@ public class MaakWorkoutTab extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        String workoutNaam = naamWorkout.getEditText().getText().toString();
+        String workoutNaam = naamWorkout.getText().toString();
 
         if (workoutNaam.equals("") || workoutNaam.length() == 0) {
 
@@ -73,8 +76,15 @@ public class MaakWorkoutTab extends Fragment implements View.OnClickListener {
 
             ((MyApplication) MaakWorkoutTab.this.getActivity().getApplication()).getOefeningen().clear();
 
+            SharedPreferences sharedPref = getActivity().getSharedPreferences("workout", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+
+            editor.clear();
+
+            editor.putString("naamWorkout", naamWorkout.getText().toString());
+            editor.apply();
+
             Intent i = new Intent(getActivity(), StelWorkoutSamen.class);
-            i.putExtra("naamWorkout", workoutNaam);
             startActivity(i);
 
         }

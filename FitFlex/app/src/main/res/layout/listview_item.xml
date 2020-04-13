@@ -13,7 +13,8 @@
         android:layout_margin="16dp"
         android:textSize="20sp"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@id/hoeveelheidReps">
+        android:layout_toStartOf="@id/hoeveelheidReps"
+        android:textColor="@color/colorPrimary">
 
     </TextView>
 
@@ -25,7 +26,8 @@
         android:textSize="20sp"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_toStartOf="@id/verwijder">
+        android:layout_toStartOf="@id/verwijder"
+        android:textColor="@color/colorPrimary">
 
     </TextView>
 

@@ -17,19 +17,21 @@
         </TextView>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/naamWorkout"
+            android:id="@+id/naamWorkout_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/naam"
             android:layout_margin="20dp"
             android:hint="@string/naam"
-            android:textColorHint="#009688">
+            android:textColorHint="@color/colorPrimary"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
+
+                android:id="@+id/naamWorkout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textColor="#009688">
+                android:textSize="20sp">
 
             </com.google.android.material.textfield.TextInputEditText>
 
@@ -39,11 +41,10 @@
         android:id="@+id/volgende"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/naamWorkout"
+        android:layout_below="@id/naamWorkout_container"
         android:background="@drawable/loginbutton_selector"
         android:text="@string/volgende"
         android:layout_margin="20dp"
-        android:textColor="#009688"
         android:textSize="17sp"
         android:textStyle="bold" />
 
