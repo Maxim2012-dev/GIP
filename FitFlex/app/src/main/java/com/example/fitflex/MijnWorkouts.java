@@ -39,7 +39,7 @@ public class MijnWorkouts extends Fragment {
 
         } else {
 
-            workoutAdapter = new WorkoutAdapter(getContext(), workouts);
+            workoutAdapter = new WorkoutAdapter(MijnWorkouts.this.getContext(), workouts);
             listView.setAdapter(workoutAdapter);
 
         }
