@@ -12,6 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class MijnWorkouts extends Fragment {
@@ -19,19 +27,34 @@ public class MijnWorkouts extends Fragment {
     ArrayList<Workout> workouts;
     WorkoutAdapter workoutAdapter;
 
+    private FirebaseUser fuser;
+    private DatabaseReference reff;
+
     private View view;
     private ListView listView;
     private TextView geenWorkouts;
+
+    private String gebruikersEmail;
+    private String naam;
+    private int aantalRondes;
+    private String rustNaRonde;
+    private String rustNaOefening;
+    private ArrayList<Oefening> oefeningen;
+
+    private String naamOefening;
+    private String moeilijkheid;
+    private int aantalReps;
 
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        receiveData();
+
         view = inflater.inflate(R.layout.mijn_workouts, container, false);
         listView = view.findViewById(R.id.workoutLijst);
         geenWorkouts = view.findViewById(R.id.geenWorkouts);
-        workouts = ((MyApplication) MijnWorkouts.this.getActivity().getApplication()).getWorkoutlijst();
 
         if (workouts.size() == 0) {
 
@@ -43,8 +66,61 @@ public class MijnWorkouts extends Fragment {
             listView.setAdapter(workoutAdapter);
 
         }
-
         return view;
+
+    }
+
+    public void receiveData() {
+
+        workouts = new ArrayList<>();
+
+        reff = FirebaseDatabase.getInstance().getReference("GemaakteWorkout");
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+
+        final String fuserEmail = fuser.getEmail();
+
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    if (ds.child("userID").getValue().equals(fuserEmail)) {
+
+                        gebruikersEmail = fuserEmail;
+                        naam = ds.child("naam").getValue(String.class);
+                        aantalRondes = ds.child("aantalRondes").getValue(Integer.class);
+                        rustNaRonde = ds.child("rustNaRonde").getValue(String.class);
+                        rustNaOefening = ds.child("rustNaOefening").getValue(String.class);
+
+                        DataSnapshot oefeningSnapshot = (DataSnapshot) dataSnapshot.child("oefeningen");
+                        Iterable<DataSnapshot> oefeningChildren = oefeningSnapshot.getChildren();
+
+                        for (DataSnapshot oefening : oefeningChildren) {
+
+                            naamOefening = oefening.child("naam").getValue(String.class);
+                            moeilijkheid = oefening.child("moeilijkheid").getValue(String.class);
+                            aantalReps = oefening.child("aantalReps").getValue(Integer.class);
+
+                            Oefening oefeningVanFirebase = new Oefening(naamOefening, moeilijkheid);
+                            oefeningVanFirebase.setAantalReps(aantalReps);
+                            oefeningen.add(oefeningVanFirebase);
+
+                        }
+                        workouts.add(new Workout(gebruikersEmail, naam, aantalRondes, rustNaRonde, rustNaOefening, oefeningen));
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 }

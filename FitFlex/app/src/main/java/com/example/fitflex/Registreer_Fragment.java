@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -71,19 +72,6 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         progressBarR.setVisibility(View.GONE);
 
         reff = FirebaseDatabase.getInstance().getReference("Gebruiker");
-        reff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    maxGebruikersNr = dataSnapshot.getChildrenCount();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         mAuth = FirebaseAuth.getInstance();
 
     }
@@ -114,7 +102,7 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
 
     }
 
-    private void checkValidation(Gebruiker gebruiker) {
+    private void checkValidation(final Gebruiker gebruiker) {
 
         final String getNaam = naam.getText().toString();
         final String getEmailId = email.getText().toString();
@@ -178,20 +166,22 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
 
             progressBarR.setVisibility(View.VISIBLE);
 
-            gebruiker.setNaam(getNaam);
-            gebruiker.setEmailID(getEmailId);
-            gebruiker.setLocatie(getLocatie);
-            gebruiker.setWachtwoord(getWachtwoord);
-            gebruiker.setTelefoonnummer(getTelefoonnummer);
-            gebruiker.setImageURL("default");
-
-            reff.child(String.valueOf(maxGebruikersNr + 1)).setValue(gebruiker);
-
             mAuth.createUserWithEmailAndPassword(getEmailId, getWachtwoord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
+
+                        gebruiker.setNaam(getNaam);
+                        gebruiker.setEmailID(getEmailId);
+                        gebruiker.setLocatie(getLocatie);
+                        gebruiker.setWachtwoord(getWachtwoord);
+                        gebruiker.setTelefoonnummer(getTelefoonnummer);
+
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        String userid = user.getUid();
+
+                        reff.child(userid).setValue(gebruiker);
 
                         progressBarR.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Succesvol geregistreerd", Toast.LENGTH_SHORT).show();

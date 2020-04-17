@@ -16,13 +16,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
 
 public class ProfielActivity extends AppCompatActivity {
 
     private FirebaseUser fuser;
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
+    private DatabaseReference reff;
 
     private EditText email;
     private EditText wachtwoord;
@@ -42,11 +40,10 @@ public class ProfielActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Profiel");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference("Gebruiker");
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        reff = FirebaseDatabase.getInstance().getReference("Gebruiker");
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
 
-        validatieEmail = user.getEmail();
+        validatieEmail = fuser.getEmail();
 
         email = findViewById(R.id.profiel_email);
         wachtwoord = findViewById(R.id.profiel_wachtwoord);
@@ -65,7 +62,7 @@ public class ProfielActivity extends AppCompatActivity {
 
     public void getGebruikersInformatie() {
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reff.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

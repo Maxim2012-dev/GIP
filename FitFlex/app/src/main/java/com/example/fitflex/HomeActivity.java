@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.fitflex.ui.main.SectionsPagerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 

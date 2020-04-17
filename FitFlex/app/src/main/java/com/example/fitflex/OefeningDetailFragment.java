@@ -2,6 +2,7 @@ package com.example.fitflex;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -99,13 +100,13 @@ public class OefeningDetailFragment extends Fragment {
 
                         Oefening nieuweOefening = new Oefening(mItem.naam, mItem.moeilijkheid);
 
+                        nieuweOefening.setAantalReps(Integer.parseInt(aantalReps.getText().toString()));
+
                         ((MyApplication) OefeningDetailFragment.this
                                 .getActivity()
                                 .getApplication())
                                 .getOefeningen()
                                 .add(nieuweOefening);
-
-                        nieuweOefening.setAantalReps(Integer.parseInt(aantalReps.getText().toString()));
 
                         startActivity(new Intent(getActivity(), StelWorkoutSamen.class));
 

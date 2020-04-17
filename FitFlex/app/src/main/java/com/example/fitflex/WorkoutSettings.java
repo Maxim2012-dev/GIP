@@ -1,5 +1,6 @@
 package com.example.fitflex;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,10 +16,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class WorkoutSettings extends AppCompatActivity implements View.OnClickListener {
+
+    ArrayList<Oefening> oefeningen;
+    DatabaseReference reff;
+
+    private long maxID = 0;
 
     private ImageView incrementRondes;
     private ImageView decrementRondes;
@@ -41,6 +53,22 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_settings);
+
+        SharedPreferences sharedPref = this.getSharedPreferences("workout", MODE_PRIVATE);
+        getSupportActionBar().setTitle(sharedPref.getString("naamWorkout", null));
+
+        reff = FirebaseDatabase.getInstance().getReference("GemaakteWorkout");
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                maxID = dataSnapshot.getChildrenCount();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         initViews();
         setListeners();
@@ -71,6 +99,7 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
         tijdTussenRondes.setText(counterTussenRondes + "s");
         tijdTussenOef.setText(counterTussenOef + "s");
 
+        oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
 
     }
 
@@ -150,14 +179,16 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
 
     private void saveData() {
 
-        SharedPreferences sharedPref = this.getSharedPreferences("workout", MODE_PRIVATE);
+        String gebruikersEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String workoutNaam = getSupportActionBar().getTitle().toString();
+        int rondes = Integer.parseInt(aantalRondes.getText().toString());
+        String rustNaRonde = tijdTussenRondes.getText().toString();
+        String rustNaOefening = tijdTussenOef.getText().toString();
 
-        ArrayList<Oefening> oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
-        String workoutnaam = sharedPref.getString("naamWorkout", "");
+        //Workout object maken
+        Workout workout = new Workout(gebruikersEmail, workoutNaam, rondes, rustNaRonde, rustNaOefening, oefeningen);
 
-        Workout workout = new Workout(workoutnaam, oefeningen);
-
-        ((MyApplication) this.getApplication()).getWorkoutlijst().add(workout);
+        reff.child(String.valueOf(maxID + 1)).setValue(workout);
 
     }
 }

@@ -2,7 +2,7 @@ package com.example.fitflex;
 
 public class Gebruiker {
 
-    public String naam, emailID, telefoonnummer, locatie, wachtwoord, imageURL;
+    public String naam, emailID, telefoonnummer, locatie, wachtwoord;
 
     public Gebruiker() {
     }
@@ -47,11 +47,4 @@ public class Gebruiker {
         this.wachtwoord = wachtwoord;
     }
 
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
 }
