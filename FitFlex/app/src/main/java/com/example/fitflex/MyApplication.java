@@ -6,7 +6,16 @@ import java.util.ArrayList;
 
 public class MyApplication extends Application {
 
+    private ArrayList<Workout> workoutlijst = new ArrayList<>();
     private ArrayList<Oefening> oefeningen = new ArrayList<>();
+
+    public ArrayList<Workout> getWorkoutlijst() {
+        return workoutlijst;
+    }
+
+    public void setWorkoutlijst(ArrayList<Workout> workoutlijst) {
+        this.workoutlijst = workoutlijst;
+    }
 
     public ArrayList<Oefening> getOefeningen() {
         return oefeningen;

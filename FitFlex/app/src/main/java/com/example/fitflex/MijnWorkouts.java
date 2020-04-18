@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 public class MijnWorkouts extends Fragment {
 
+    ArrayList<Oefening> oefeningen;
     ArrayList<Workout> workouts;
     WorkoutAdapter workoutAdapter;
 
@@ -39,7 +40,6 @@ public class MijnWorkouts extends Fragment {
     private int aantalRondes;
     private String rustNaRonde;
     private String rustNaOefening;
-    private ArrayList<Oefening> oefeningen;
 
     private String naamOefening;
     private String moeilijkheid;
@@ -50,29 +50,18 @@ public class MijnWorkouts extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        receiveData();
-
         view = inflater.inflate(R.layout.mijn_workouts, container, false);
         listView = view.findViewById(R.id.workoutLijst);
         geenWorkouts = view.findViewById(R.id.geenWorkouts);
+
+        workouts = ((MyApplication) this.getActivity().getApplication()).getWorkoutlijst();
+        oefeningen = new ArrayList<>();
 
         if (workouts.size() == 0) {
 
             geenWorkouts.setText("Je hebt nog geen workouts");
 
-        } else {
-
-            workoutAdapter = new WorkoutAdapter(MijnWorkouts.this.getContext(), workouts);
-            listView.setAdapter(workoutAdapter);
-
         }
-        return view;
-
-    }
-
-    public void receiveData() {
-
-        workouts = new ArrayList<>();
 
         reff = FirebaseDatabase.getInstance().getReference("GemaakteWorkout");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
@@ -85,7 +74,7 @@ public class MijnWorkouts extends Fragment {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                    if (ds.child("userID").getValue().equals(fuserEmail)) {
+                    if (ds.child("gebruikersEmail").getValue().equals(fuserEmail)) {
 
                         gebruikersEmail = fuserEmail;
                         naam = ds.child("naam").getValue(String.class);
@@ -93,10 +82,7 @@ public class MijnWorkouts extends Fragment {
                         rustNaRonde = ds.child("rustNaRonde").getValue(String.class);
                         rustNaOefening = ds.child("rustNaOefening").getValue(String.class);
 
-                        DataSnapshot oefeningSnapshot = (DataSnapshot) dataSnapshot.child("oefeningen");
-                        Iterable<DataSnapshot> oefeningChildren = oefeningSnapshot.getChildren();
-
-                        for (DataSnapshot oefening : oefeningChildren) {
+                        for (DataSnapshot oefening : ds.child("oefeningen").getChildren()) {
 
                             naamOefening = oefening.child("naam").getValue(String.class);
                             moeilijkheid = oefening.child("moeilijkheid").getValue(String.class);
@@ -108,6 +94,9 @@ public class MijnWorkouts extends Fragment {
 
                         }
                         workouts.add(new Workout(gebruikersEmail, naam, aantalRondes, rustNaRonde, rustNaOefening, oefeningen));
+                        workoutAdapter = new WorkoutAdapter(MijnWorkouts.this.getContext(), workouts);
+                        listView.setAdapter(workoutAdapter);
+                        geenWorkouts.setText("Je hebt " + workouts.size() + " workouts");
 
                     }
 
@@ -120,6 +109,8 @@ public class MijnWorkouts extends Fragment {
 
             }
         });
+
+        return view;
 
     }
 
