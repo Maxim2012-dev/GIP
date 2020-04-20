@@ -165,13 +165,13 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
 
                                 saveData();
                                 Toast.makeText(getApplicationContext(), "Workout opgeslagen!", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
 
                             }
                         })
                         .setNegativeButton("Nee", null)
                         .show();
 
-                startActivity(new Intent(getApplicationContext(), WorkoutProgress.class));
                 break;
 
         }
