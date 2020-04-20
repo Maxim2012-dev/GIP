@@ -3,42 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/homeToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp"
+            app:titleMarginStart="25dp"
+            app:title="@string/app_name"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary">
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
-            style="@style/Widget.MaterialComponents.TabLayout"
+            style="@style/Widget.MaterialComponents.TabLayout.Colored"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.tabs.TabItem
-                android:icon="@drawable/ic_graphic_eq_black"
-                android:text="@string/overzicht"
-                android:layout_height="20dp"
-                android:layout_width="30dp" />
-            <com.google.android.material.tabs.TabItem
-                android:icon="@drawable/ic_toc_black"
-                android:text="@string/mijn_workouts"
-                android:layout_height="20dp"
-                android:layout_width="30dp" />
-            <com.google.android.material.tabs.TabItem
-                android:icon="@drawable/ic_add_box"
-                android:text="@string/nieuw"
-                android:layout_height="20dp"
-                android:layout_width="30dp" />
+            android:layout_height="wrap_content"
+            app:tabRippleColor="@color/colorSecondary">
 
         </com.google.android.material.tabs.TabLayout>
 
@@ -53,10 +41,13 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_account_box" />
+        android:src="@drawable/account_circle"
+        app:rippleColor="@color/colorPrimary"
+        android:elevation="2dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

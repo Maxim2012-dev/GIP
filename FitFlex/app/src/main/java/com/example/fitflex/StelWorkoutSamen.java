@@ -2,22 +2,22 @@ package com.example.fitflex;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,8 +26,7 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
     private TextView naam;
     private TextView geenOefeningen;
-    private Button toevoegen;
-    private Button volgende;
+    private FloatingActionButton toevoegen;
     private ListView listView;
     private ImageView verwijder;
 
@@ -40,7 +39,6 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stel_workout_samen);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         SharedPreferences sharedPref = this.getSharedPreferences("workout", MODE_PRIVATE);
 
@@ -48,12 +46,10 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
         setListeners();
 
         String naamWorkout = sharedPref.getString("naamWorkout", "");
-        getSupportActionBar().setTitle(naamWorkout);
         naam.setText(naamWorkout);
 
         if (oefeningen.size() == 0) {
 
-            volgende.setVisibility(View.GONE);
             geenOefeningen.setText("Nog geen oefeningen...");
 
         } else {
@@ -79,7 +75,6 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
                                     if (oefeningen.size() == 0) {
 
-                                        volgende.setVisibility(View.GONE);
                                         geenOefeningen.setText("Nog geen oefeningen");
 
                                     }
@@ -100,10 +95,10 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
         naam = findViewById(R.id.naam);
         geenOefeningen = findViewById(R.id.geen_oefeningen);
-        toevoegen = findViewById(R.id.toevoegen);
-        volgende = findViewById(R.id.volgende);
         listView = findViewById(R.id.workoutOefeningen);
         verwijder = findViewById(R.id.verwijder);
+
+        toevoegen = findViewById(R.id.toevoegen);
 
         oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
 
@@ -112,7 +107,6 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
     private void setListeners() {
 
         toevoegen.setOnClickListener(this);
-        volgende.setOnClickListener(this);
 
     }
 
@@ -123,9 +117,6 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
             case R.id.toevoegen:
                 startActivity(new Intent(this, OefeningListActivity.class));
-                break;
-            case R.id.volgende:
-                startActivity(new Intent(this, WorkoutSettings.class));
                 break;
 
         }

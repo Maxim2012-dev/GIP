@@ -44,7 +44,8 @@ public class OefeningListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oefening_list);
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = findViewById(R.id.oefeningToolbar);
+        setSupportActionBar(toolbar);
 
         if (findViewById(R.id.oefening_detail_container) != null) {
             // The detail container view will be present only in the

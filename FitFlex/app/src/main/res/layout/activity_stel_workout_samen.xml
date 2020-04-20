@@ -1,75 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StelWorkoutSamen">
 
-    <TextView
-        android:id="@+id/naam"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text=""
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary">
+        <TextView
+            android:id="@+id/naam"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp">
 
-    </TextView>
+        </TextView>
 
-    <ListView
-        android:id="@+id/workoutOefeningen"
-        android:layout_width="match_parent"
-        android:layout_height="380dp"
-        android:layout_below="@id/naam"
-        android:layout_margin="10dp">
+        <ListView
+            android:id="@+id/workoutOefeningen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/naam"
+            android:layout_margin="10dp">
 
-    </ListView>
+        </ListView>
 
-    <TextView
-        android:id="@+id/geen_oefeningen"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/workoutOefeningen"
-        android:textSize="20sp"
-        android:layout_centerInParent="true"
-        android:textColor="@color/black">
+        <TextView
+            android:id="@+id/geen_oefeningen"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAlignment="center">
 
-    </TextView>
+        </TextView>
 
-    <RelativeLayout
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/geen_oefeningen"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="30dp">
+        <RelativeLayout
+            android:id="@+id/buttonContainer"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp">
 
-        <Button
+        </RelativeLayout>
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:fabCradleRoundedCornerRadius="20dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/toevoegen"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/loginbutton_selector"
-            android:text="@string/voeg_toe"
-            android:textSize="15sp"
-            android:textStyle="bold">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/bar"
+            android:src="@drawable/add">
 
-        </Button>
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
-        <Button
-            android:id="@+id/volgende"
-            android:layout_width="120dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/loginbutton_selector"
-            android:padding="3dp"
-            android:text="@string/volgende"
-            android:textSize="15sp"
-            android:textStyle="bold">
-
-        </Button>
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

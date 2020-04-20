@@ -6,19 +6,15 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 
 import com.example.fitflex.ui.main.SectionsPagerAdapter;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -29,7 +25,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        getSupportActionBar().hide();
+        Toolbar homeToolbar = findViewById(R.id.homeToolbar);
+        setSupportActionBar(homeToolbar);
 
         floatingActionButton = findViewById(R.id.fab);
 
@@ -42,10 +39,6 @@ public class HomeActivity extends AppCompatActivity {
         tabs.getTabAt(0).setIcon(R.drawable.ic_graphic_eq_black);
         tabs.getTabAt(1).setIcon(R.drawable.ic_toc_black);
         tabs.getTabAt(2).setIcon(R.drawable.ic_add_box);
-
-        tabs.getTabAt(0).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-        tabs.getTabAt(1).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-        tabs.getTabAt(2).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
