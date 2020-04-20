@@ -8,6 +8,7 @@ public class MyApplication extends Application {
 
     private ArrayList<Workout> workoutlijst = new ArrayList<>();
     private ArrayList<Oefening> oefeningen = new ArrayList<>();
+    private Workout huidigeWorkout;
 
     public ArrayList<Workout> getWorkoutlijst() {
         return workoutlijst;
@@ -25,4 +26,11 @@ public class MyApplication extends Application {
         this.oefeningen = oefeningen;
     }
 
+    public Workout getHuidigeWorkout() {
+        return huidigeWorkout;
+    }
+
+    public void setHuidigeWorkout(Workout huidigeWorkout) {
+        this.huidigeWorkout = huidigeWorkout;
+    }
 }

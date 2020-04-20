@@ -45,4 +45,9 @@
     <string name="overzicht">Overzicht</string>
     <string name="mijn_workouts">Mijn Workouts</string>
     <string name="nieuw">Nieuw</string>
+    <string name="readyfoto">readyFoto</string>
+    <string name="beginnen">Beginnen</string>
+    <string name="klik_om_te_starten">Klik om te starten</string>
+    <string name="_00_00">00:00</string>
+    <string name="s">s</string>
 </resources>
