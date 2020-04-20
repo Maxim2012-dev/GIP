@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -59,6 +60,15 @@ public class WorkoutProgress extends AppCompatActivity {
 
                 naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(j).getNaam());
 
+                klaarknop.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        resterendeTijdInMillis = tijdTussenOefening;
+                        startTimer();
+
+                    }
+                });
 
             }
 
@@ -79,6 +89,8 @@ public class WorkoutProgress extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+
+                klaarknop.setEnabled(true);
 
             }
         }.start();
