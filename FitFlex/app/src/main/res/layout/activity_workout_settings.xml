@@ -40,17 +40,36 @@
 
             </TextView>
 
-            <TextView
-                android:id="@+id/aantalRondes"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text=""
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:textSize="30sp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
 
-            </TextView>
+                <TextView
+                    android:id="@+id/aantalRondes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="30sp">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/s"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="30sp">
+
+                </TextView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -99,17 +118,36 @@
 
             </TextView>
 
-            <TextView
-                android:id="@+id/tijdTussenRondes"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text=""
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:textSize="30sp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
 
-            </TextView>
+                <TextView
+                    android:id="@+id/tijdTussenRondes"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="30sp">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/s"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="30sp">
+
+                </TextView>
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -158,17 +196,36 @@
 
             </TextView>
 
-            <TextView
-                android:id="@+id/tijdTussenOef"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text=""
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:textSize="30sp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
 
-            </TextView>
+                <TextView
+                    android:id="@+id/tijdTussenOef"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="30sp">
+
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/s"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="30sp">
+
+                </TextView>
+
+            </LinearLayout>
 
         </LinearLayout>
 

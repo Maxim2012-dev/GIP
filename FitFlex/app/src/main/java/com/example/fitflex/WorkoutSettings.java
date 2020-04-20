@@ -96,8 +96,8 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
         counterTussenRondes = 60;
         counterTussenOef = 15;
         aantalRondes.setText(String.valueOf(counterRondes));
-        tijdTussenRondes.setText(counterTussenRondes + "s");
-        tijdTussenOef.setText(counterTussenOef + "s");
+        tijdTussenRondes.setText(counterTussenRondes + "");
+        tijdTussenOef.setText(counterTussenOef + "");
 
         oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
 
@@ -135,22 +135,22 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.incrementTussenRondes:
                 counterTussenRondes += 5;
-                tijdTussenRondes.setText(counterTussenRondes + "s");
+                tijdTussenRondes.setText(counterTussenRondes + "");
                 break;
             case R.id.decrementTussenRondes:
                 if (counterTussenRondes > 0) {
                     counterTussenRondes -= 5;
-                    tijdTussenRondes.setText(counterTussenRondes + "s");
+                    tijdTussenRondes.setText(counterTussenRondes + "");
                 }
                 break;
             case R.id.incrementTussenOef:
                 counterTussenOef += 5;
-                tijdTussenOef.setText(counterTussenOef + "s");
+                tijdTussenOef.setText(counterTussenOef + "");
                 break;
             case R.id.decrementTussenOef:
                 if (counterTussenOef > 0) {
                     counterTussenOef -= 5;
-                    tijdTussenOef.setText(counterTussenOef + "s");
+                    tijdTussenOef.setText(counterTussenOef + "");
                 }
                 break;
             case R.id.startknop:

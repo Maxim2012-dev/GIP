@@ -14,11 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WorkoutBegin" />
+        <activity android:name=".WorkoutProgress"></activity>
+        <activity
+            android:name=".WorkoutBegin"
+            android:parentActivityName=".HomeActivity" />
         <activity
             android:name=".WorkoutSettings"
             android:parentActivityName=".StelWorkoutSamen"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".OefeningListActivity"
             android:label="@string/title_oefening_list"
@@ -36,11 +39,11 @@
         <activity
             android:name=".StelWorkoutSamen"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ProfielActivity"
             android:parentActivityName=".HomeActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"

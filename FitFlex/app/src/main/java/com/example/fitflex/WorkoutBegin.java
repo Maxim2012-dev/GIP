@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +30,16 @@ public class WorkoutBegin extends AppCompatActivity {
         workoutText = findViewById(R.id.workoutText);
         beginknop = findViewById(R.id.beginknop);
 
-        workoutText.setText("Ben je klaar om " + huidigeWorkout.getNaam() + " te doen?");
+        workoutText.setText("Klaar om " + huidigeWorkout.getNaam() + " te doen?");
+
+        beginknop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+            }
+        });
 
     }
 }
