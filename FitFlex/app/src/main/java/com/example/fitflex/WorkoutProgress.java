@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -19,6 +22,7 @@ public class WorkoutProgress extends AppCompatActivity {
     private Button klaarknop;
 
     private CountDownTimer countDownTimer;
+    private Chronometer chronometer;
 
     private Workout huidigeWorkout;
 
@@ -29,11 +33,16 @@ public class WorkoutProgress extends AppCompatActivity {
     private long tijdTussenOefening;
     private long resterendeTijdInMillis;
 
+    private int index = 0;
+    private boolean bezig = true;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_progress);
+
+        chronometer = findViewById(R.id.chronometer);
 
         rondeText = findViewById(R.id.rondeText);
         naamHuidigeOefening = findViewById(R.id.naamHuidigeOefening);
@@ -48,31 +57,55 @@ public class WorkoutProgress extends AppCompatActivity {
         tijdTussenRonde = Integer.parseInt(huidigeWorkout.getRustNaRonde()) * 1000;
         tijdTussenOefening = Integer.parseInt(huidigeWorkout.getRustNaOefening()) * 1000;
 
-        for (int i = 1; i <= aantalRondes; i++) {
+        while (bezig) {
 
-            if (i > 1) {
+            index++;
+
+            if (index > 1) {
                 resterendeTijdInMillis = tijdTussenRonde;
                 startTimer();
             }
-            rondeText.setText("Ronde " + i);
+            rondeText.setText("Ronde " + index);
 
-            for (int j = 0; j < aantalOefeningen; j++) {
+            naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(index - 1).getNaam());
 
-                naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(j).getNaam());
+            startChronometer();
+            timerText.setVisibility(View.GONE);
 
-                klaarknop.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+            klaarknop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                        resterendeTijdInMillis = tijdTussenOefening;
-                        startTimer();
+                    timerText.setVisibility(View.VISIBLE);
+                    resterendeTijdInMillis = tijdTussenOefening;
+                    startTimer();
+                    naamHuidigeOefening.setText("");
+
+                    if (index >= aantalRondes) {
+
+                        bezig = false;
+                        Toast.makeText(WorkoutProgress.this, "Klaar", Toast.LENGTH_SHORT).show();
 
                     }
-                });
 
-            }
+                }
+            });
 
         }
+
+
+    }
+
+    public void startChronometer() {
+
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
+
+    }
+
+    public void resetChronometer() {
+
+        chronometer.setBase(SystemClock.elapsedRealtime());
 
     }
 
@@ -104,7 +137,7 @@ public class WorkoutProgress extends AppCompatActivity {
         int minuten = (int) resterendeTijdInMillis / 1000 / 60;
         int seconden = (int) resterendeTijdInMillis / 1000 % 60;
 
-        String resterendeTijdFormat = String.format(Locale.getDefault(),"%02d:%02d", minuten, seconden);
+        String resterendeTijdFormat = String.format(Locale.getDefault(), "%02d:%02d", minuten, seconden);
 
         timerText.setText(resterendeTijdFormat);
 
