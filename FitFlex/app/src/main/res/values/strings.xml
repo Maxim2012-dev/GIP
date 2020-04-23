@@ -50,4 +50,14 @@
     <string name="klik_om_te_starten">Klik om te starten</string>
     <string name="_00_00">00:00</string>
     <string name="s">s</string>
+    <string name="help">Help</string>
+    <string name="annuleer">annuleer</string>
+    <string name="hulp_nodig">Hulp nodig?</string>
+    <string name="dialog_info1">1.   Druk op de plusknop</string>
+    <string name="dialog_info2">2.   Kies een oefening uit de lijst</string>
+    <string name="dialog_info3">3.   Je krijgt details over de oefening te zien</string>
+    <string name="dialog_info4">4.   Voer het aantal repetities in</string>
+    <string name="dialog_info5">5.   Druk op het pijltje naar rechts hier onderaan om door te gaan</string>
+    <string name="infoicon">infoIcon</string>
+    <string name="begrepen">Begrepen</string>
 </resources>

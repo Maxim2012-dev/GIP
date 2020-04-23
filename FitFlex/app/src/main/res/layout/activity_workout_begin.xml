@@ -6,6 +6,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".WorkoutBegin">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/beginToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp"
+            app:titleMarginStart="25dp"
+            app:title="Beginnen?"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary">
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
         android:id="@+id/workoutText"
         android:layout_width="wrap_content"
@@ -14,6 +32,7 @@
         app:layout_constraintBottom_toTopOf="@id/readyFoto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -29,6 +48,7 @@
         app:layout_constraintBottom_toTopOf="@id/beginknop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="100dp"
         android:contentDescription="@string/readyfoto"
         android:src="@drawable/check_circle">
 

@@ -1,25 +1,32 @@
 package com.example.fitflex;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickListener {
+public class StelWorkoutSamen extends AppCompatActivity {
 
     ArrayList<Oefening> oefeningen;
     OefeningAdapter oefeningAdapter;
@@ -29,6 +36,11 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
     private FloatingActionButton toevoegen;
     private ListView listView;
     private ImageView verwijder;
+    private Dialog infoDialog;
+    private ImageView sluitDialog;
+    private Button okKnop;
+
+    private BottomAppBar bottomAppBar;
 
     public StelWorkoutSamen() {
 
@@ -44,9 +56,6 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
         initViews();
         setListeners();
-
-        String naamWorkout = sharedPref.getString("naamWorkout", "");
-        naam.setText(naamWorkout);
 
         if (oefeningen.size() == 0) {
 
@@ -97,6 +106,8 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
         geenOefeningen = findViewById(R.id.geen_oefeningen);
         listView = findViewById(R.id.workoutOefeningen);
         verwijder = findViewById(R.id.verwijder);
+        infoDialog = new Dialog(this);
+        bottomAppBar = findViewById(R.id.bar);
 
         toevoegen = findViewById(R.id.toevoegen);
 
@@ -104,22 +115,62 @@ public class StelWorkoutSamen extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void setListeners() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
-        toevoegen.setOnClickListener(this);
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
 
     }
 
     @Override
-    public void onClick(View v) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (v.getId()) {
-
-            case R.id.toevoegen:
-                startActivity(new Intent(this, OefeningListActivity.class));
+        switch (item.getItemId()) {
+            case R.id.helpInfo:
+                toonDialog();
+                break;
+            case R.id.volgende:
+                startActivity(new Intent(this, WorkoutSettings.class));
                 break;
 
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void toonDialog() {
+
+        infoDialog.setContentView(R.layout.custom_dialog);
+        okKnop = infoDialog.findViewById(R.id.okKnop);
+
+        sluitDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoDialog.dismiss();
+            }
+        });
+
+        okKnop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoDialog.dismiss();
+            }
+        });
+
+        infoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        infoDialog.show();
+
+    }
+
+    private void setListeners() {
+
+        toevoegen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), OefeningListActivity.class));
+            }
+        });
 
     }
 }

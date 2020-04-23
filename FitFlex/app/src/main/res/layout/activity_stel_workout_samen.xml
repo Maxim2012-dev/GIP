@@ -6,22 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".StelWorkoutSamen">
 
-    <TextView
-        android:id="@+id/naam"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text=""
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@id/coordinator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </TextView>
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
@@ -53,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            app:menu="@menu/menu"
             app:fabCradleRoundedCornerRadius="20dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
