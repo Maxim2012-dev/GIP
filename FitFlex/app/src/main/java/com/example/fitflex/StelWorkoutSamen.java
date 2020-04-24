@@ -109,6 +109,8 @@ public class StelWorkoutSamen extends AppCompatActivity {
         infoDialog = new Dialog(this);
         bottomAppBar = findViewById(R.id.bar);
 
+        setSupportActionBar(bottomAppBar);
+
         toevoegen = findViewById(R.id.toevoegen);
 
         oefeningen = ((MyApplication) this.getApplication()).getOefeningen();
@@ -118,7 +120,6 @@ public class StelWorkoutSamen extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
 
@@ -142,7 +143,9 @@ public class StelWorkoutSamen extends AppCompatActivity {
     private void toonDialog() {
 
         infoDialog.setContentView(R.layout.custom_dialog);
+        infoDialog.setCancelable(false);
         okKnop = infoDialog.findViewById(R.id.okKnop);
+        sluitDialog = infoDialog.findViewById(R.id.sluitDialog);
 
         sluitDialog.setOnClickListener(new View.OnClickListener() {
             @Override
