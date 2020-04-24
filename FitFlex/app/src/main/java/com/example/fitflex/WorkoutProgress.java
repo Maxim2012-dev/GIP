@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -27,14 +26,16 @@ public class WorkoutProgress extends AppCompatActivity {
     private Workout huidigeWorkout;
 
     private int aantalRondes;
-    private int aantalOefeningen;
 
     private long tijdTussenRonde;
     private long tijdTussenOefening;
     private long resterendeTijdInMillis;
 
     private int index = 0;
-    private boolean bezig = true;
+    private int ronde = 1;
+    private boolean workoutBezig = true;
+    private boolean oefeningBezig;
+    private boolean timerBezig = false;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,56 +44,82 @@ public class WorkoutProgress extends AppCompatActivity {
         setContentView(R.layout.activity_workout_progress);
 
         chronometer = findViewById(R.id.chronometer);
+        chronometer.setVisibility(View.GONE);
+
+        timerText = findViewById(R.id.timerText);
+        timerText.setVisibility(View.GONE);
 
         rondeText = findViewById(R.id.rondeText);
         naamHuidigeOefening = findViewById(R.id.naamHuidigeOefening);
-        timerText = findViewById(R.id.timerText);
+
         klaarknop = findViewById(R.id.klaarknop);
+        klaarknop.setVisibility(View.VISIBLE);
 
         huidigeWorkout = ((MyApplication) this.getApplication()).getHuidigeWorkout();
 
         aantalRondes = huidigeWorkout.getAantalRondes();
-        aantalOefeningen = huidigeWorkout.getOefeningen().size();
 
         tijdTussenRonde = Integer.parseInt(huidigeWorkout.getRustNaRonde()) * 1000;
         tijdTussenOefening = Integer.parseInt(huidigeWorkout.getRustNaOefening()) * 1000;
 
-        while (bezig) {
+        while (workoutBezig) {
 
-            index++;
+            if (ronde < aantalRondes) {
 
-            if (index > 1) {
-                resterendeTijdInMillis = tijdTussenRonde;
-                startTimer();
-            }
-            rondeText.setText("Ronde " + index);
+                if (index == huidigeWorkout.getOefeningen().size()) {
 
-            naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(index - 1).getNaam());
+                    index = 0;
+                    ronde++;
 
-            startChronometer();
-            timerText.setVisibility(View.GONE);
+                }
 
-            klaarknop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                rondeText.setText("Ronde " + ronde);
 
-                    timerText.setVisibility(View.VISIBLE);
-                    resterendeTijdInMillis = tijdTussenOefening;
-                    startTimer();
-                    naamHuidigeOefening.setText("");
+                naamHuidigeOefening.setVisibility(View.VISIBLE);
+                naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(index).getNaam());
+                oefeningBezig = true;
+                chronometer.setVisibility(View.VISIBLE);
+                startChronometer();
 
-                    if (index >= aantalRondes) {
+                while (oefeningBezig) {
 
-                        bezig = false;
-                        Toast.makeText(WorkoutProgress.this, "Klaar", Toast.LENGTH_SHORT).show();
+                    klaarknop.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            resetChronometer();
+
+                            klaarknop.setEnabled(false);
+                            naamHuidigeOefening.setVisibility(View.GONE);
+
+                            timerText.setVisibility(View.VISIBLE);
+                            resterendeTijdInMillis = tijdTussenOefening;
+                            startTimer();
+
+                            oefeningBezig = false;
+                            timerBezig = true;
+
+                            index++;
+
+                        }
+                    });
+
+                }
+
+                while (timerBezig) {
+
+                    if (resterendeTijdInMillis == 0) {
+
+                        timerBezig = false;
+                        timerText.setVisibility(View.GONE);
 
                     }
 
                 }
-            });
+
+            }
 
         }
-
 
     }
 
@@ -105,6 +132,7 @@ public class WorkoutProgress extends AppCompatActivity {
 
     public void resetChronometer() {
 
+        chronometer.stop();
         chronometer.setBase(SystemClock.elapsedRealtime());
 
     }

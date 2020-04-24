@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="50sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/timerText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
 
     </TextView>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/klaarknop"
         android:layout_width="250dp"
         android:layout_height="60dp"
@@ -72,6 +72,6 @@
         android:text="@string/volgende"
         android:textSize="20sp">
 
-    </Button>
+    </com.google.android.material.button.MaterialButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
