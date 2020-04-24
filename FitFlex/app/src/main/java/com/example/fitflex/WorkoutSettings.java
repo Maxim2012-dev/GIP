@@ -3,6 +3,7 @@ package com.example.fitflex;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -54,7 +55,9 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_settings);
 
+        Toolbar instellingenToolbar = findViewById(R.id.instellingenToolbar);
         SharedPreferences sharedPref = this.getSharedPreferences("workout", MODE_PRIVATE);
+        setSupportActionBar(instellingenToolbar);
         getSupportActionBar().setTitle(sharedPref.getString("naamWorkout", null));
 
         reff = FirebaseDatabase.getInstance().getReference("GemaakteWorkout");
@@ -128,7 +131,7 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
                 aantalRondes.setText(String.valueOf(counterRondes));
                 break;
             case R.id.decrementRondes:
-                if (counterRondes > 0) {
+                if (counterRondes > 1) {
                     counterRondes--;
                     aantalRondes.setText(String.valueOf(counterRondes));
                 }
@@ -138,7 +141,7 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
                 tijdTussenRondes.setText(counterTussenRondes + "");
                 break;
             case R.id.decrementTussenRondes:
-                if (counterTussenRondes > 0) {
+                if (counterTussenRondes > 5) {
                     counterTussenRondes -= 5;
                     tijdTussenRondes.setText(counterTussenRondes + "");
                 }
@@ -148,33 +151,37 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
                 tijdTussenOef.setText(counterTussenOef + "");
                 break;
             case R.id.decrementTussenOef:
-                if (counterTussenOef > 0) {
+                if (counterTussenOef > 5) {
                     counterTussenOef -= 5;
                     tijdTussenOef.setText(counterTussenOef + "");
                 }
                 break;
             case R.id.startknop:
-
-                new AlertDialog.Builder(WorkoutSettings.this)
-                        .setIcon(R.drawable.ic_save)
-                        .setTitle("Workout bijhouden?")
-                        .setMessage("Wil je de gemaakte workout opslaan?")
-                        .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                saveData();
-                                Toast.makeText(getApplicationContext(), "Workout opgeslagen!", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-
-                            }
-                        })
-                        .setNegativeButton("Nee", null)
-                        .show();
-
+                toonPopUp();
                 break;
 
         }
+    }
+
+    private void toonPopUp() {
+
+        new AlertDialog.Builder(WorkoutSettings.this)
+                .setIcon(R.drawable.ic_save)
+                .setTitle("Workout opslaan?")
+                .setMessage("Weet je zeker dat je deze workout wilt opslaan?")
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        saveData();
+                        Toast.makeText(getApplicationContext(), "Workout opgeslagen!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
+                    }
+                })
+                .setNegativeButton("Nee", null)
+                .show();
+
     }
 
     private void saveData() {

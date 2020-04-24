@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toast_root"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="15dp">
 
     <TextView
         android:id="@+id/toast_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:drawableStart="@drawable/error"
         android:drawablePadding="10dp"
-        android:gravity="center_vertical"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
         android:padding="5dp"
+        android:textStyle="bold"
         android:textColor="#c0392b"
-        android:textSize="15sp" />
+        android:textSize="20sp" />
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -15,11 +15,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,7 +34,8 @@ public class StelWorkoutSamen extends AppCompatActivity {
     ArrayList<Oefening> oefeningen;
     OefeningAdapter oefeningAdapter;
 
-    private TextView naam;
+    private View view;
+    private Animation shakeAnimation;
     private TextView geenOefeningen;
     private FloatingActionButton toevoegen;
     private ListView listView;
@@ -102,7 +106,9 @@ public class StelWorkoutSamen extends AppCompatActivity {
 
     private void initViews() {
 
-        naam = findViewById(R.id.naam);
+        view = findViewById(R.id.toegevoegdeOef);
+        shakeAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+
         geenOefeningen = findViewById(R.id.geen_oefeningen);
         listView = findViewById(R.id.workoutOefeningen);
         verwijder = findViewById(R.id.verwijder);
@@ -133,11 +139,26 @@ public class StelWorkoutSamen extends AppCompatActivity {
                 toonDialog();
                 break;
             case R.id.volgende:
-                startActivity(new Intent(this, WorkoutSettings.class));
+                checkValidatie();
                 break;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkValidatie() {
+
+        if (oefeningen.size() >= 1) {
+
+            startActivity(new Intent(this, WorkoutSettings.class));
+
+        } else {
+
+            new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.toegevoegdeOef), "Voeg eerst oefeningen toe");
+            view.startAnimation(shakeAnimation);
+
+        }
+
     }
 
     private void toonDialog() {

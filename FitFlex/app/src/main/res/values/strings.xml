@@ -49,7 +49,7 @@
     <string name="beginnen">Beginnen</string>
     <string name="klik_om_te_starten">Klik om te starten</string>
     <string name="_00_00">00:00</string>
-    <string name="s">s</string>
+    <string name="seconden">s</string>
     <string name="help">Help</string>
     <string name="annuleer">annuleer</string>
     <string name="hulp_nodig">Hulp nodig?</string>
@@ -60,4 +60,5 @@
     <string name="dialog_info5">5.   Druk op het pijltje naar rechts hier onderaan om door te gaan</string>
     <string name="infoicon">infoIcon</string>
     <string name="begrepen">Begrepen</string>
+    <string name="opslaan">Opslaan</string>
 </resources>
