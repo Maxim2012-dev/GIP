@@ -55,7 +55,17 @@ public class WorkoutAdapter extends BaseAdapter {
 
         foto.setImageResource(R.drawable.logo);
         naamWorkout.setText(tempWorkout.getNaam());
-        aantalOefeningen.setText(tempWorkout.getOefeningen().size() + " oefeningen");
+
+        if (tempWorkout.getOefeningen().size() == 1) {
+
+            aantalOefeningen.setText(tempWorkout.getOefeningen().size() + " oefening");
+
+        } else {
+
+            aantalOefeningen.setText(tempWorkout.getOefeningen().size() + " oefeningen");
+
+        }
+
 
         return convertView;
     }
