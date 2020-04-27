@@ -78,6 +78,7 @@ public class WorkoutProgress extends AppCompatActivity {
                 naamHuidigeOefening.setVisibility(View.VISIBLE);
                 naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(index).getNaam());
                 oefeningBezig = true;
+                klaarknop.setEnabled(true);
                 chronometer.setVisibility(View.VISIBLE);
                 startChronometer();
 
