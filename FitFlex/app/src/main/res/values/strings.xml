@@ -61,4 +61,6 @@
     <string name="infoicon">infoIcon</string>
     <string name="begrepen">Begrepen</string>
     <string name="opslaan">Opslaan</string>
+    <string name="einde_workout">Einde workout!</string>
+    <string name="ga_terug">Ga terug</string>
 </resources>

@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -163,7 +162,7 @@ public class StelWorkoutSamen extends AppCompatActivity {
 
     private void toonDialog() {
 
-        infoDialog.setContentView(R.layout.custom_dialog);
+        infoDialog.setContentView(R.layout.help_dialog);
         infoDialog.setCancelable(false);
         okKnop = infoDialog.findViewById(R.id.okKnop);
         sluitDialog = infoDialog.findViewById(R.id.sluitDialog);

@@ -3,15 +3,21 @@ package com.example.fitflex;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Locale;
+import java.util.Random;
 
 public class WorkoutProgress extends AppCompatActivity {
 
@@ -25,17 +31,18 @@ public class WorkoutProgress extends AppCompatActivity {
 
     private Workout huidigeWorkout;
 
-    private int aantalRondes;
+    private Dialog klaarDialog;
+    private Button gaTerugKnop;
+    private TextView boodschap;
 
+    private int aantalRondes;
     private long tijdTussenRonde;
     private long tijdTussenOefening;
     private long resterendeTijdInMillis;
+    private boolean oefeningBezig = false;
 
     private int index = 0;
     private int ronde = 1;
-    private boolean workoutBezig = true;
-    private boolean oefeningBezig;
-    private boolean timerBezig = false;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,8 +50,93 @@ public class WorkoutProgress extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_progress);
 
-        chronometer = findViewById(R.id.chronometer);
+        initViews();
+
+        klaarknop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (oefeningBezig) {
+
+                    startOefening();
+
+                } else {
+
+                    zetTimer();
+
+                }
+
+            }
+        });
+
+    }
+
+    private void zetTimer() {
+
+        //timer zichtbaar, chrono onzichtbaar en huidige oefening onzichtbaar
         chronometer.setVisibility(View.GONE);
+        timerText.setVisibility(View.VISIBLE);
+        naamHuidigeOefening.setVisibility(View.GONE);
+
+        //knop disabled en timer initialiseren
+        klaarknop.setEnabled(false);
+
+        index++;
+
+        //Als je aan de laatste oefening zit
+        if (index == huidigeWorkout.getOefeningen().size()) {
+
+            index = 0;
+            ronde++;
+
+            //rust ronde
+            resterendeTijdInMillis = tijdTussenRonde;
+            startTimer();
+
+            if (ronde > aantalRondes) {
+
+                beëindigWorkout();
+
+            } else {
+
+                rondeText.setText("Ronde " + ronde);
+
+            }
+
+        //Als je niet aan laatste oefening zit
+        } else {
+
+            //rust oefening
+            resterendeTijdInMillis = tijdTussenOefening;
+            startTimer();
+
+        }
+
+    }
+
+    private void startOefening() {
+
+        //timer onzichtbaar, chrono zichtbaar, huidige oefening zichtbaar en knop enabled
+        timerText.setVisibility(View.GONE);
+        chronometer.setVisibility(View.VISIBLE);
+        naamHuidigeOefening.setVisibility(View.VISIBLE);
+        klaarknop.setEnabled(true);
+
+        //chrono resetten en starten
+        resetChronometer();
+        startChronometer();
+
+        //De huidige oefening tonen
+        naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(index).getNaam());
+        oefeningBezig = false;
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void initViews() {
+
+        chronometer = findViewById(R.id.chronometer);
+        chronometer.setVisibility(View.VISIBLE);
 
         timerText = findViewById(R.id.timerText);
         timerText.setVisibility(View.GONE);
@@ -53,74 +145,61 @@ public class WorkoutProgress extends AppCompatActivity {
         naamHuidigeOefening = findViewById(R.id.naamHuidigeOefening);
 
         klaarknop = findViewById(R.id.klaarknop);
-        klaarknop.setVisibility(View.VISIBLE);
 
         huidigeWorkout = ((MyApplication) this.getApplication()).getHuidigeWorkout();
 
-        aantalRondes = huidigeWorkout.getAantalRondes();
+        klaarDialog = new Dialog(this);
 
+        aantalRondes = huidigeWorkout.getAantalRondes();
         tijdTussenRonde = Integer.parseInt(huidigeWorkout.getRustNaRonde()) * 1000;
         tijdTussenOefening = Integer.parseInt(huidigeWorkout.getRustNaOefening()) * 1000;
 
-        while (workoutBezig) {
+        rondeText.setText("Ronde " + ronde);
 
-            if (ronde < aantalRondes) {
+        naamHuidigeOefening.setVisibility(View.VISIBLE);
+        naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(index).getNaam());
 
-                if (index == huidigeWorkout.getOefeningen().size()) {
+        startChronometer();
 
-                    index = 0;
-                    ronde++;
+    }
 
-                }
+    @SuppressLint("SetTextI18n")
+    private void beëindigWorkout() {
 
-                rondeText.setText("Ronde " + ronde);
+        Random random = new Random();
 
-                naamHuidigeOefening.setVisibility(View.VISIBLE);
-                naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(index).getNaam());
-                oefeningBezig = true;
-                klaarknop.setEnabled(true);
-                chronometer.setVisibility(View.VISIBLE);
-                startChronometer();
+        klaarknop.setEnabled(false);
+        klaarDialog.setContentView(R.layout.klaar_dialog);
+        klaarDialog.setCancelable(false);
+        gaTerugKnop = klaarDialog.findViewById(R.id.gaTerugKnop);
+        boodschap = klaarDialog.findViewById(R.id.boodschap);
 
-                while (oefeningBezig) {
+        int tempRandom = random.nextInt(3);
 
-                    klaarknop.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            resetChronometer();
-
-                            klaarknop.setEnabled(false);
-                            naamHuidigeOefening.setVisibility(View.GONE);
-
-                            timerText.setVisibility(View.VISIBLE);
-                            resterendeTijdInMillis = tijdTussenOefening;
-                            startTimer();
-
-                            oefeningBezig = false;
-                            timerBezig = true;
-
-                            index++;
-
-                        }
-                    });
-
-                }
-
-                while (timerBezig) {
-
-                    if (resterendeTijdInMillis == 0) {
-
-                        timerBezig = false;
-                        timerText.setVisibility(View.GONE);
-
-                    }
-
-                }
-
-            }
-
+        switch (tempRandom) {
+            case 0:
+                boodschap.setText("Super gedaan!");
+                break;
+            case 1:
+                boodschap.setText("Wauw!!!");
+                break;
+            case 2:
+                boodschap.setText("Uitstekend!");
+                break;
+            case 3:
+                boodschap.setText("Ga zo door!");
+                break;
         }
+
+        gaTerugKnop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+            }
+        });
+
+        klaarDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        klaarDialog.show();
 
     }
 
@@ -152,12 +231,11 @@ public class WorkoutProgress extends AppCompatActivity {
             @Override
             public void onFinish() {
 
-                klaarknop.setEnabled(true);
+                startOefening();
 
             }
-        }.start();
 
-        klaarknop.setEnabled(false);
+        }.start();
 
     }
 
