@@ -63,4 +63,7 @@
     <string name="opslaan">Opslaan</string>
     <string name="einde_workout">Einde workout!</string>
     <string name="ga_terug">Ga terug</string>
+    <string name="uitloggen">Uitloggen</string>
+    <string name="update">Update</string>
+    <string name="label">label</string>
 </resources>

@@ -1,13 +1,17 @@
 package com.example.fitflex;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,9 +30,9 @@ public class ProfielActivity extends AppCompatActivity {
     private EditText wachtwoord;
     private EditText telefoon;
     private EditText locatie;
-    private EditText naam;
-    private ImageView profiel_foto;
-    private ProgressBar progressBar;
+    private TextView naam;
+    private Button uitlogknop;
+    private Button updateknop;
 
     String validatieEmail;
 
@@ -37,30 +41,52 @@ public class ProfielActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profiel);
 
-        getSupportActionBar().setTitle("Profiel");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initViews();
+
+        toonGebruikersInformatie();
+
+        uitlogknop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logGebruikerUit();
+            }
+        });
+
+        updateknop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO update gebruikersinfo
+            }
+        });
+
+    }
+
+    private void initViews() {
 
         reff = FirebaseDatabase.getInstance().getReference("Gebruiker");
         fuser = FirebaseAuth.getInstance().getCurrentUser();
 
         validatieEmail = fuser.getEmail();
 
+        naam = findViewById(R.id.profiel_naam);
         email = findViewById(R.id.profiel_email);
         wachtwoord = findViewById(R.id.profiel_wachtwoord);
         telefoon = findViewById(R.id.profiel_telefoonnummer);
         locatie = findViewById(R.id.profiel_locatie);
-        naam = findViewById(R.id.profiel_naam);
-
-        progressBar = findViewById(R.id.profiel_progressBar);
-        profiel_foto = findViewById(R.id.profiel_foto);
-
-        progressBar.setVisibility(View.GONE);
-
-        getGebruikersInformatie();
+        uitlogknop = findViewById(R.id.uitlogknop);
+        updateknop = findViewById(R.id.updateknop);
 
     }
 
-    public void getGebruikersInformatie() {
+    private void logGebruikerUit() {
+
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.profielcontainer), "Succesvol uitgelogd", "succes");
+
+    }
+
+    public void toonGebruikersInformatie() {
 
         reff.addValueEventListener(new ValueEventListener() {
             @Override
