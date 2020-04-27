@@ -123,7 +123,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
 
             loginLayout.startAnimation(shakeAnimation);
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Vul beide velden in!");
+                    "Vul beide velden in!", "error");
             progressBarL.setVisibility(View.GONE);
 
         } else {

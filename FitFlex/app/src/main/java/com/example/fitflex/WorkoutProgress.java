@@ -23,6 +23,7 @@ public class WorkoutProgress extends AppCompatActivity {
 
     private TextView rondeText;
     private TextView naamHuidigeOefening;
+    private TextView reps;
     private TextView timerText;
     private Button klaarknop;
 
@@ -74,15 +75,17 @@ public class WorkoutProgress extends AppCompatActivity {
     private void zetTimer() {
 
         //timer zichtbaar, chrono onzichtbaar en huidige oefening onzichtbaar
+        //reps onzichtbaar
         chronometer.setVisibility(View.GONE);
         timerText.setVisibility(View.VISIBLE);
         naamHuidigeOefening.setVisibility(View.GONE);
+        reps.setVisibility(View.GONE);
 
         //knop disabled en timer initialiseren
         klaarknop.setEnabled(false);
 
         index++;
-
+        reps.setText(huidigeWorkout.getOefeningen().get(index).getAantalReps() + " repetities");
         //Als je aan de laatste oefening zit
         if (index == huidigeWorkout.getOefeningen().size()) {
 
@@ -114,6 +117,7 @@ public class WorkoutProgress extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void startOefening() {
 
         //timer onzichtbaar, chrono zichtbaar, huidige oefening zichtbaar en knop enabled
@@ -128,6 +132,7 @@ public class WorkoutProgress extends AppCompatActivity {
 
         //De huidige oefening tonen
         naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(index).getNaam());
+        reps.setText(huidigeWorkout.getOefeningen().get(index).getAantalReps() + " repetities");
         oefeningBezig = false;
 
     }
@@ -143,6 +148,7 @@ public class WorkoutProgress extends AppCompatActivity {
 
         rondeText = findViewById(R.id.rondeText);
         naamHuidigeOefening = findViewById(R.id.naamHuidigeOefening);
+        reps = findViewById(R.id.reps);
 
         klaarknop = findViewById(R.id.klaarknop);
 
@@ -158,6 +164,7 @@ public class WorkoutProgress extends AppCompatActivity {
 
         naamHuidigeOefening.setVisibility(View.VISIBLE);
         naamHuidigeOefening.setText(huidigeWorkout.getOefeningen().get(index).getNaam());
+        reps.setText(huidigeWorkout.getOefeningen().get(index).getAantalReps() + " repetities");
 
         startChronometer();
 

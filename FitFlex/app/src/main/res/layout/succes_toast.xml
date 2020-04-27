@@ -4,19 +4,20 @@
     android:id="@+id/toast_root"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="15dp">
+    app:cardCornerRadius="15dp"
+    app:cardElevation="8dp">
 
     <TextView
         android:id="@+id/toast_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/error"
         android:drawablePadding="10dp"
+        android:drawableStart="@drawable/check_circle_green"
         android:gravity="center_horizontal"
         android:layout_gravity="center_horizontal"
         android:padding="5dp"
+        android:textColor="#5cbf00"
         android:textStyle="bold"
-        android:textColor="#c0392b"
         android:textSize="20sp" />
 
 </androidx.cardview.widget.CardView>

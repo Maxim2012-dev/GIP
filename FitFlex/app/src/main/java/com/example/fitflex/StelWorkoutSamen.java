@@ -153,7 +153,7 @@ public class StelWorkoutSamen extends AppCompatActivity {
 
         } else {
 
-            new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.toegevoegdeOef), "Voeg eerst oefeningen toe");
+            new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.toegevoegdeOef), "Voeg eerst oefeningen toe", "error");
             view.startAnimation(shakeAnimation);
 
         }

@@ -121,20 +121,20 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
                 || getBevestigWachtwoord.length() == 0) {
 
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Vul alle velden in.");
+                    "Vul alle velden in.", "error");
 
         //Email
         } else if (!Patterns.EMAIL_ADDRESS.matcher(getEmailId).matches()) {
 
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Het e-mailadres is ongeldig.");
+                    "Het e-mailadres is ongeldig.", "error");
 
 
         //Telefoonnummer
         } else if (getTelefoonnummer.length() > 10) {
 
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Het telefoonnummer is ongeldig.");
+                    "Het telefoonnummer is ongeldig.", "error");
 
 
         //Wachtwoord
@@ -144,21 +144,21 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
                     "Het wachtwoord moet minstens 6 karakters bevatten met:\n" +
                             "- min. 1 cijfer\n" +
                             "- min. 1 kleine letter\n" +
-                            "- min. 1 hoofdletter");
+                            "- min. 1 hoofdletter", "error");
 
 
         //Bevestig wachtwoord
         } else if (!getBevestigWachtwoord.equals(getWachtwoord)) {
 
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Beide wachtwoorden moeten gelijk zijn.");
+                    "Beide wachtwoorden moeten gelijk zijn.", "error");
 
 
         //Voorwaarden
         } else if (!voorwaarden.isChecked()) {
 
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Accepteer de algemene voorwaarden.");
+                    "Accepteer de algemene voorwaarden.", "error");
 
 
         //Registreer

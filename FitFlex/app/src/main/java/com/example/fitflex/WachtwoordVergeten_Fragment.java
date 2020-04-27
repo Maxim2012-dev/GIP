@@ -83,12 +83,12 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
         if (getEmailId.equals("") || getEmailId.length() == 0) {
 
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Gelieve uw e-mailadres in te voeren.");
+                    "Gelieve uw e-mailadres in te voeren.", "error");
 
         } else if (!Patterns.EMAIL_ADDRESS.matcher(getEmailId).matches()) {
 
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Dit e-mailadres is ongeldig.");
+                    "Dit e-mailadres is ongeldig.", "error");
 
         } else {
 

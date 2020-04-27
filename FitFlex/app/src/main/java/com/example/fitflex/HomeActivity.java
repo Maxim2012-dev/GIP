@@ -6,17 +6,23 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.fitflex.ui.main.SectionsPagerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity {
 
-    FloatingActionButton floatingActionButton;
+    private FloatingActionButton floatingActionButton;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(homeToolbar);
 
         floatingActionButton = findViewById(R.id.fab);
+        mAuth = FirebaseAuth.getInstance();
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
@@ -46,6 +53,28 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.logout) {
+            logGebruikerUit();
+        }
+        return true;
+    }
+
+    private void logGebruikerUit() {
+
+        mAuth.signOut();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.home), "Succesvol uitgelogd", "succes");
+
+    }
 }
