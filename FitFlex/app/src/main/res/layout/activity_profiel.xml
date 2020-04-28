@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profielcontainer"
@@ -169,7 +170,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="270dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardcontainer">
@@ -192,7 +193,7 @@
                     android:id="@+id/profiel_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_email"
+                    android:drawableStart="@drawable/email"
                     android:drawablePadding="10dp">
 
                 </com.google.android.material.textfield.TextInputEditText>
@@ -211,7 +212,7 @@
                     android:id="@+id/profiel_wachtwoord"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_password_key"
+                    android:drawableStart="@drawable/password_key"
                     android:drawablePadding="10dp">
 
                 </com.google.android.material.textfield.TextInputEditText>
@@ -231,7 +232,7 @@
                     android:id="@+id/profiel_telefoonnummer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_telefoon"
+                    android:drawableStart="@drawable/telefoon"
                     android:drawablePadding="10dp">
 
                 </com.google.android.material.textfield.TextInputEditText>
@@ -251,7 +252,7 @@
                     android:id="@+id/profiel_locatie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_locatie"
+                    android:drawableStart="@drawable/locatie"
                     android:drawablePadding="10dp">
 
                 </com.google.android.material.textfield.TextInputEditText>

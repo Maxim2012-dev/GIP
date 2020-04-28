@@ -18,6 +18,6 @@
         android:padding="5dp"
         android:textColor="#940b09"
         android:textStyle="bold"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 </androidx.cardview.widget.CardView>

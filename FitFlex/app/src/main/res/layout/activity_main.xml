@@ -19,7 +19,7 @@ android:scrollbars="none" >
             android:layout_margin="4dp"
             android:contentDescription="@string/sluitknop"
             android:padding="5dp"
-            android:src="@drawable/ic_cancel" />
+            android:src="@drawable/cancel" />
 
         <FrameLayout
             android:id="@+id/frameContainer"

@@ -76,7 +76,7 @@ public class StelWorkoutSamen extends AppCompatActivity {
                     final int item = position;
 
                     new AlertDialog.Builder(StelWorkoutSamen.this)
-                            .setIcon(R.drawable.ic_cancel_red)
+                            .setIcon(R.drawable.cancel_red)
                             .setTitle("Ben je zeker?")
                             .setMessage("Wil je dit item verwijderen?")
                             .setPositiveButton("Ja", new DialogInterface.OnClickListener() {

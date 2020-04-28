@@ -166,7 +166,8 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
     private void toonPopUp() {
 
         new AlertDialog.Builder(WorkoutSettings.this)
-                .setIcon(R.drawable.ic_save)
+                .setCancelable(false)
+                .setIcon(R.drawable.save)
                 .setTitle("Workout opslaan?")
                 .setMessage("Weet je zeker dat je deze workout wilt opslaan?")
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {

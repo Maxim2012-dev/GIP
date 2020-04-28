@@ -1,5 +1,6 @@
 package com.example.fitflex;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -7,6 +8,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,9 +43,9 @@ public class HomeActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
-        tabs.getTabAt(0).setIcon(R.drawable.ic_graphic_eq_black);
-        tabs.getTabAt(1).setIcon(R.drawable.ic_toc_black);
-        tabs.getTabAt(2).setIcon(R.drawable.ic_add_box);
+        tabs.getTabAt(0).setIcon(R.drawable.graphic_eq);
+        tabs.getTabAt(1).setIcon(R.drawable.toc);
+        tabs.getTabAt(2).setIcon(R.drawable.add_box);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +74,23 @@ public class HomeActivity extends AppCompatActivity {
 
     private void logGebruikerUit() {
 
-        mAuth.signOut();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.home), "Succesvol uitgelogd", "succes");
+        new AlertDialog.Builder(HomeActivity.this)
+                .setCancelable(false)
+                .setIcon(R.drawable.logout_green)
+                .setTitle("Uitloggen?")
+                .setMessage("Weet je zeker dat je wilt uitloggen?")
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        mAuth.signOut();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.home), "Succesvol uitgelogd", "succes");
+
+                    }
+                })
+                .setNegativeButton("Nee", null)
+                .show();
 
     }
 }

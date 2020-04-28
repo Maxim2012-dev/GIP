@@ -145,7 +145,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
 
                         progressBarL.setVisibility(View.GONE);
 
-                        Toast.makeText(getContext(), "Wachtwoord incorrect.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
 
                     }
 
