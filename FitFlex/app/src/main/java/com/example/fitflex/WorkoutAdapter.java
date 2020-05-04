@@ -18,10 +18,14 @@ public class WorkoutAdapter extends BaseAdapter {
     ImageView foto;
     TextView naamWorkout;
     TextView aantalOefeningen;
-
+private OnListItemClickListener onListItemClickListener;
     public WorkoutAdapter(Context context, ArrayList<Workout> workouts) {
         mContext = context;
         this.workouts = workouts;
+    }
+
+    public void setOnListItemClickListener(OnListItemClickListener onListItemClickListener) {
+        this.onListItemClickListener = onListItemClickListener;
     }
 
     @Override
@@ -41,7 +45,7 @@ public class WorkoutAdapter extends BaseAdapter {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.workout_item, parent, false);
@@ -66,7 +70,29 @@ public class WorkoutAdapter extends BaseAdapter {
 
         }
 
+        convertView.findViewById(R.id.remove_workout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onListItemClickListener!=null){onListItemClickListener.onItemRemove(position);
+                }
+            }
+        });
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onListItemClickListener!=null){
+                    onListItemClickListener.onItemClick(position);
+                }
+            }
+        });
+
 
         return convertView;
+    }
+
+    public interface  OnListItemClickListener{
+        public void onItemRemove(int position);
+        public void onItemClick(int position);
     }
 }

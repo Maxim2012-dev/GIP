@@ -46,7 +46,6 @@ public class OefeningListActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.oefeningToolbar);
         setSupportActionBar(toolbar);
-
         if (findViewById(R.id.oefening_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -60,8 +59,15 @@ public class OefeningListActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) recyclerView);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, mTwoPane));
+    private void setupRecyclerView(@NonNull final RecyclerView recyclerView) {
+
+        new DummyContent().listenDataLoadChange(new DummyContent.OnDataLoadListener() {
+            @Override
+            public void onDataLoaded(List<DummyContent.DummyItem> dummyItems) {
+                recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(OefeningListActivity.this, dummyItems, mTwoPane));
+            }
+        });
+
     }
 
     public static class SimpleItemRecyclerViewAdapter
@@ -86,7 +92,7 @@ public class OefeningListActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, OefeningDetailActivity.class);
                     intent.putExtra(OefeningDetailFragment.ARG_ITEM_ID, item.id);
-
+                    intent.putExtra(OefeningDetailFragment.ARG_ITEM_NAME, item.naam);
                     context.startActivity(intent);
                 }
             }
@@ -109,7 +115,7 @@ public class OefeningListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
+            holder.mIdView.setText(String.valueOf(position+1));
             holder.mContentView.setText(mValues.get(position).naam);
             holder.mLevelView.setText(mValues.get(position).moeilijkheid);
 

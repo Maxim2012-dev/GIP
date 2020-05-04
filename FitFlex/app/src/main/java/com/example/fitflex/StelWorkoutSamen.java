@@ -68,39 +68,49 @@ public class StelWorkoutSamen extends AppCompatActivity {
 
             oefeningAdapter = new OefeningAdapter(StelWorkoutSamen.this, oefeningen);
             listView.setAdapter(oefeningAdapter);
+            oefeningAdapter.setOnListItemClickListener(new OefeningAdapter.OnListItemClickListener() {
+                @Override
+                public void onItemRemove(int position) {
+                    onRemoveItemClick(position);
+                }
+            });
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    final int item = position;
-
-                    new AlertDialog.Builder(StelWorkoutSamen.this)
-                            .setIcon(R.drawable.cancel_red)
-                            .setTitle("Ben je zeker?")
-                            .setMessage("Wil je dit item verwijderen?")
-                            .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                    oefeningen.remove(item);
-
-                                    if (oefeningen.size() == 0) {
-
-                                        geenOefeningen.setText("Nog geen oefeningen");
-
-                                    }
-                                    oefeningAdapter.notifyDataSetChanged();
-
-                                }
-                            })
-                            .setNegativeButton("Nee", null)
-                            .show();
+                    onRemoveItemClick(position);
 
                 }
-            });
+            });*/
         }
 
+    }
+
+    private void onRemoveItemClick(int position) {
+        final int item = position;
+
+        new AlertDialog.Builder(StelWorkoutSamen.this)
+                .setIcon(R.drawable.cancel_red)
+                .setTitle("Ben je zeker?")
+                .setMessage("Wil je dit item verwijderen?")
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        oefeningen.remove(item);
+
+                        if (oefeningen.size() == 0) {
+
+                            geenOefeningen.setText("Nog geen oefeningen");
+
+                        }
+                        oefeningAdapter.notifyDataSetChanged();
+
+                    }
+                })
+                .setNegativeButton("Nee", null)
+                .show();
     }
 
     private void initViews() {

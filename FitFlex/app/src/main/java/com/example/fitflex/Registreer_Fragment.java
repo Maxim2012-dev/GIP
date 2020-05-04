@@ -111,6 +111,8 @@ public class Registreer_Fragment extends Fragment implements View.OnClickListene
         final String getWachtwoord = wachtwoord.getText().toString();
         final String getBevestigWachtwoord = bevestigWachtwoord.getText().toString();
 
+        //Checken of email al bestaat
+
         //Alles ingevuld?
         if (getNaam.equals("") || getNaam.length() == 0
                 || getEmailId.equals("") || getEmailId.length() == 0

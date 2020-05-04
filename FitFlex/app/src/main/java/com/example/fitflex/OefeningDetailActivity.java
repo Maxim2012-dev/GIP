@@ -1,8 +1,11 @@
 package com.example.fitflex;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -18,18 +21,21 @@ import android.view.MenuItem;
 /**
  * An activity representing a single Oefening detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
- * item details are presented side-by-side with a list of items
+ * item details are presented side-by-side with
+ * a list of items
  * in a {@link OefeningListActivity}.
  */
 public class OefeningDetailActivity extends AppCompatActivity {
 
 
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oefening_detail);
-
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -45,6 +51,8 @@ public class OefeningDetailActivity extends AppCompatActivity {
         //
         // http://developer.android.com/guide/components/fragments.html
         //
+
+        setUpToolbarLayout(getIntent().getStringExtra(OefeningDetailFragment.ARG_ITEM_NAME));
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
@@ -73,5 +81,15 @@ public class OefeningDetailActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setUpToolbarLayout(String title) {
+        CollapsingToolbarLayout appBarLayout = findViewById(R.id.toolbar_layout);
+        if (appBarLayout != null) {
+            appBarLayout.setTitle(title);
+            appBarLayout.setCollapsedTitleTextColor(Color.WHITE);
+            appBarLayout.setExpandedTitleColor(Color.WHITE);
+
+        }
     }
 }

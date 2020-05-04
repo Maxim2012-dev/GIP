@@ -1,5 +1,7 @@
 package com.example.fitflex.dummy;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,47 +22,50 @@ import java.util.Map;
  */
 public class DummyContent {
 
+    private static final String TAG =DummyContent.class.getSimpleName() ;
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference reference = database.getReference("Oefening");
 
     /**
      * An array of sample (dummy) items.
      */
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    private List<DummyItem> ITEMS = new ArrayList<DummyItem>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
     public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
 
-    private static int counter = 1;
+    private int counter = 1;
 
-    static {
+public void listenDataLoadChange(final OnDataLoadListener onDataLoadListener) {
+    reference.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                    String moeilijkheid = ds.child("Moeilijkheid").getValue(String.class);
-                    String naam = ds.child("Naam").getValue(String.class);
-                    addItem(new DummyItem(String.valueOf(counter), naam, moeilijkheid, makeDetails(naam)));
-                    counter++;
-
-                }
+                String moeilijkheid = ds.child("Moeilijkheid").getValue(String.class);
+                String naam = ds.child("Naam").getValue(String.class);
+                addItem(new DummyItem(String.valueOf(counter), naam, moeilijkheid, makeDetails(naam)));
+                counter++;
 
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+            if (onDataLoadListener!=null){
+                onDataLoadListener.onDataLoaded(ITEMS);
             }
-        });
 
-    }
+        }
 
-    private static void addItem(DummyItem item) {
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    });
+}
+
+
+    private  void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
@@ -94,5 +99,9 @@ public class DummyContent {
         public String toString() {
             return naam;
         }
+    }
+
+    public interface OnDataLoadListener{
+        public void onDataLoaded(List<DummyItem> dummyItems);
     }
 }

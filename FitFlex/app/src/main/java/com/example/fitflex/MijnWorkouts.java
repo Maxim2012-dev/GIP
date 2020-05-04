@@ -1,19 +1,25 @@
 package com.example.fitflex;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -65,15 +71,6 @@ public class MijnWorkouts extends Fragment {
         }
         toonGemaakteWorkouts();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                ((MyApplication) getActivity().getApplication()).setHuidigeWorkout(workouts.get(position));
-                startActivity(new Intent(getContext(), WorkoutBegin.class));
-
-            }
-        });
 
         return view;
 
@@ -103,7 +100,6 @@ public class MijnWorkouts extends Fragment {
                         rustNaOefening = ds.child("rustNaOefening").getValue(String.class);
 
                         System.out.println(ds.child("naam"));
-
                         if (ds.child("naam").getValue().equals(naam)) {
 
                             for (DataSnapshot oefening : ds.child("oefeningen").getChildren()) {
@@ -125,6 +121,20 @@ public class MijnWorkouts extends Fragment {
                 }
                 workoutAdapter = new WorkoutAdapter(MijnWorkouts.this.getContext(), workouts);
                 listView.setAdapter(workoutAdapter);
+                workoutAdapter.setOnListItemClickListener(new WorkoutAdapter.OnListItemClickListener() {
+                    @Override
+                    public void onItemRemove(final int position) {
+
+                        removeSelectedItem(reff,position,fuserEmail);
+
+                    }
+
+                    @Override
+                    public void onItemClick(int position) {
+                        ((MyApplication) getActivity().getApplication()).setHuidigeWorkout(workouts.get(position));
+                        startActivity(new Intent(getContext(), WorkoutBegin.class));
+                    }
+                });
                 geenWorkouts.setText("");
 
             }
@@ -137,4 +147,47 @@ public class MijnWorkouts extends Fragment {
 
     }
 
+    private void removeSelectedItem(final DatabaseReference reff,final int position, final String userEmail) {
+        new AlertDialog.Builder(getContext())
+                .setIcon(R.drawable.cancel_red)
+                .setTitle("Ben je zeker?")
+                .setMessage("Wil je dit item verwijderen?")
+                .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        reff.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                                    if (ds.child("gebruikersEmail").getValue().equals(userEmail)) {
+                                        if (ds.child("naam").getValue().equals(workouts.get(position).naam)) {
+                                            ds.getRef().removeValue();
+                                            workouts.remove(position);
+                                            workoutAdapter.notifyDataSetChanged();
+                                            if (workouts.size()==0){
+                                                geenWorkouts.setText("Nog geen workouts");
+                                            }
+                                            return;
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    }
+                    })
+                .setNegativeButton("Nee",null)
+                .show();
+        ;
+
+}
 }

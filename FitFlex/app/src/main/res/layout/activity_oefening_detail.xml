@@ -24,6 +24,12 @@
             app:toolbarId="@+id/toolbar"
             android:theme="@style/AppTheme">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                android:layout_height="wrap_content"/>
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

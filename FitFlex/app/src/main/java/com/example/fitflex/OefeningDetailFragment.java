@@ -1,26 +1,19 @@
 package com.example.fitflex;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.fitflex.dummy.DummyContent;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -31,6 +24,7 @@ import java.util.Objects;
  */
 public class OefeningDetailFragment extends Fragment {
 
+    public static final String ARG_ITEM_NAME = "name";
     private Button toevoegknop;
     private EditText aantalReps;
 
@@ -62,11 +56,7 @@ public class OefeningDetailFragment extends Fragment {
             // to load content from a content provider.
             mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.naam);
-            }
+
         }
 
     }

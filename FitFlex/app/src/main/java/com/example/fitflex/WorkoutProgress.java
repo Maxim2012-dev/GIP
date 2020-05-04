@@ -1,5 +1,6 @@
 package com.example.fitflex;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -10,12 +11,22 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.fitflex.dummy.Track;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -85,7 +96,9 @@ public class WorkoutProgress extends AppCompatActivity {
         klaarknop.setEnabled(false);
 
         index++;
-        reps.setText(huidigeWorkout.getOefeningen().get(index).getAantalReps() + " repetities");
+        if (huidigeWorkout.getOefeningen().size()-1>=index) {
+            reps.setText(huidigeWorkout.getOefeningen().get(index).getAantalReps() + " repetities");
+        }
         //Als je aan de laatste oefening zit
         if (index == huidigeWorkout.getOefeningen().size()) {
 
@@ -172,7 +185,7 @@ public class WorkoutProgress extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void beëindigWorkout() {
-
+onExcerciseCompletion();
         Random random = new Random();
 
         klaarknop.setEnabled(false);
@@ -208,6 +221,25 @@ public class WorkoutProgress extends AppCompatActivity {
         klaarDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         klaarDialog.show();
 
+    }
+
+    private void onExcerciseCompletion(){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("track");
+        Track track = new Track();
+        track.setTimestamp(System.currentTimeMillis());
+        track.setEmail(huidigeWorkout.gebruikersEmail);
+        List<Track.TrackData> trackData =new ArrayList<>();
+        for (Oefening oefening : huidigeWorkout.getOefeningen()){
+            Track.TrackData trackData1 = new Track().new TrackData();
+            trackData1.setNumber_of_reps(oefening.aantalReps);
+            trackData1.setWorkout_name(oefening.naam);
+            trackData.add(trackData1);
+        }
+        track.setData(trackData);
+
+        Log.d("SAVE","TRACK : "+track.toString());
+
+     databaseReference.setValue(track);
     }
 
     public void startChronometer() {
