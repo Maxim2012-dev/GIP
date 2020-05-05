@@ -99,7 +99,6 @@ public class MijnWorkouts extends Fragment {
                         rustNaRonde = ds.child("rustNaRonde").getValue(String.class);
                         rustNaOefening = ds.child("rustNaOefening").getValue(String.class);
 
-                        System.out.println(ds.child("naam"));
                         if (ds.child("naam").getValue().equals(naam)) {
 
                             for (DataSnapshot oefening : ds.child("oefeningen").getChildren()) {

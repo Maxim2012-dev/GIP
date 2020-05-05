@@ -19,13 +19,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fitflex.dummy.Track;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -96,7 +99,7 @@ public class WorkoutProgress extends AppCompatActivity {
         klaarknop.setEnabled(false);
 
         index++;
-        if (huidigeWorkout.getOefeningen().size()-1>=index) {
+        if (huidigeWorkout.getOefeningen().size() - 1 >= index) {
             reps.setText(huidigeWorkout.getOefeningen().get(index).getAantalReps() + " repetities");
         }
         //Als je aan de laatste oefening zit
@@ -119,7 +122,7 @@ public class WorkoutProgress extends AppCompatActivity {
 
             }
 
-        //Als je niet aan laatste oefening zit
+            //Als je niet aan laatste oefening zit
         } else {
 
             //rust oefening
@@ -185,7 +188,9 @@ public class WorkoutProgress extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void beëindigWorkout() {
-onExcerciseCompletion();
+
+        onExcerciseCompletion();
+
         Random random = new Random();
 
         klaarknop.setEnabled(false);
@@ -223,23 +228,39 @@ onExcerciseCompletion();
 
     }
 
-    private void onExcerciseCompletion(){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("track");
+    private void onExcerciseCompletion() {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Track");
+
+        String key = databaseReference.push().getKey();
+
         Track track = new Track();
-        track.setTimestamp(System.currentTimeMillis());
+        track.setDatum(geefDatum());
         track.setEmail(huidigeWorkout.gebruikersEmail);
-        List<Track.TrackData> trackData =new ArrayList<>();
-        for (Oefening oefening : huidigeWorkout.getOefeningen()){
+
+        List<Track.TrackData> trackData = new ArrayList<>();
+
+        for (Oefening oefening : huidigeWorkout.getOefeningen()) {
             Track.TrackData trackData1 = new Track().new TrackData();
-            trackData1.setNumber_of_reps(oefening.aantalReps);
-            trackData1.setWorkout_name(oefening.naam);
+            trackData1.setAantal_reps(oefening.aantalReps);
+            trackData1.setOefening_naam(oefening.naam);
             trackData.add(trackData1);
         }
         track.setData(trackData);
 
-        Log.d("SAVE","TRACK : "+track.toString());
+        Log.d("SAVE", "TRACK : " + track.toString());
 
-     databaseReference.setValue(track);
+        databaseReference.child(key).setValue(track);
+
+    }
+
+    private String geefDatum() {
+
+        Calendar calendar = Calendar.getInstance();
+        String huidgeDatum = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
+
+        return huidgeDatum;
+
     }
 
     public void startChronometer() {

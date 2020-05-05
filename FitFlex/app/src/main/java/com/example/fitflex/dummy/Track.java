@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Track {
     public String email;
-    public long timestamp;
+    public String datum;
     public List<TrackData> data;
 
     public void setData(List<TrackData> data) {
@@ -15,36 +15,36 @@ public class Track {
         this.email = email;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setDatum(String datum) {
+        this.datum = datum;
     }
 
     @Override
     public String toString() {
         return "Track{" +
                 "email='" + email + '\'' +
-                ", timestamp=" + timestamp +
+                ", datum=" + datum +
                 ", data=" + data +
                 '}';
     }
 
     public class TrackData{
-        public String workout_name;
-        public int number_of_reps;
+        public String oefening_naam;
+        public int aantal_reps;
 
-        public void setNumber_of_reps(int number_of_reps) {
-            this.number_of_reps = number_of_reps;
+        public void setOefening_naam(String oefening_naam) {
+            this.oefening_naam = oefening_naam;
         }
 
-        public void setWorkout_name(String workout_name) {
-            this.workout_name = workout_name;
+        public void setAantal_reps(int aantal_reps) {
+            this.aantal_reps = aantal_reps;
         }
 
         @Override
         public String toString() {
             return "TrackData{" +
-                    "workout_name='" + workout_name + '\'' +
-                    ", number_of_reps=" + number_of_reps +
+                    "oefening_naam='" + oefening_naam + '\'' +
+                    ", aantal_repetities=" + aantal_reps +
                     '}';
         }
     }
