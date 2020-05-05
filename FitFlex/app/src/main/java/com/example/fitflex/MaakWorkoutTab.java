@@ -26,10 +26,6 @@ public class MaakWorkoutTab extends Fragment implements View.OnClickListener {
     private RelativeLayout maakWorkout;
     private Animation shakeAnimation;
 
-    public MaakWorkoutTab() {
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

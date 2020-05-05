@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -34,7 +35,6 @@ public class Overzicht extends Fragment {
     BarChart barChart;
     ArrayList<BarEntry> barEntrylijst;
     ArrayList<String> labelnamen;
-
 
     ArrayList<GrafiekData> grafiekDatalijst = new ArrayList<>();
 
@@ -77,11 +77,15 @@ public class Overzicht extends Fragment {
         barDataSet.setValueTextColor(Color.BLACK);
         barDataSet.setValueTextSize(16f);
         Description description = new Description();
-        description.setText("Datum");
-        description.setTextSize(20f);
+        description.setText("Per dag");
+        description.setTextSize(15f);
         barChart.setDescription(description);
         BarData barData = new BarData(barDataSet);
         barChart.setData(barData);
+
+        Legend legend = barChart.getLegend();
+        legend.setTextSize(15f);
+        legend.setFormToTextSpace(10f);
 
         //Zet x-as Formatter
         XAxis xAxis = barChart.getXAxis();
@@ -89,6 +93,7 @@ public class Overzicht extends Fragment {
 
         //x-as voorkeuren
         xAxis.setPosition(XAxis.XAxisPosition.TOP);
+        xAxis.setTextSize(15f);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
         xAxis.setGranularity(1f);
@@ -96,6 +101,8 @@ public class Overzicht extends Fragment {
         xAxis.setLabelRotationAngle(270);
         barChart.animateY(2000);
         barChart.invalidate();
+
+        grafiekDatalijst.clear();
 
     }
 
@@ -126,6 +133,7 @@ public class Overzicht extends Fragment {
 
                 }
                 grafiekDatalijst.add(new GrafiekData(datum, aantalReps));
+                aantalReps = 0;
 
             }
 
