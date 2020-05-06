@@ -49,6 +49,14 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".LoginActivity"
+            android:label="@string/login"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".RegistreerActivity"
+            android:label="@string/registreer"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>

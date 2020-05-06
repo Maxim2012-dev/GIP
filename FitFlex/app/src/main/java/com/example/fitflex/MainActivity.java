@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -13,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static int TIJD = 5000;
 
     Animation topAnim, bottomAnim;
     ImageView image;
@@ -32,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
 
         image.setAnimation(topAnim);
         description.setAnimation(bottomAnim);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }, TIJD);
 
     }
 

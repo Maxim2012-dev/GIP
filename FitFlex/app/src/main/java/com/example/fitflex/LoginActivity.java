@@ -25,7 +25,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 @SuppressLint("Registered")
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextInputLayout email_layout, wachtwoord_layout;
     private TextInputEditText email, wachtwoord;
@@ -71,12 +71,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setListeners() {
 
-        loginknop.setOnClickListener((View.OnClickListener) this);
-        vergetenWachtwoord.setOnClickListener((View.OnClickListener) this);
-        maakAccount.setOnClickListener((View.OnClickListener) this);
+        loginknop.setOnClickListener(this);
+        vergetenWachtwoord.setOnClickListener(this);
+        maakAccount.setOnClickListener(this);
 
     }
 
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginknop:
@@ -89,11 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                 gaNaarRegistreerPagina();
                 break;
         }
-
     }
 
     private void gaNaarWachtwoordVergetenPagina() {
-
 
 
     }
@@ -104,12 +104,12 @@ public class LoginActivity extends AppCompatActivity {
 
         Pair[] pairs = new Pair[6];
 
-        pairs[0] = new Pair<View, String> (loginText, "login_text");
-        pairs[1] = new Pair<View, String> (email_layout, "email");
-        pairs[2] = new Pair<View, String> (wachtwoord_layout, "wachtwoord");
-        pairs[3] = new Pair<View, String> (vergetenWachtwoord, "checkbox");
-        pairs[4] = new Pair<View, String> (loginknop, "button");
-        pairs[5] = new Pair<View, String> (maakAccount, "lid");
+        pairs[0] = new Pair<View, String>(loginText, "login_text");
+        pairs[1] = new Pair<View, String>(email_layout, "email");
+        pairs[2] = new Pair<View, String>(wachtwoord_layout, "wachtwoord");
+        pairs[3] = new Pair<View, String>(vergetenWachtwoord, "checkbox");
+        pairs[4] = new Pair<View, String>(loginknop, "button");
+        pairs[5] = new Pair<View, String>(maakAccount, "lid");
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, pairs);
         startActivity(intent, options.toBundle());
@@ -161,3 +161,5 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 }
+
+
