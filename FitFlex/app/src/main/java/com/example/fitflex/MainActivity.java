@@ -6,58 +6,33 @@ import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FragmentManager fragmentManager;
+    Animation topAnim, bottomAnim;
+    ImageView image;
+    TextView description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
+        topAnim = AnimationUtils.loadAnimation(this, R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation);
 
-            replaceLoginFragment();
+        image = findViewById(R.id.logo);
+        description = findViewById(R.id.desc);
 
-        }
+        image.setAnimation(topAnim);
+        description.setAnimation(bottomAnim);
 
-        findViewById(R.id.close_activity).setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View arg0) {
-                        finish();
-
-                    }
-                });
-
-    }
-
-    protected void replaceLoginFragment() {
-
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
-                .replace(R.id.frameContainer, new Login_Fragment())
-                .commit();
-
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        Fragment Registreer_Fragment = getSupportFragmentManager()
-                .findFragmentByTag(Utils.Registreer_Fragment);
-        Fragment WachtwoordVergeten_Fragment = getSupportFragmentManager()
-                .findFragmentByTag(Utils.WachtwoordVergeten_Fragment);
-
-        if (Registreer_Fragment != null)
-            replaceLoginFragment();
-        else if (WachtwoordVergeten_Fragment != null)
-            replaceLoginFragment();
-        else
-            super.onBackPressed();
     }
 
 }

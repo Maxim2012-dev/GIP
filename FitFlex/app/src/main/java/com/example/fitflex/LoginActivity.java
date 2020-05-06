@@ -1,114 +1,118 @@
 package com.example.fitflex;
 
+import android.annotation.SuppressLint;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.view.LayoutInflater;
+import android.util.Pair;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Login_Fragment extends Fragment implements View.OnClickListener {
+@SuppressLint("Registered")
+public class LoginActivity extends AppCompatActivity {
 
-    private View view;
-
+    private TextInputLayout email_layout, wachtwoord_layout;
     private TextInputEditText email, wachtwoord;
     private Button loginknop;
-    private TextView vergetenWachtwoord, maakAccount;
+    private TextView vergetenWachtwoord, maakAccount, loginText;
     private ProgressBar progressBarL;
     private ConstraintLayout loginLayout;
     private Animation shakeAnimation;
-    private FragmentManager fragmentManager;
 
     private FirebaseAuth mAuth;
 
-    public Login_Fragment() {
-
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.login_layout, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.login_layout);
+
         initViews();
         setListeners();
-        return view;
 
     }
 
     private void initViews() {
-        fragmentManager = getActivity().getSupportFragmentManager();
 
-        email = view.findViewById(R.id.login_email);
-        wachtwoord = view.findViewById(R.id.login_wachtwoord);
-        loginknop = view.findViewById(R.id.loginknop);
-        vergetenWachtwoord = view.findViewById(R.id.vergetenWachtwoord);
-        maakAccount = view.findViewById(R.id.maakAccount);
-        progressBarL = view.findViewById(R.id.progressBarL);
-        loginLayout = view.findViewById(R.id.login_layout);
+        email_layout = findViewById(R.id.login_email_layout);
+        wachtwoord_layout = findViewById(R.id.login_wachtwoord_layout);
+        email = findViewById(R.id.login_email);
+        wachtwoord = findViewById(R.id.login_wachtwoord);
+        loginknop = findViewById(R.id.loginknop);
+        vergetenWachtwoord = findViewById(R.id.vergetenWachtwoord);
+        loginText = findViewById(R.id.login_text);
+        maakAccount = findViewById(R.id.maakAccount);
+        progressBarL = findViewById(R.id.progressBarL);
+        loginLayout = findViewById(R.id.login_layout);
 
         progressBarL.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
 
-        shakeAnimation = AnimationUtils.loadAnimation(getActivity(),
+        shakeAnimation = AnimationUtils.loadAnimation(this,
                 R.anim.shake);
 
     }
 
     private void setListeners() {
 
-        loginknop.setOnClickListener(this);
-        vergetenWachtwoord.setOnClickListener(this);
-        maakAccount.setOnClickListener(this);
+        loginknop.setOnClickListener((View.OnClickListener) this);
+        vergetenWachtwoord.setOnClickListener((View.OnClickListener) this);
+        maakAccount.setOnClickListener((View.OnClickListener) this);
 
     }
 
-    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginknop:
                 checkValidation();
                 break;
-
             case R.id.vergetenWachtwoord:
-
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer,
-                                new WachtwoordVergeten_Fragment()).commit();
+                gaNaarWachtwoordVergetenPagina();
                 break;
             case R.id.maakAccount:
-
-                fragmentManager
-                        .beginTransaction()
-                        .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                        .replace(R.id.frameContainer, new Registreer_Fragment()).commit();
+                gaNaarRegistreerPagina();
                 break;
         }
+
+    }
+
+    private void gaNaarWachtwoordVergetenPagina() {
+
+
+
+    }
+
+    private void gaNaarRegistreerPagina() {
+
+        Intent intent = new Intent(LoginActivity.this, RegistreerActivity.class);
+
+        Pair[] pairs = new Pair[6];
+
+        pairs[0] = new Pair<View, String> (loginText, "login_text");
+        pairs[1] = new Pair<View, String> (email_layout, "email");
+        pairs[2] = new Pair<View, String> (wachtwoord_layout, "wachtwoord");
+        pairs[3] = new Pair<View, String> (vergetenWachtwoord, "checkbox");
+        pairs[4] = new Pair<View, String> (loginknop, "button");
+        pairs[5] = new Pair<View, String> (maakAccount, "lid");
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, pairs);
+        startActivity(intent, options.toBundle());
 
     }
 
@@ -123,7 +127,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
                 || getWachtwoord.equals("") || getWachtwoord.length() == 0) {
 
             loginLayout.startAnimation(shakeAnimation);
-            new CustomToast().Show_Toast(getActivity(), view,
+            new CustomToast().Show_Toast(this, findViewById(R.id.login_layout),
                     "Vul beide velden in!", "error");
             progressBarL.setVisibility(View.GONE);
 
@@ -138,7 +142,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
 
                         progressBarL.setVisibility(View.GONE);
 
-                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
@@ -146,7 +150,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
 
                         progressBarL.setVisibility(View.GONE);
 
-                        Toast.makeText(getContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
 
                     }
 

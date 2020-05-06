@@ -62,10 +62,6 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
         switch (v.getId()) {
             case R.id.terug:
 
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
-                        .replace(R.id.frameContainer, new Login_Fragment())
-                        .commit();
                 break;
 
             case R.id.bevestig:
