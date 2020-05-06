@@ -14,7 +14,7 @@
         //ActionBar
         <item name="colorSurface">@color/colorPrimary</item>
         //ActionBar TextColor
-        <item name="colorOnSurface">@color/white</item>
+        <item name="colorOnSurface">@color/colorOnSurface</item>
         <item name="android:colorBackground">@color/white</item>
         <item name="colorOnBackground">@color/black</item>
 

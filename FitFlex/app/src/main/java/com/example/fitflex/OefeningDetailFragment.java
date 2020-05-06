@@ -80,11 +80,11 @@ public class OefeningDetailFragment extends Fragment {
 
                     if (aantalReps.getText().toString().trim().isEmpty()) {
 
-                        new CustomToast().Show_Toast(Objects.requireNonNull(getActivity()), rootView, "Voer het aantal reps in!", "error");
+                        new CustomToast().Show_Toast(Objects.requireNonNull(getActivity()), rootView, "Voer het aantal repetities in!", "error");
 
                     } else if (Integer.parseInt(aantalReps.getText().toString()) <= 0) {
 
-                        new CustomToast().Show_Toast(Objects.requireNonNull(getActivity()), rootView, "Reps moeten hoger zijn dan 0!", "error");
+                        new CustomToast().Show_Toast(Objects.requireNonNull(getActivity()), rootView, "Repetities moeten hoger zijn dan 0!", "error");
 
                     } else {
 

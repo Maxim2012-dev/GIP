@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -23,7 +24,7 @@ public class MaakWorkoutTab extends Fragment implements View.OnClickListener {
     private Button volgende;
     private TextInputEditText naamWorkout;
     private View view;
-    private RelativeLayout maakWorkout;
+    private ConstraintLayout maakWorkout;
     private Animation shakeAnimation;
 
     @Override
@@ -61,12 +62,12 @@ public class MaakWorkoutTab extends Fragment implements View.OnClickListener {
         if (workoutNaam.equals("") || workoutNaam.length() == 0) {
 
             maakWorkout.startAnimation(shakeAnimation);
-            Toast.makeText(getContext(), "Voer een naam in!", Toast.LENGTH_SHORT).show();
+            new CustomToast().Show_Toast(getActivity().getApplicationContext(), view.findViewById(R.id.maak_workout_tab), "Voer een naam in!", "error");
 
         } else if (workoutNaam.length() < 4) {
 
             maakWorkout.startAnimation(shakeAnimation);
-            Toast.makeText(getContext(), "Naam moet meer dan drie letters bevatten!", Toast.LENGTH_SHORT).show();
+            new CustomToast().Show_Toast(getActivity().getApplicationContext(), view.findViewById(R.id.maak_workout_tab), "Naam moet meer dan 3 letters bevatten", "error");
 
         } else {
 

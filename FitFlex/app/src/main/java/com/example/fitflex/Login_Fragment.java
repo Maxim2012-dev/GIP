@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -37,7 +38,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
     private Button loginknop;
     private TextView vergetenWachtwoord, maakAccount;
     private ProgressBar progressBarL;
-    private LinearLayout loginLayout;
+    private ConstraintLayout loginLayout;
     private Animation shakeAnimation;
     private FragmentManager fragmentManager;
 

@@ -1,56 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <TextView xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/oefening_detail"
-        style="?android:attr/textAppearanceLarge"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:textColor="@color/black"
-        android:textIsSelectable="true"
-        tools:context=".OefeningDetailFragment">
-
-    </TextView>
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:hint="@string/aantal_reps"
-        android:textColorHint="@color/colorPrimary"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/aantalReps"
+        <TextView xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/oefening_detail"
+            style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:padding="16dp"
+            android:textColor="@color/black"
+            android:textIsSelectable="true"
+            app:layout_constraintBottom_toTopOf="@id/reps_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:context=".OefeningDetailFragment">
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </TextView>
 
-    <Button
-        android:id="@+id/toevoegknop"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/loginbutton_selector"
-        android:text="@string/toevoegen"
-        android:textSize="17sp"
-        android:textStyle="bold">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reps_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="@string/aantal_reps"
+            android:textColorHint="@color/colorOnSurface"
+            app:layout_constraintBottom_toTopOf="@id/toevoegknop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/oefening_detail">
 
-    </Button>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/aantalReps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-</LinearLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/toevoegknop"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="50sp"
+            android:background="@drawable/loginbutton_selector"
+            android:text="@string/toevoegen"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reps_layout">
+
+        </Button>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
 
 
 

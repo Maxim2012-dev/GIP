@@ -39,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             app:menu="@menu/menu"
+            app:navigationIcon="@drawable/arrow_back"
             app:fabCradleRoundedCornerRadius="20dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -62,7 +62,8 @@ public class StelWorkoutSamen extends AppCompatActivity {
 
         if (oefeningen.size() == 0) {
 
-            geenOefeningen.setText("Nog geen oefeningen...");
+            geenOefeningen.setText("Nog geen oefeningen...\n\n" +
+                                    "Druk op de plusknop!");
 
         } else {
 
@@ -75,14 +76,6 @@ public class StelWorkoutSamen extends AppCompatActivity {
                 }
             });
 
-           /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    onRemoveItemClick(position);
-
-                }
-            });*/
         }
 
     }
@@ -95,6 +88,7 @@ public class StelWorkoutSamen extends AppCompatActivity {
                 .setTitle("Ben je zeker?")
                 .setMessage("Wil je dit item verwijderen?")
                 .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -102,7 +96,7 @@ public class StelWorkoutSamen extends AppCompatActivity {
 
                         if (oefeningen.size() == 0) {
 
-                            geenOefeningen.setText("Nog geen oefeningen");
+                            geenOefeningen.setText("Voeg opnieuw oefeningen toe!");
 
                         }
                         oefeningAdapter.notifyDataSetChanged();
@@ -202,6 +196,15 @@ public class StelWorkoutSamen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), OefeningListActivity.class));
+            }
+        });
+
+        bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+
             }
         });
 

@@ -9,5 +9,6 @@
     <color name="colorPrimaryDark">#00423B</color>
     <color name="colorSecondary">#64FFDA</color>
     <color name="colorAccent">#FF0000</color>
+    <color name="colorOnSurface">#838891</color>
 
 </resources>
