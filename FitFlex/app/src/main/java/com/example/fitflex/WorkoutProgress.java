@@ -27,8 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -256,10 +259,10 @@ public class WorkoutProgress extends AppCompatActivity {
 
     private String geefDatum() {
 
-        Calendar calendar = Calendar.getInstance();
-        String huidgeDatum = DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String datum = sdf.format(new Date());
 
-        return huidgeDatum;
+        return datum;
 
     }
 

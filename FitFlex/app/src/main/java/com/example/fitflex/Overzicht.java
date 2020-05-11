@@ -128,12 +128,12 @@ public class Overzicht extends Fragment {
                             aantalReps += oefening.child("aantal_reps").getValue(Integer.class);
 
                         }
+                        grafiekDatalijst.add(new GrafiekData(datum, aantalReps));
+                        aantalReps = 0;
 
                     }
 
                 }
-                grafiekDatalijst.add(new GrafiekData(datum, aantalReps));
-                aantalReps = 0;
 
             }
 
