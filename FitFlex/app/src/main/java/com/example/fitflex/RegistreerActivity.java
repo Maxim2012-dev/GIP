@@ -1,12 +1,16 @@
 package com.example.fitflex;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +26,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class RegistreerActivity extends AppCompatActivity {
+public class RegistreerActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText naam, email, telefoonnummer, locatie,
             wachtwoord, bevestigWachtwoord;
@@ -30,6 +34,10 @@ public class RegistreerActivity extends AppCompatActivity {
     private Button registerknop;
     private CheckBox voorwaarden;
     private ProgressBar progressBarR;
+
+    private Dialog infoDialog;
+    private Button okKnop;
+    private ImageView sluitDialog;
 
     private long maxGebruikersNr;
     DatabaseReference reff;
@@ -41,6 +49,7 @@ public class RegistreerActivity extends AppCompatActivity {
         setContentView(R.layout.registreer_layout);
 
         initViews();
+        toonGDPRDialog();
         setListeners();
 
     }
@@ -60,6 +69,8 @@ public class RegistreerActivity extends AppCompatActivity {
 
         progressBarR.setVisibility(View.GONE);
 
+        infoDialog = new Dialog(this);
+
         reff = FirebaseDatabase.getInstance().getReference("Gebruiker");
         mAuth = FirebaseAuth.getInstance();
 
@@ -67,8 +78,8 @@ public class RegistreerActivity extends AppCompatActivity {
 
     private void setListeners() {
 
-        registerknop.setOnClickListener((View.OnClickListener) this);
-        alGebruiker.setOnClickListener((View.OnClickListener) this);
+        registerknop.setOnClickListener(this);
+        alGebruiker.setOnClickListener(this);
 
     }
 
@@ -79,9 +90,35 @@ public class RegistreerActivity extends AppCompatActivity {
                 checkValidation(gebruiker);
                 break;
             case R.id.alGebruiker:
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                onBackPressed();
                 break;
         }
+
+    }
+
+    private void toonGDPRDialog() {
+
+        infoDialog.setContentView(R.layout.gdpr_dialog);
+        infoDialog.setCancelable(false);
+        okKnop = infoDialog.findViewById(R.id.okKnop);
+        sluitDialog = infoDialog.findViewById(R.id.sluitDialog);
+
+        sluitDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoDialog.dismiss();
+            }
+        });
+
+        okKnop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                infoDialog.dismiss();
+            }
+        });
+
+        infoDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        infoDialog.show();
 
     }
 
