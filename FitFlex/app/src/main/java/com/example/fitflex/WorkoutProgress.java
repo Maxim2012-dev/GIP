@@ -70,6 +70,15 @@ public class WorkoutProgress extends AppCompatActivity {
 
         initViews();
 
+        if (savedInstanceState != null) {
+
+            resterendeTijdInMillis = savedInstanceState.getLong("milisOver");
+            oefeningBezig = savedInstanceState.getBoolean("oefeningBezig", oefeningBezig);
+            index = savedInstanceState.getInt("index", index);
+            ronde = savedInstanceState.getInt("ronde", ronde);
+
+        }
+
         klaarknop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -311,6 +320,15 @@ public class WorkoutProgress extends AppCompatActivity {
 
         timerText.setText(resterendeTijdFormat);
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong("milisOver", resterendeTijdInMillis);
+        outState.putBoolean("oefeningBezig", oefeningBezig);
+        outState.putInt("index", index);
+        outState.putInt("ronde", ronde);
     }
 
 }
