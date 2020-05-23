@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClickListener {
+public class WachtwoordVergeten extends Fragment implements View.OnClickListener {
 
     private View view;
 
@@ -27,7 +27,7 @@ public class WachtwoordVergeten_Fragment extends Fragment implements View.OnClic
 
     private FirebaseAuth mAuth;
 
-    public WachtwoordVergeten_Fragment() {
+    public WachtwoordVergeten() {
 
     }
 

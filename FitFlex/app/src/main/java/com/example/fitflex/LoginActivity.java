@@ -95,6 +95,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void gaNaarWachtwoordVergetenPagina() {
 
+        Intent intent = new Intent(LoginActivity.this, WachtwoordVergeten.class);
+
+        Pair[] pairs = new Pair[4];
+
+        pairs[0] = new Pair<View, String>(loginText, "login_text");
+        pairs[1] = new Pair<View, String>(email_layout, "email");
+        pairs[2] = new Pair<View, String>(vergetenWachtwoord, "checkbox");
+        pairs[3] = new Pair<View, String>(maakAccount, "lid");
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, pairs);
+        startActivity(intent, options.toBundle());
 
     }
 

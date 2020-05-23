@@ -10,6 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
+        android:transitionName="login_text"
         android:text="@string/geregistreerdeEmail"
         android:textColor="@color/colorPrimary"
         android:textSize="17sp" />
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/email"
         android:textColorHint="@color/colorPrimary"
+        android:transitionName="email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -48,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:padding="5dp"
+            android:transitionName="checkbox"
             android:text="@string/terug"
             android:textColor="@color/text_selector"
             android:textSize="15sp"
@@ -61,6 +64,7 @@
             android:gravity="end"
             android:padding="5dp"
             android:text="@string/bevestig"
+            android:transitionName="lid"
             android:textColor="@color/text_selector"
             android:textSize="15sp"
             android:textStyle="bold" />
