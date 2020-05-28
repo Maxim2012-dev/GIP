@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WorkoutProgress"></activity>
+        <activity android:name=".WorkoutProgress" />
         <activity
             android:name=".WorkoutBegin"
             android:parentActivityName=".HomeActivity" />

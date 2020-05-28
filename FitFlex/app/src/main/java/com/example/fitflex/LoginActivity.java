@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextInputEditText email, wachtwoord;
     private Button loginknop;
     private TextView vergetenWachtwoord, maakAccount, loginText;
+    private ImageView sluit_activity;
     private ProgressBar progressBarL;
     private ConstraintLayout loginLayout;
     private Animation shakeAnimation;
@@ -57,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         vergetenWachtwoord = findViewById(R.id.vergetenWachtwoord);
         loginText = findViewById(R.id.login_text);
         maakAccount = findViewById(R.id.maakAccount);
+        sluit_activity = findViewById(R.id.sluit_activity);
         progressBarL = findViewById(R.id.progressBarL);
         loginLayout = findViewById(R.id.login_layout);
 
@@ -74,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginknop.setOnClickListener(this);
         vergetenWachtwoord.setOnClickListener(this);
         maakAccount.setOnClickListener(this);
+        sluit_activity.setOnClickListener(this);
 
     }
 
@@ -90,6 +94,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.maakAccount:
                 gaNaarRegistreerPagina();
                 break;
+            case R.id.sluit_activity:
+                finish();
+                System.exit(0);
         }
     }
 

@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int TIJD = 5000;
+    private static int TIJD = 4000;
 
     Animation topAnim, bottomAnim;
     ImageView image;

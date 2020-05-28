@@ -32,14 +32,13 @@ public class RegistreerActivity extends AppCompatActivity implements View.OnClic
             wachtwoord, bevestigWachtwoord;
     private TextView alGebruiker;
     private Button registerknop;
-    private CheckBox voorwaarden;
+    private TextView voorwaarden;
     private ProgressBar progressBarR;
 
     private Dialog infoDialog;
     private Button okKnop;
     private ImageView sluitDialog;
 
-    private long maxGebruikersNr;
     DatabaseReference reff;
     private FirebaseAuth mAuth;
 
@@ -80,6 +79,7 @@ public class RegistreerActivity extends AppCompatActivity implements View.OnClic
 
         registerknop.setOnClickListener(this);
         alGebruiker.setOnClickListener(this);
+        voorwaarden.setOnClickListener(this);
 
     }
 
@@ -91,6 +91,9 @@ public class RegistreerActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.alGebruiker:
                 onBackPressed();
+                break;
+            case R.id.voorwaarden:
+                toonGDPRDialog();
                 break;
         }
 
@@ -174,14 +177,6 @@ public class RegistreerActivity extends AppCompatActivity implements View.OnClic
 
             new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.registreer_layout),
                     "Beide wachtwoorden moeten gelijk zijn.", "error");
-
-
-            //Voorwaarden
-        } else if (!voorwaarden.isChecked()) {
-
-            new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.registreer_layout),
-                    "Accepteer de algemene voorwaarden.", "error");
-
 
             //Registreer
         } else {
