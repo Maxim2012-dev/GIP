@@ -36,7 +36,6 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@id/profielfoto"
-            android:text="Gerrit Wijns"
             android:textColor="@color/white"
             android:textSize="20sp">
 
@@ -48,7 +47,7 @@
             android:layout_below="@id/profiel_naam"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@id/profielfoto"
-            android:text="Gerrit_Wijns"
+            android:text="Level 1"
             android:textColor="@color/white"
             android:textSize="14sp">
 

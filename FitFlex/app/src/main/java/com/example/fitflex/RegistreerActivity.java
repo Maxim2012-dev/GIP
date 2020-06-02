@@ -48,7 +48,6 @@ public class RegistreerActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.registreer_layout);
 
         initViews();
-        toonGDPRDialog();
         setListeners();
 
     }

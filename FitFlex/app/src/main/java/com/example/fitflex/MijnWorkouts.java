@@ -71,7 +71,6 @@ public class MijnWorkouts extends Fragment {
         }
         toonGemaakteWorkouts();
 
-
         return view;
 
     }
