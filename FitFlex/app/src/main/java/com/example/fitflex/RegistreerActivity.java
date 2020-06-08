@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -126,14 +128,12 @@ public class RegistreerActivity extends AppCompatActivity implements View.OnClic
 
     private void checkValidation(final Gebruiker gebruiker) {
 
-        final String getNaam = naam.getText().toString();
-        final String getEmailId = email.getText().toString();
-        final String getTelefoonnummer = telefoonnummer.getText().toString();
-        final String getLocatie = locatie.getText().toString();
-        final String getWachtwoord = wachtwoord.getText().toString();
-        final String getBevestigWachtwoord = bevestigWachtwoord.getText().toString();
-
-        //Checken of email al bestaat
+        final String getNaam = naam.getText().toString().trim();
+        final String getEmailId = email.getText().toString().trim();
+        final String getTelefoonnummer = telefoonnummer.getText().toString().trim();
+        final String getLocatie = locatie.getText().toString().trim();
+        final String getWachtwoord = wachtwoord.getText().toString().trim();
+        final String getBevestigWachtwoord = bevestigWachtwoord.getText().toString().trim();
 
         //Alles ingevuld?
         if (getNaam.equals("") || getNaam.length() == 0
@@ -190,9 +190,10 @@ public class RegistreerActivity extends AppCompatActivity implements View.OnClic
 
                         gebruiker.setNaam(getNaam);
                         gebruiker.setEmailID(getEmailId);
-                        gebruiker.setLocatie(getLocatie);
-                        gebruiker.setWachtwoord(getWachtwoord);
                         gebruiker.setTelefoonnummer(getTelefoonnummer);
+                        gebruiker.setLocatie(getLocatie);
+                        gebruiker.setAantalWorkouts(0);
+                        gebruiker.setAantalOefeningen(0);
 
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         String userid = user.getUid();
@@ -206,7 +207,16 @@ public class RegistreerActivity extends AppCompatActivity implements View.OnClic
 
                     } else {
 
-                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        try {
+
+                            throw task.getException();
+
+                        } catch (Exception e) {
+
+                            new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.registreer_layout), "Het ingevoerde e-mailadres is al in gebruik!", "error");
+
+                        }
+                        progressBarR.setVisibility(View.GONE);
 
                     }
                 }

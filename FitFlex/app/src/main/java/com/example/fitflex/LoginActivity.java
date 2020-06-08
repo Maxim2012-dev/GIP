@@ -24,6 +24,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 
 @SuppressLint("Registered")
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -166,9 +168,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     } else {
 
-                        progressBarL.setVisibility(View.GONE);
+                        new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.login_layout),
+                                "E-mailadres en/of wachtwoord is incorrect!", "error");
 
-                        Toast.makeText(getApplicationContext(), task.getException().toString(), Toast.LENGTH_SHORT).show();
+                        progressBarL.setVisibility(View.GONE);
 
                     }
 

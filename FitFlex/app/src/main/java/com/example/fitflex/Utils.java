@@ -11,8 +11,4 @@ public class Utils {
                     "(?=.*[A-Z])" +         //Minstens 1 hoofdletter
                     ".{6,}");               //Minstens 6 karakters
 
-    public static final String Login_Fragment = "Login_Fragment";
-    public static final String Registreer_Fragment = "Registreer_Fragment";
-    public static final String WachtwoordVergeten_Fragment = "WachtwoordVergeten_Fragment";
-
 }

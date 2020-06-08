@@ -25,17 +25,18 @@ public class ProfielActivity extends AppCompatActivity {
     private DatabaseReference reff;
 
     private EditText email;
-    private EditText wachtwoord;
     private EditText telefoon;
     private EditText locatie;
-    private TextView naam;
+    private EditText naam;
+    private TextView profiel_naam;
     private Button uitlogknop;
     private Button updateknop;
+    private Button wijzigWachtwoord;
 
     String validatieEmail;
     String gebruikersID;
 
-    String _NAAM, _EMAIL, _WACHTWOORD, _TELEFOON, _LOCATIE;
+    String _EMAIL, _TELEFOON, _LOCATIE, _NAAM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,24 +53,30 @@ public class ProfielActivity extends AppCompatActivity {
                 logGebruikerUit();
             }
         });
-
         updateknop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateGebruikersInfo();
             }
         });
+        wijzigWachtwoord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), WijzigWachtwoord.class));
+            }
+        });
+
 
     }
 
     private void updateGebruikersInfo() {
 
-        if (TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(wachtwoord.getText().toString())
+        if (TextUtils.isEmpty(email.getText().toString()) || TextUtils.isEmpty(naam.getText().toString())
                 || TextUtils.isEmpty(telefoon.getText().toString()) || TextUtils.isEmpty(locatie.getText().toString())) {
 
             new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.profielcontainer), "Eén of meerdere velden zijn leeg", "error");
 
-        } else if (isEmailVeranderd() || isWachtwoordVeranderd()
+        } else if (isEmailVeranderd() || isNaamVeranderd()
                 || isTelefoonVeranderd() || isLocatieVeranderd()) {
 
             new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.profielcontainer), "Gegevens gewijzigd!", "succes");
@@ -106,11 +113,12 @@ public class ProfielActivity extends AppCompatActivity {
 
     }
 
-    private boolean isWachtwoordVeranderd() {
+    private boolean isNaamVeranderd() {
 
-        if (!_WACHTWOORD.equals(wachtwoord.getText().toString())) {
-            reff.child(gebruikersID).child("wachtwoord").setValue(wachtwoord.getText().toString());
-            _WACHTWOORD = wachtwoord.getText().toString();
+        if (!_NAAM.equals(naam.getText().toString())) {
+            reff.child(gebruikersID).child("naam").setValue(naam.getText().toString());
+            _NAAM = naam.getText().toString();
+            profiel_naam.setText(_NAAM);
             return true;
         } else {
             return false;
@@ -138,13 +146,15 @@ public class ProfielActivity extends AppCompatActivity {
         validatieEmail = fuser.getEmail();
         gebruikersID = fuser.getUid();
 
-        naam = findViewById(R.id.profiel_naam);
+        profiel_naam = findViewById(R.id.profiel_naam);
+        naam = findViewById(R.id.naam);
         email = findViewById(R.id.profiel_email);
-        wachtwoord = findViewById(R.id.profiel_wachtwoord);
         telefoon = findViewById(R.id.profiel_telefoonnummer);
         locatie = findViewById(R.id.profiel_locatie);
+
         uitlogknop = findViewById(R.id.uitlogknop);
         updateknop = findViewById(R.id.updateknop);
+        wijzigWachtwoord = findViewById(R.id.wijzigWachtwoord);
 
     }
 
@@ -167,16 +177,16 @@ public class ProfielActivity extends AppCompatActivity {
                     if (ds.child("emailID").getValue().equals(validatieEmail)) {
 
                         _EMAIL = validatieEmail;
-                        _WACHTWOORD = ds.child("wachtwoord").getValue(String.class);
                         _TELEFOON = ds.child("telefoonnummer").getValue(String.class);
                         _LOCATIE = ds.child("locatie").getValue(String.class);
                         _NAAM = ds.child("naam").getValue(String.class);
 
                         email.setText(validatieEmail);
-                        wachtwoord.setText(_WACHTWOORD);
                         telefoon.setText(_TELEFOON);
                         locatie.setText(_LOCATIE);
                         naam.setText(_NAAM);
+
+                        profiel_naam.setText(_NAAM);
 
                     }
 

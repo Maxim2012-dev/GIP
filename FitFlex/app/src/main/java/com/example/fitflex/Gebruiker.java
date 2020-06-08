@@ -2,7 +2,8 @@ package com.example.fitflex;
 
 public class Gebruiker {
 
-    public String naam, emailID, telefoonnummer, locatie, wachtwoord;
+    public String naam, emailID, telefoonnummer, locatie;
+    public int aantalWorkouts, aantalOefeningen;
 
     public Gebruiker() {
     }
@@ -39,12 +40,19 @@ public class Gebruiker {
         this.locatie = locatie;
     }
 
-    public String getWachtwoord() {
-        return wachtwoord;
+    public int getAantalWorkouts() {
+        return aantalWorkouts;
     }
 
-    public void setWachtwoord(String wachtwoord) {
-        this.wachtwoord = wachtwoord;
+    public void setAantalWorkouts(int aantalWorkouts) {
+        this.aantalWorkouts = aantalWorkouts;
     }
 
+    public int getAantalOefeningen() {
+        return aantalOefeningen;
+    }
+
+    public void setAantalOefeningen(int aantalOefeningen) {
+        this.aantalOefeningen = aantalOefeningen;
+    }
 }

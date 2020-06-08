@@ -69,4 +69,12 @@
     <string name="no_pain_no_gain">No Pain, No Gain...</string>
     <string name="beste_nieuwe_gebruiker_uw_persoonlijke_profielgegevens_zullen_worden_bewaard_in_een_databanksysteem">Beste nieuwe gebruiker! Uw persoonlijke profielgegevens zullen worden bewaard in een databanksysteem.
                                                                                                                         Deze worden voortdurend beschermd en niet doorgegeven aan derden.</string>
+    <string name="oefeningen">Oefeningen</string>
+    <string name="workouts">Workouts</string>
+    <string name="foto">foto</string>
+    <string name="wachtwoord_wijzigen">Wachtwoord wijzigen</string>
+    <string name="vul_de_volgende_gegevens_in">Vul het onderstaande veld in:</string>
+    <string name="wijzigen">Wijzigen</string>
+    <string name="huidig_wachtwoord">Huidig wachtwoord</string>
+    <string name="nieuw_wachtwoord">Nieuw wachtwoord</string>
 </resources>
