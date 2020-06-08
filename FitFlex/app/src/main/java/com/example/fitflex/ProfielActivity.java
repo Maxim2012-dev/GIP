@@ -1,5 +1,6 @@
 package com.example.fitflex;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -28,7 +29,8 @@ public class ProfielActivity extends AppCompatActivity {
     private EditText telefoon;
     private EditText locatie;
     private EditText naam;
-    private TextView profiel_naam;
+    private TextView profiel_naam, workoutsLabel, oefeningLabel
+            , workoutText, oefeningText;
     private Button uitlogknop;
     private Button updateknop;
     private Button wijzigWachtwoord;
@@ -37,6 +39,7 @@ public class ProfielActivity extends AppCompatActivity {
     String gebruikersID;
 
     String _EMAIL, _TELEFOON, _LOCATIE, _NAAM;
+    int _WORKOUTS, _OEFENINGEN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +154,10 @@ public class ProfielActivity extends AppCompatActivity {
         email = findViewById(R.id.profiel_email);
         telefoon = findViewById(R.id.profiel_telefoonnummer);
         locatie = findViewById(R.id.profiel_locatie);
+        workoutsLabel = findViewById(R.id.workoutsLabel);
+        oefeningLabel = findViewById(R.id.oefeningLabel);
+        workoutText = findViewById(R.id.workoutText);
+        oefeningText = findViewById(R.id.oefeningText);
 
         uitlogknop = findViewById(R.id.uitlogknop);
         updateknop = findViewById(R.id.updateknop);
@@ -169,6 +176,7 @@ public class ProfielActivity extends AppCompatActivity {
     public void toonGebruikersInfo() {
 
         reff.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -180,11 +188,27 @@ public class ProfielActivity extends AppCompatActivity {
                         _TELEFOON = ds.child("telefoonnummer").getValue(String.class);
                         _LOCATIE = ds.child("locatie").getValue(String.class);
                         _NAAM = ds.child("naam").getValue(String.class);
+                        _WORKOUTS = ds.child("aantalWorkouts").getValue(Integer.class);
+                        _OEFENINGEN = ds.child("aantalOefeningen").getValue(Integer.class);
 
                         email.setText(validatieEmail);
                         telefoon.setText(_TELEFOON);
                         locatie.setText(_LOCATIE);
                         naam.setText(_NAAM);
+
+                        if (_WORKOUTS == 1) {
+                            workoutText.setText("Workout");
+                        } else {
+                            workoutText.setText("Workouts");
+                        }
+
+                        if (_OEFENINGEN == 1) {
+                            oefeningText.setText("Oefening");
+                        } else {
+                            oefeningText.setText("Oefeningen");
+                        }
+                        workoutsLabel.setText(String.valueOf(_WORKOUTS));
+                        oefeningLabel.setText(String.valueOf(_OEFENINGEN));
 
                         profiel_naam.setText(_NAAM);
 

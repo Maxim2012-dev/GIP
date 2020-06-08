@@ -100,12 +100,11 @@
                 </TextView>
 
                 <TextView
-                    android:id="@+id/workouts"
+                    android:id="@+id/workoutText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/workoutsLabel"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/workouts"
                     android:textColor="@color/white"
                     android:textSize="20sp">
 
@@ -138,7 +137,7 @@
                 </ImageView>
 
                 <TextView
-                    android:id="@+id/oefeninglabel"
+                    android:id="@+id/oefeningLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -149,12 +148,11 @@
                 </TextView>
 
                 <TextView
-                    android:id="@+id/oefeningen"
+                    android:id="@+id/oefeningText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/oefeninglabel"
+                    android:layout_below="@id/oefeningLabel"
                     android:layout_centerHorizontal="true"
-                    android:text="@string/oefeningen"
                     android:textColor="@color/white"
                     android:textSize="20sp">
 

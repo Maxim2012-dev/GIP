@@ -175,7 +175,7 @@ public class WorkoutSettings extends AppCompatActivity implements View.OnClickLi
                     public void onClick(DialogInterface dialog, int which) {
 
                         saveData();
-                        Toast.makeText(getApplicationContext(), "Workout opgeslagen!", Toast.LENGTH_SHORT).show();
+                        new CustomToast().Show_Toast(getApplicationContext(), findViewById(R.id.instellingen), "Workout succesvol opgeslagen!", "succes");
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
 
                     }
