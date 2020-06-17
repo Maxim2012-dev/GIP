@@ -36,7 +36,7 @@ public class Overzicht extends Fragment {
     ArrayList<BarEntry> barEntrylijst;
     ArrayList<String> labelnamen;
 
-    ArrayList<GrafiekData> grafiekDatalijst = new ArrayList<>();
+    ArrayList<GrafiekData> grafiekDatalijst ;
 
     DatabaseReference reff;
     FirebaseAuth mAuth;
@@ -53,15 +53,16 @@ public class Overzicht extends Fragment {
         view = inflater.inflate(R.layout.overzicht_layout, container, false);
         barChart = view.findViewById(R.id.barChart);
 
-        barEntrylijst = new ArrayList<>();
-        labelnamen = new ArrayList<>();
+
         vulGrafiekDatalijst();
-        prepareChart();
 
         return view;
     }
 
     private void prepareChart() {
+
+        barEntrylijst = new ArrayList<>();
+        labelnamen = new ArrayList<>();
 
         for (int i = 0; i < grafiekDatalijst.size(); i++) {
 
@@ -71,17 +72,6 @@ public class Overzicht extends Fragment {
             labelnamen.add(datum);
 
         }
-
-        BarDataSet barDataSet = new BarDataSet(barEntrylijst, "aantal repetities");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        barDataSet.setValueTextColor(Color.BLACK);
-        barDataSet.setValueTextSize(16f);
-        Description description = new Description();
-        description.setText("Per dag");
-        description.setTextSize(15f);
-        barChart.setDescription(description);
-        BarData barData = new BarData(barDataSet);
-        barChart.setData(barData);
 
         Legend legend = barChart.getLegend();
         legend.setTextSize(15f);
@@ -100,9 +90,28 @@ public class Overzicht extends Fragment {
         xAxis.setLabelCount(labelnamen.size());
         xAxis.setLabelRotationAngle(270);
         barChart.animateY(2000);
+
+        BarDataSet barDataSet;
+        if (barChart.getData() != null &&
+                barChart.getData().getDataSetCount() > 0) {
+            barDataSet = (BarDataSet) barChart.getData().getDataSetByIndex(0);
+            barDataSet.setValues(barEntrylijst);
+            barChart.getData().notifyDataChanged();
+            barDataSet.notifyDataSetChanged();
+
+        } else {
+            barDataSet = new BarDataSet(barEntrylijst, "aantal repetities");
+            barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+            barDataSet.setValueTextColor(Color.BLACK);
+            barDataSet.setValueTextSize(16f);
+            BarData barData = new BarData(barDataSet);
+            barChart.setData(barData);
+        }
+
+
         barChart.invalidate();
 
-        grafiekDatalijst.clear();
+       // grafiekDatalijst.clear();
 
     }
 
@@ -116,7 +125,7 @@ public class Overzicht extends Fragment {
         reff.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                grafiekDatalijst = new ArrayList<>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     if (ds.child("email").getValue().equals(gebruikersEmail)) {
@@ -134,6 +143,8 @@ public class Overzicht extends Fragment {
                     }
 
                 }
+
+                prepareChart();
 
             }
 
