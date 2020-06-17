@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public class DummyContent {
 
-    private static final String TAG =DummyContent.class.getSimpleName() ;
+    private static final String TAG = DummyContent.class.getSimpleName();
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference reference = database.getReference("Oefening");
 
@@ -38,34 +38,34 @@ public class DummyContent {
 
     private int counter = 1;
 
-public void listenDataLoadChange(final OnDataLoadListener onDataLoadListener) {
-    reference.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+    public void listenDataLoadChange(final OnDataLoadListener onDataLoadListener) {
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                String moeilijkheid = ds.child("Moeilijkheid").getValue(String.class);
-                String naam = ds.child("Naam").getValue(String.class);
-                addItem(new DummyItem(String.valueOf(counter), naam, moeilijkheid, makeDetails(naam)));
-                counter++;
+                    String moeilijkheid = ds.child("Moeilijkheid").getValue(String.class);
+                    String naam = ds.child("Naam").getValue(String.class);
+                    addItem(new DummyItem(String.valueOf(counter), naam, moeilijkheid, makeDetails(naam)));
+                    counter++;
+
+                }
+
+                if (onDataLoadListener != null) {
+                    onDataLoadListener.onDataLoaded(ITEMS);
+                }
 
             }
 
-            if (onDataLoadListener!=null){
-                onDataLoadListener.onDataLoaded(ITEMS);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
-
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-        }
-    });
-}
+        });
+    }
 
 
-    private  void addItem(DummyItem item) {
+    private void addItem(DummyItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
@@ -101,7 +101,7 @@ public void listenDataLoadChange(final OnDataLoadListener onDataLoadListener) {
         }
     }
 
-    public interface OnDataLoadListener{
+    public interface OnDataLoadListener {
         public void onDataLoaded(List<DummyItem> dummyItems);
     }
 }
