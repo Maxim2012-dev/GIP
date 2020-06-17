@@ -133,7 +133,6 @@ public class MijnWorkouts extends Fragment {
                         startActivity(new Intent(getContext(), WorkoutBegin.class));
                     }
                 });
-                geenWorkouts.setText("");
 
             }
 

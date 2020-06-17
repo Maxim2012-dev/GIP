@@ -1,10 +1,12 @@
 package com.example.fitflex;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,20 +33,22 @@ import java.util.ArrayList;
 
 public class Overzicht extends Fragment {
 
-    View view;
-    BarChart barChart;
-    ArrayList<BarEntry> barEntrylijst;
-    ArrayList<String> labelnamen;
+    private View view;
+    private BarChart barChart;
+    private TextView geenData;
 
-    ArrayList<GrafiekData> grafiekDatalijst ;
+    private ArrayList<BarEntry> barEntrylijst;
+    private ArrayList<String> labelnamen;
 
-    DatabaseReference reff;
-    FirebaseAuth mAuth;
-    FirebaseUser fUser;
-    String gebruikersEmail;
+    private ArrayList<GrafiekData> grafiekDatalijst;
 
-    int aantalReps;
-    String datum;
+    private DatabaseReference reff;
+    private FirebaseAuth mAuth;
+    private FirebaseUser fUser;
+    private String gebruikersEmail;
+
+    private int aantalReps;
+    private String datum;
 
     @Nullable
     @Override
@@ -52,7 +56,7 @@ public class Overzicht extends Fragment {
 
         view = inflater.inflate(R.layout.overzicht_layout, container, false);
         barChart = view.findViewById(R.id.barChart);
-
+        geenData = view.findViewById(R.id.geenData);
 
         vulGrafiekDatalijst();
 
@@ -73,9 +77,14 @@ public class Overzicht extends Fragment {
 
         }
 
+        //legende maken
         Legend legend = barChart.getLegend();
         legend.setTextSize(15f);
         legend.setFormToTextSpace(10f);
+
+        //Beschrijving uitzetten
+        barChart.getDescription().setEnabled(false);
+        barChart.setNoDataText("");
 
         //Zet x-as Formatter
         XAxis xAxis = barChart.getXAxis();
@@ -92,26 +101,28 @@ public class Overzicht extends Fragment {
         barChart.animateY(2000);
 
         BarDataSet barDataSet;
-        if (barChart.getData() != null &&
-                barChart.getData().getDataSetCount() > 0) {
+        if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
+
             barDataSet = (BarDataSet) barChart.getData().getDataSetByIndex(0);
             barDataSet.setValues(barEntrylijst);
             barChart.getData().notifyDataChanged();
             barDataSet.notifyDataSetChanged();
 
         } else {
+
             barDataSet = new BarDataSet(barEntrylijst, "aantal repetities");
             barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
             barDataSet.setValueTextColor(Color.BLACK);
             barDataSet.setValueTextSize(16f);
             BarData barData = new BarData(barDataSet);
             barChart.setData(barData);
+
         }
 
 
         barChart.invalidate();
 
-       // grafiekDatalijst.clear();
+        // grafiekDatalijst.clear();
 
     }
 
@@ -123,6 +134,7 @@ public class Overzicht extends Fragment {
         gebruikersEmail = fUser.getEmail();
 
         reff.addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 grafiekDatalijst = new ArrayList<>();
@@ -144,7 +156,11 @@ public class Overzicht extends Fragment {
 
                 }
 
-                prepareChart();
+                if (!grafiekDatalijst.isEmpty()) {
+                    prepareChart();
+                } else {
+                    geenData.setText("Nog geen gegevens om te tonen...");
+                }
 
             }
 
