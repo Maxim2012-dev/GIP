@@ -113,6 +113,7 @@ public class MijnWorkouts extends Fragment {
                             }
                         }
                         workouts.add(new Workout(gebruikersEmail, naam, aantalRondes, rustNaRonde, rustNaOefening, oefeningen));
+                        geenWorkouts.setVisibility(View.GONE);
 
                     }
 
@@ -153,6 +154,7 @@ public class MijnWorkouts extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         reff.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @SuppressLint("SetTextI18n")
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -164,7 +166,7 @@ public class MijnWorkouts extends Fragment {
                                             workouts.remove(position);
                                             workoutAdapter.notifyDataSetChanged();
                                             if (workouts.size()==0){
-                                                geenWorkouts.setText("Nog geen workouts");
+                                                geenWorkouts.setVisibility(View.VISIBLE);
                                             }
                                             return;
                                         }
