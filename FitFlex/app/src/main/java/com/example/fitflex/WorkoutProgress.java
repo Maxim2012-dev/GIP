@@ -8,6 +8,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
@@ -49,6 +52,8 @@ public class WorkoutProgress extends AppCompatActivity {
     private TextView timerText;
     private Button klaarknop;
 
+    private int sound;
+    private SoundPool soundPool;
     private CountDownTimer countDownTimer;
     private Chronometer chronometer;
 
@@ -151,17 +156,17 @@ public class WorkoutProgress extends AppCompatActivity {
             index = 0;
             ronde++;
 
-            //rust ronde
-            resterendeTijdInMillis = tijdTussenRonde;
-            startTimer();
-
             if (ronde > aantalRondes) {
 
                 beëindigWorkout();
 
             } else {
 
-                rondeText.setText("Ronde " + ronde);
+                //rust ronde
+                resterendeTijdInMillis = tijdTussenRonde;
+                timerText.setTextColor(Color.BLACK);
+                startTimer();
+                rondeText.setText("Maak je klaar voor ronde " + ronde + "!");
 
             }
 
@@ -180,10 +185,18 @@ public class WorkoutProgress extends AppCompatActivity {
     private void startOefening() {
 
         //timer onzichtbaar, chrono zichtbaar, huidige oefening zichtbaar en knop enabled
+        //reps zichtbaar
         timerText.setVisibility(View.GONE);
         chronometer.setVisibility(View.VISIBLE);
         naamHuidigeOefening.setVisibility(View.VISIBLE);
         klaarknop.setEnabled(true);
+        reps.setVisibility(View.VISIBLE);
+
+        //ronde tonen
+        rondeText.setText("Ronde " + ronde);
+
+        //timerkleur op zwart
+        timerText.setTextColor(Color.BLACK);
 
         //chrono resetten en starten
         resetChronometer();
@@ -204,6 +217,19 @@ public class WorkoutProgress extends AppCompatActivity {
 
         chronometer = findViewById(R.id.chronometer);
         chronometer.setVisibility(View.VISIBLE);
+
+        //Geluidje initialiseren
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(6)
+                .setAudioAttributes(audioAttributes)
+                .build();
+
+        sound = soundPool.load(this, R.raw.countdown, 1);
 
         timerText = findViewById(R.id.timerText);
         timerText.setVisibility(View.GONE);
@@ -336,7 +362,6 @@ public class WorkoutProgress extends AppCompatActivity {
                 updateTimerText();
 
             }
-
             @Override
             public void onFinish() {
 
@@ -355,9 +380,11 @@ public class WorkoutProgress extends AppCompatActivity {
 
         String resterendeTijdFormat = String.format(Locale.getDefault(), "%02d:%02d", minuten, seconden);
 
-        if (resterendeTijdInMillis < 6000) {
+        if (minuten == 0 && seconden == 4) {
             timerText.setTextColor(Color.RED);
+            soundPool.play(sound, 1, 1, 0, 0, 1);
         }
+
         timerText.setText(resterendeTijdFormat);
 
     }
