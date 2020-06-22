@@ -40,8 +40,8 @@ public class WorkoutProgress extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference reff;
-    private int aantalWorkouts = 0;
-    private int aantalOefeningen = 0;
+    private int aantalWorkouts;
+    private int aantalOefeningen;
 
     private TextView rondeText;
     private TextView naamHuidigeOefening;
@@ -74,6 +74,31 @@ public class WorkoutProgress extends AppCompatActivity {
         setContentView(R.layout.activity_workout_progress);
 
         initViews();
+
+        reff.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                final String validatieEmail = mAuth.getCurrentUser().getEmail();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    if (ds.child("emailID").getValue().equals(validatieEmail)) {
+
+                        aantalWorkouts = ds.child("aantalWorkouts").getValue(Integer.class);
+                        aantalOefeningen = ds.child("aantalOefeningen").getValue(Integer.class);
+
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         if (savedInstanceState != null) {
 
@@ -210,6 +235,11 @@ public class WorkoutProgress extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void beëindigWorkout() {
 
+        final String uID = mAuth.getCurrentUser().getUid();
+
+        reff.child(uID).child("aantalWorkouts").setValue(aantalWorkouts + 1);
+        reff.child(uID).child("aantalOefeningen").setValue(aantalOefeningen + (huidigeWorkout.getAantalRondes() * huidigeWorkout.getOefeningen().size()));
+
         onWorkoutCompletion();
 
         Random random = new Random();
@@ -250,35 +280,6 @@ public class WorkoutProgress extends AppCompatActivity {
     }
 
     private void onWorkoutCompletion() {
-
-        final String validatieEmail = mAuth.getCurrentUser().getEmail();
-        final String uID = mAuth.getCurrentUser().getUid();
-
-        reff.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                    if (ds.child("emailID").getValue().equals(validatieEmail)) {
-
-                        aantalWorkouts = ds.child("aantalWorkouts").getValue(Integer.class);
-                        aantalOefeningen = ds.child("aantalOefeningen").getValue(Integer.class);
-
-                    }
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        reff.child(uID).child("aantalWorkouts").setValue(aantalWorkouts + 1);
-        reff.child(uID).child("aantalOefeningen").setValue(aantalOefeningen + (huidigeWorkout.getAantalRondes() * huidigeWorkout.getOefeningen().size()));
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Track");
 
@@ -354,6 +355,9 @@ public class WorkoutProgress extends AppCompatActivity {
 
         String resterendeTijdFormat = String.format(Locale.getDefault(), "%02d:%02d", minuten, seconden);
 
+        if (resterendeTijdInMillis < 6000) {
+            timerText.setTextColor(Color.RED);
+        }
         timerText.setText(resterendeTijdFormat);
 
     }
