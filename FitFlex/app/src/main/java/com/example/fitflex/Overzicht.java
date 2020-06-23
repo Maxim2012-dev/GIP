@@ -159,6 +159,7 @@ public class Overzicht extends Fragment {
                 if (!grafiekDatalijst.isEmpty()) {
                     prepareChart();
                 } else {
+                    barChart.setEnabled(false);
                     geenData.setText("Nog geen gegevens om te tonen...");
                 }
 

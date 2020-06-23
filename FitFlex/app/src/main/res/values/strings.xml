@@ -73,8 +73,9 @@
     <string name="workouts">Workouts</string>
     <string name="foto">foto</string>
     <string name="wachtwoord_wijzigen">Wachtwoord wijzigen</string>
-    <string name="vul_de_volgende_gegevens_in">Vul het onderstaande veld in:</string>
+    <string name="vul_de_volgende_gegevens_in">Vul de onderstaande velden in:</string>
     <string name="wijzigen">Wijzigen</string>
     <string name="huidig_wachtwoord">Huidig wachtwoord</string>
     <string name="nieuw_wachtwoord">Nieuw wachtwoord</string>
+    <string name="wat_moet_ik_doen">Wat moet ik doen?</string>
 </resources>

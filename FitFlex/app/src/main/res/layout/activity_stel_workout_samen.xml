@@ -13,6 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/help"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="200dp"
+            android:text="@string/wat_moet_ik_doen"
+            android:background="@drawable/loginbutton_selector"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:icon="@drawable/info_outline">
+
+        </com.google.android.material.button.MaterialButton>
+
         <ListView
             android:id="@+id/workoutOefeningen"
             android:layout_width="match_parent"

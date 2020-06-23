@@ -36,6 +36,7 @@ public class StelWorkoutSamen extends AppCompatActivity {
     private View view;
     private Animation shakeAnimation;
     private TextView geenOefeningen;
+    private Button help;
     private FloatingActionButton toevoegen;
     private ListView listView;
     private ImageView verwijder;
@@ -60,13 +61,22 @@ public class StelWorkoutSamen extends AppCompatActivity {
         initViews();
         setListeners();
 
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toonDialog();
+            }
+        });
+
         if (oefeningen.size() == 0) {
 
+            help.setVisibility(View.VISIBLE);
             geenOefeningen.setText("Nog geen oefeningen...\n\n" +
                                     "Druk op de plusknop!");
 
         } else {
 
+            help.setVisibility(View.GONE);
             oefeningAdapter = new OefeningAdapter(StelWorkoutSamen.this, oefeningen);
             listView.setAdapter(oefeningAdapter);
             oefeningAdapter.setOnListItemClickListener(new OefeningAdapter.OnListItemClickListener() {
@@ -97,6 +107,7 @@ public class StelWorkoutSamen extends AppCompatActivity {
                         if (oefeningen.size() == 0) {
 
                             geenOefeningen.setText("Voeg opnieuw oefeningen toe!");
+                            help.setVisibility(View.VISIBLE);
 
                         }
                         oefeningAdapter.notifyDataSetChanged();
@@ -113,6 +124,7 @@ public class StelWorkoutSamen extends AppCompatActivity {
         shakeAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
 
         geenOefeningen = findViewById(R.id.geen_oefeningen);
+        help = findViewById(R.id.help);
         listView = findViewById(R.id.workoutOefeningen);
         verwijder = findViewById(R.id.verwijder);
         infoDialog = new Dialog(this);
@@ -137,14 +149,8 @@ public class StelWorkoutSamen extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.helpInfo:
-                toonDialog();
-                break;
-            case R.id.volgende:
-                checkValidatie();
-                break;
-
+        if (item.getItemId() == R.id.volgende) {
+            checkValidatie();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -202,9 +208,7 @@ public class StelWorkoutSamen extends AppCompatActivity {
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-
             }
         });
 
